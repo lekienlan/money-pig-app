@@ -5,7 +5,8 @@ part 'pig_listing_state.freezed.dart';
 
 @freezed
 class PigListingState with _$PigListingState {
-  const factory PigListingState.loading() = _Loading;
-
   const factory PigListingState.data(List<Pig> pigListing) = _Loaded;
+  const factory PigListingState.loading() = _Loading;
+  const factory PigListingState.empty() = _Empty;
+  const factory PigListingState.error() = _Error;
 }

@@ -13,7 +13,9 @@ class PigListingNotifier extends _$PigListingNotifier {
   }
 
   Future<void> fetchPigListing() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 200));
+
+    // state = PigListingState.empty();
 
     state = PigListingState.data([
       Pig(
@@ -31,7 +33,7 @@ class PigListingNotifier extends _$PigListingNotifier {
       Pig(
         id: '12',
         name: 'Tiền cafe',
-        percent: 70,
+        percent: 10,
         balance: 82000,
       ),
       Pig(
@@ -43,7 +45,7 @@ class PigListingNotifier extends _$PigListingNotifier {
       Pig(
           id: '12',
           name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 80,
+          percent: 100,
           balance: 2819000),
       Pig(
           id: '12',
@@ -53,8 +55,18 @@ class PigListingNotifier extends _$PigListingNotifier {
       Pig(
           id: '12',
           name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 8,
+          percent: 30,
           balance: 800200300),
+      Pig(
+          id: '12',
+          name: 'Tiền nuôi Đỗ Hà Đông Phương',
+          percent: 25,
+          balance: 800300),
+      Pig(
+          id: '12',
+          name: 'Tiền nuôi Đỗ Hà Đông Phương',
+          percent: 10,
+          balance: 800200),
     ]);
   }
 }

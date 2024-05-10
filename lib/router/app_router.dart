@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_pig/presentation/eastlin/widget/eastlin_page.dart';
 import 'package:money_pig/presentation/home/widget/home_page.dart';
 import 'package:money_pig/presentation/new_pig/widget/new_pig_page.dart';
 
@@ -11,8 +12,6 @@ import 'package:money_pig/presentation/splash/widget/splash_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
-
-final _key = GlobalKey<NavigatorState>(debugLabel: 'routerKey');
 
 @riverpod
 GoRouter router(RouterRef ref) {
@@ -22,15 +21,15 @@ GoRouter router(RouterRef ref) {
     // navigatorKey: _key,
     //refreshListenable: notifier,
     debugLogDiagnostics: true,
-    initialLocation: AppRoute.path,
+    initialLocation: SplashRoute.path,
     routes: $appRoutes,
     //redirect: notifier.redirect,
   );
 }
 
-@TypedGoRoute<AppRoute>(path: AppRoute.path)
-class AppRoute extends GoRouteData {
-  const AppRoute();
+@TypedGoRoute<SplashRoute>(path: SplashRoute.path)
+class SplashRoute extends GoRouteData {
+  const SplashRoute();
 
   static const path = '/';
 
@@ -60,7 +59,42 @@ class NewPigRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const NewPigPage();
+    return NewPigPage();
+    // return CustomTransitionPage(
+    //   child: const NewPigPage(),
+    //   transitionDuration: const Duration(milliseconds: 200),
+    //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //     return FadeTransition(
+    //       opacity: animation,
+    //       child: child,
+    //     );
+    //   },
+    // );
+  }
+}
+
+@TypedGoRoute<PigDetailRoute>(path: PigDetailRoute.path)
+class PigDetailRoute extends GoRouteData {
+  final String id;
+  const PigDetailRoute({this.id = ''});
+
+  static const path = '/new-pig/:id';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return NewPigPage(id: id);
+  }
+}
+
+@TypedGoRoute<EastlinRoute>(path: EastlinRoute.path)
+class EastlinRoute extends GoRouteData {
+  const EastlinRoute();
+
+  static const path = '/eastlin';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return EastlinPage();
   }
 }
 

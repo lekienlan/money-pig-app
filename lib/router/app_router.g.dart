@@ -7,18 +7,20 @@ part of 'app_router.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $appRoute,
+      $splashRoute,
       $homeRoute,
       $newPigRoute,
+      $pigDetailRoute,
+      $eastlinRoute,
     ];
 
-RouteBase get $appRoute => GoRouteData.$route(
+RouteBase get $splashRoute => GoRouteData.$route(
       path: '/',
-      factory: $AppRouteExtension._fromState,
+      factory: $SplashRouteExtension._fromState,
     );
 
-extension $AppRouteExtension on AppRoute {
-  static AppRoute _fromState(GoRouterState state) => const AppRoute();
+extension $SplashRouteExtension on SplashRoute {
+  static SplashRoute _fromState(GoRouterState state) => const SplashRoute();
 
   String get location => GoRouteData.$location(
         '/',
@@ -78,11 +80,57 @@ extension $NewPigRouteExtension on NewPigRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $pigDetailRoute => GoRouteData.$route(
+      path: '/new-pig/:id',
+      factory: $PigDetailRouteExtension._fromState,
+    );
+
+extension $PigDetailRouteExtension on PigDetailRoute {
+  static PigDetailRoute _fromState(GoRouterState state) => PigDetailRoute(
+        id: state.pathParameters['id']! ?? '',
+      );
+
+  String get location => GoRouteData.$location(
+        '/new-pig/${Uri.encodeComponent(id)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $eastlinRoute => GoRouteData.$route(
+      path: '/eastlin',
+      factory: $EastlinRouteExtension._fromState,
+    );
+
+extension $EastlinRouteExtension on EastlinRoute {
+  static EastlinRoute _fromState(GoRouterState state) => const EastlinRoute();
+
+  String get location => GoRouteData.$location(
+        '/eastlin',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'496a6b3a2449c356171b834737b1c12e0fca51b7';
+String _$routerHash() => r'1e3504b868996462b85ba592df8b7a551851c97f';
 
 /// See also [router].
 @ProviderFor(router)

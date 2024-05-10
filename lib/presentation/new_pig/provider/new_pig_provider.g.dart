@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pig_listing_provider.dart';
+part of 'new_pig_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$pigListingNotifierHash() =>
-    r'bb9c6a0e1cbf3cb289e73426bb0860bf71a6c599';
+String _$newPigNotifierHash() => r'fd92b431d58ffda41bc0942a2bff0962f5dc4561';
 
-/// See also [PigListingNotifier].
-@ProviderFor(PigListingNotifier)
-final pigListingNotifierProvider =
-    AutoDisposeNotifierProvider<PigListingNotifier, PigListingState>.internal(
-  PigListingNotifier.new,
-  name: r'pigListingNotifierProvider',
+/// See also [NewPigNotifier].
+@ProviderFor(NewPigNotifier)
+final newPigNotifierProvider =
+    AutoDisposeNotifierProvider<NewPigNotifier, NewPigState>.internal(
+  NewPigNotifier.new,
+  name: r'newPigNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$pigListingNotifierHash,
+      : _$newPigNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PigListingNotifier = AutoDisposeNotifier<PigListingState>;
+typedef _$NewPigNotifier = AutoDisposeNotifier<NewPigState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

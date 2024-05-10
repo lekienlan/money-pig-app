@@ -12,7 +12,7 @@ abstract class AppShadow {
       offset: Offset(1, 2),
       blurRadius: 5,
       spreadRadius: 0,
-      color: ColorName.neutral800.withOpacity(0.2));
+      color: ColorName.neutral800.withOpacity(0.1));
 
   static BoxShadow hard = BoxShadow(
       offset: Offset(1, 3),

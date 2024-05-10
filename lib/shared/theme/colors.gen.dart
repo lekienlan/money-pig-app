@@ -154,14 +154,20 @@ class ColorName {
   /// Color: #802041
   static const Color primaryDark = Color(0xFF802041);
 
-  /// Color: #ffa0c0
-  static const Color primaryLight = Color(0xFFFFA0C0);
+  /// Color: #3a3637
+  static const Color primaryExtraDark = Color(0xFF3A3637);
+
+  /// Color: #ffc6d9
+  static const Color primaryExtraLight = Color(0xFFFFC6D9);
+
+  /// Color: #ff79a7
+  static const Color primaryLight = Color(0xFFFF79A7);
 
   /// Color: #ff4081
   static const Color primaryMain = Color(0xFFFF4081);
 
-  /// Color: #ff79a7
-  static const Color secondaryMain = Color(0xFFFF79A7);
+  /// Color: #ffecf2
+  static const Color primaryUltraLight = Color(0xFFFFECF2);
 
   /// Color: #ffecf2
   static const Color surfaceBrandLight = Color(0xFFFFECF2);

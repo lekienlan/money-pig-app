@@ -1,3 +1,12 @@
 {
-  "income": "income"
+  "income": "income",
+  "balance": "balance",
+  "new_pig": "new pig",
+  "add": "add",
+  "pig_name": "pig name",
+  "budget": "budget",
+  "time_range": "time range",
+  "next": "next",
+  "back": "go back",
+  "complete": "complete"
 }

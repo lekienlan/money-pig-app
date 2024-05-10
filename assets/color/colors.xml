@@ -50,9 +50,11 @@
     <color name="blue_100">#e6f6ff</color>
 
     <color name="primary_main">#ff4081</color>
-    <color name="primary_light">#ffa0c0</color>
+    <color name="primary_light">#ff79a7</color>
+    <color name="primary_extra_light">#ffc6d9</color>
+    <color name="primary_ultra_light">#ffecf2</color>
     <color name="primary_dark">#802041</color>
-    <color name="secondary_main">#ff79a7</color>
+    <color name="primary_extra_dark">#3a3637</color>
     <color name="text_primary">#131212</color>
     <color name="text_secondary">#3a3637</color>
     <color name="text_tertiary">#605a5c</color>

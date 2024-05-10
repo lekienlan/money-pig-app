@@ -1,15 +1,15 @@
-import 'dart:developer';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/domain/model/pig.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
+import 'package:remixicon/remixicon.dart';
 
 class PigCardWidget extends StatelessWidget {
   final Pig? pig;
-  final GlobalKey _key = GlobalKey();
   PigCardWidget({
     this.pig,
     super.key,
@@ -21,7 +21,7 @@ class PigCardWidget extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints constraints) {
       return Container(
         decoration: BoxDecoration(
-            color: ColorName.pink100,
+            color: ColorName.primaryExtraLight,
             borderRadius: BorderRadius.circular(24),
             boxShadow: [AppShadow.light]),
         child: ClipRRect(
@@ -34,7 +34,7 @@ class PigCardWidget extends StatelessWidget {
                 height: constraints.maxHeight *
                     ((pig?.percent?.toDouble() ?? 0) / 100),
                 child: Container(
-                  color: ColorName.pink400,
+                  color: ColorName.primaryLight,
                 ),
               ),
               Container(
@@ -47,16 +47,18 @@ class PigCardWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: Text('${pig?.name}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: ColorName.pink700,
-                                fontSize: dynamicFontSize(
-                                  text: pig?.name ?? '',
-                                  defaultFontSize: 20,
-                                  stepLength: 6,
-                                ),
-                              )),
+                          child: Text(
+                            '${pig?.name}',
+                            style: TextStyle(
+                              color: ColorName.primaryDark,
+                              fontWeight: FontWeight.w600,
+                              fontSize: dynamicFontSize(
+                                text: pig?.name ?? '',
+                                defaultFontSize: 20,
+                                stepLength: 6,
+                              ),
+                            ),
+                          ),
                         ),
                         Column(
                           children: [
@@ -65,13 +67,14 @@ class PigCardWidget extends StatelessWidget {
                               height: 48,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                color: ColorName.pink500.withOpacity(0.8),
+                                color:
+                                    ColorName.surfaceSecondary.withOpacity(0.8),
                               ),
                               child: Center(
                                 child: Icon(
-                                  Icons.card_membership_sharp,
-                                  color: ColorName.white,
-                                  size: 20,
+                                  Remix.drinks_2_fill,
+                                  color: ColorName.primaryLight,
+                                  size: 24,
                                 ),
                               ),
                             ),
@@ -85,33 +88,15 @@ class PigCardWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Số dư',
+                            'balance'.tr().capitalize(),
                             style: AppTextStyle.bodyS(color: ColorName.white),
                           ),
-                          Text.rich(
-                            TextSpan(children: [
-                              TextSpan(
-                                text:
-                                    '${formatCurrency(((pig?.balance ?? 0) / 1000))}.',
-                                style: TextStyle(
-                                  fontSize: dynamicFontSize(
-                                      text: pig?.balance?.toString() ?? '',
-                                      stepLength: 7,
-                                      scale: 0.8,
-                                      defaultFontSize: 28),
-                                  shadows: [
-                                    AppShadow.light,
-                                  ],
-                                ),
-                              ),
-                              TextSpan(
-                                  text: '000 đ',
-                                  style: AppTextStyle.heading2XS()
-                                      .copyWith(shadows: [AppShadow.light])),
-                            ]),
-                            style:
-                                AppTextStyle.headingL(color: ColorName.white),
-                          ),
+                          Text('${formatCurrency(((pig?.balance ?? 0)))}đ',
+                              style: AppTextStyle.headingS(
+                                color: ColorName.white,
+                              ).copyWith(
+                                overflow: TextOverflow.ellipsis,
+                              )),
                         ],
                       ),
                     )

@@ -61,36 +61,12 @@ abstract class AppTextStyle {
     );
   }
 
-  static TextStyle bodyL({
-    Color? color,
-  }) {
-    return TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.normal,
-      letterSpacing: 0,
-      height: 1.2,
-      color: color,
-    );
-  }
-
   static TextStyle headingXS({
     Color? color,
   }) {
     return TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0,
-      height: 1.25,
-      color: color,
-    );
-  }
-
-  static TextStyle bodyM({
-    Color? color,
-  }) {
-    return TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.normal,
       letterSpacing: 0,
       height: 1.25,
       color: color,
@@ -109,6 +85,30 @@ abstract class AppTextStyle {
     );
   }
 
+  static TextStyle bodyL({
+    Color? color,
+  }) {
+    return TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.normal,
+      letterSpacing: 0,
+      height: 1.2,
+      color: color,
+    );
+  }
+
+  static TextStyle bodyM({
+    Color? color,
+  }) {
+    return TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.normal,
+      letterSpacing: 0,
+      height: 1.25,
+      color: color,
+    );
+  }
+
   static TextStyle bodyS({
     Color? color,
   }) {
@@ -121,7 +121,7 @@ abstract class AppTextStyle {
     );
   }
 
-  static TextStyle body2XS({
+  static TextStyle bodyXS({
     Color? color,
   }) {
     return TextStyle(

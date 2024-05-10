@@ -32,3 +32,7 @@ String formatCurrency(num? value) {
       formattedValue.replaceAllMapped(regex, (Match match) => '${match[1]}.');
   return formattedValue;
 }
+
+bool isTruthy(dynamic value) {
+  return value != null && value != false && value != 0 && value != '';
+}

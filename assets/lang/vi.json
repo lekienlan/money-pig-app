@@ -1,3 +1,12 @@
 {
-  "income": "thu nhập"
+  "income": "thu nhập",
+  "balance": "số dư",
+  "new_pig": "heo mới",
+  "add": "thêm",
+  "pig_name": "tên heo",
+  "budget": "ngân sách",
+  "time_range": "khung thời gian",
+  "next": "tiếp theo",
+  "back": "quay lại",
+  "complete": "hoàn tất"
 }
