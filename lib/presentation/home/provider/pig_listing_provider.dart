@@ -1,4 +1,4 @@
-import 'package:money_pig/domain/model/pig.dart';
+import 'package:money_pig/domain/repository/pig_repository.dart';
 import 'package:money_pig/presentation/home/state/pig_listing_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,61 +12,20 @@ class PigListingNotifier extends _$PigListingNotifier {
     return PigListingState.loading();
   }
 
+  final PigRepository pigRepository = PigRepository();
+
   Future<void> fetchPigListing() async {
-    await Future.delayed(Duration(milliseconds: 200));
+    try {
+      final resp = await pigRepository.getPigListing();
 
-    // state = PigListingState.empty();
+      if (resp.isEmpty) {
+        state = PigListingState.empty();
+        return;
+      }
 
-    state = PigListingState.data([
-      Pig(
-        id: '12',
-        name: 'Tiền nhà',
-        percent: 90,
-        balance: 217000,
-      ),
-      Pig(
-        id: '12',
-        name: 'Tiền chợ',
-        percent: 80,
-        balance: 1963000,
-      ),
-      Pig(
-        id: '12',
-        name: 'Tiền cafe',
-        percent: 10,
-        balance: 82000,
-      ),
-      Pig(
-        id: '12',
-        name: 'Tiền học',
-        percent: 50,
-        balance: 739000,
-      ),
-      Pig(
-          id: '12',
-          name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 100,
-          balance: 2819000),
-      Pig(
-          id: '12',
-          name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 60,
-          balance: 10245000),
-      Pig(
-          id: '12',
-          name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 30,
-          balance: 800200300),
-      Pig(
-          id: '12',
-          name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 25,
-          balance: 800300),
-      Pig(
-          id: '12',
-          name: 'Tiền nuôi Đỗ Hà Đông Phương',
-          percent: 10,
-          balance: 800200),
-    ]);
+      state = PigListingState.data(resp);
+    } catch (err) {
+      state = PigListingState.empty();
+    }
   }
 }

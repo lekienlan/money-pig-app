@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'pig.dart';
+part of 'pig_card_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,47 +14,51 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Pig _$PigFromJson(Map<String, dynamic> json) {
-  return _Pig.fromJson(json);
+PigCardModel _$PigCardModelFromJson(Map<String, dynamic> json) {
+  return _PigCardModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Pig {
+mixin _$PigCardModel {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  num? get percent => throw _privateConstructorUsedError;
-  num? get balance => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get style => throw _privateConstructorUsedError;
-  DateTime? get updated_at => throw _privateConstructorUsedError;
-  DateTime? get created_at => throw _privateConstructorUsedError;
-  String? get user_id => throw _privateConstructorUsedError;
+  num? get budget => throw _privateConstructorUsedError;
+  String? get start_date => throw _privateConstructorUsedError;
+  String? get end_date => throw _privateConstructorUsedError;
+  String? get updated_at => throw _privateConstructorUsedError;
+  String? get created_at => throw _privateConstructorUsedError;
+  String? get user_id =>
+      throw _privateConstructorUsedError; // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
   StatusEnum get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PigCopyWith<Pig> get copyWith => throw _privateConstructorUsedError;
+  $PigCardModelCopyWith<PigCardModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PigCopyWith<$Res> {
-  factory $PigCopyWith(Pig value, $Res Function(Pig) then) =
-      _$PigCopyWithImpl<$Res, Pig>;
+abstract class $PigCardModelCopyWith<$Res> {
+  factory $PigCardModelCopyWith(
+          PigCardModel value, $Res Function(PigCardModel) then) =
+      _$PigCardModelCopyWithImpl<$Res, PigCardModel>;
   @useResult
   $Res call(
       {String? id,
       String? name,
-      num? percent,
-      num? balance,
-      Map<String, dynamic>? style,
-      DateTime? updated_at,
-      DateTime? created_at,
+      num? budget,
+      String? start_date,
+      String? end_date,
+      String? updated_at,
+      String? created_at,
       String? user_id,
       StatusEnum status});
 }
 
 /// @nodoc
-class _$PigCopyWithImpl<$Res, $Val extends Pig> implements $PigCopyWith<$Res> {
-  _$PigCopyWithImpl(this._value, this._then);
+class _$PigCardModelCopyWithImpl<$Res, $Val extends PigCardModel>
+    implements $PigCardModelCopyWith<$Res> {
+  _$PigCardModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,9 +70,9 @@ class _$PigCopyWithImpl<$Res, $Val extends Pig> implements $PigCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? percent = freezed,
-    Object? balance = freezed,
-    Object? style = freezed,
+    Object? budget = freezed,
+    Object? start_date = freezed,
+    Object? end_date = freezed,
     Object? updated_at = freezed,
     Object? created_at = freezed,
     Object? user_id = freezed,
@@ -83,26 +87,26 @@ class _$PigCopyWithImpl<$Res, $Val extends Pig> implements $PigCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      percent: freezed == percent
-          ? _value.percent
-          : percent // ignore: cast_nullable_to_non_nullable
+      budget: freezed == budget
+          ? _value.budget
+          : budget // ignore: cast_nullable_to_non_nullable
               as num?,
-      balance: freezed == balance
-          ? _value.balance
-          : balance // ignore: cast_nullable_to_non_nullable
-              as num?,
-      style: freezed == style
-          ? _value.style
-          : style // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+      start_date: freezed == start_date
+          ? _value.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      end_date: freezed == end_date
+          ? _value.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
+              as String?,
       updated_at: freezed == updated_at
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       created_at: freezed == created_at
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       user_id: freezed == user_id
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
@@ -116,27 +120,31 @@ class _$PigCopyWithImpl<$Res, $Val extends Pig> implements $PigCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$PigImplCopyWith<$Res> implements $PigCopyWith<$Res> {
-  factory _$$PigImplCopyWith(_$PigImpl value, $Res Function(_$PigImpl) then) =
-      __$$PigImplCopyWithImpl<$Res>;
+abstract class _$$PigCardModelImplCopyWith<$Res>
+    implements $PigCardModelCopyWith<$Res> {
+  factory _$$PigCardModelImplCopyWith(
+          _$PigCardModelImpl value, $Res Function(_$PigCardModelImpl) then) =
+      __$$PigCardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? id,
       String? name,
-      num? percent,
-      num? balance,
-      Map<String, dynamic>? style,
-      DateTime? updated_at,
-      DateTime? created_at,
+      num? budget,
+      String? start_date,
+      String? end_date,
+      String? updated_at,
+      String? created_at,
       String? user_id,
       StatusEnum status});
 }
 
 /// @nodoc
-class __$$PigImplCopyWithImpl<$Res> extends _$PigCopyWithImpl<$Res, _$PigImpl>
-    implements _$$PigImplCopyWith<$Res> {
-  __$$PigImplCopyWithImpl(_$PigImpl _value, $Res Function(_$PigImpl) _then)
+class __$$PigCardModelImplCopyWithImpl<$Res>
+    extends _$PigCardModelCopyWithImpl<$Res, _$PigCardModelImpl>
+    implements _$$PigCardModelImplCopyWith<$Res> {
+  __$$PigCardModelImplCopyWithImpl(
+      _$PigCardModelImpl _value, $Res Function(_$PigCardModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,15 +152,15 @@ class __$$PigImplCopyWithImpl<$Res> extends _$PigCopyWithImpl<$Res, _$PigImpl>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? percent = freezed,
-    Object? balance = freezed,
-    Object? style = freezed,
+    Object? budget = freezed,
+    Object? start_date = freezed,
+    Object? end_date = freezed,
     Object? updated_at = freezed,
     Object? created_at = freezed,
     Object? user_id = freezed,
     Object? status = null,
   }) {
-    return _then(_$PigImpl(
+    return _then(_$PigCardModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -161,26 +169,26 @@ class __$$PigImplCopyWithImpl<$Res> extends _$PigCopyWithImpl<$Res, _$PigImpl>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      percent: freezed == percent
-          ? _value.percent
-          : percent // ignore: cast_nullable_to_non_nullable
+      budget: freezed == budget
+          ? _value.budget
+          : budget // ignore: cast_nullable_to_non_nullable
               as num?,
-      balance: freezed == balance
-          ? _value.balance
-          : balance // ignore: cast_nullable_to_non_nullable
-              as num?,
-      style: freezed == style
-          ? _value._style
-          : style // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+      start_date: freezed == start_date
+          ? _value.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      end_date: freezed == end_date
+          ? _value.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
+              as String?,
       updated_at: freezed == updated_at
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       created_at: freezed == created_at
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       user_id: freezed == user_id
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
@@ -195,66 +203,59 @@ class __$$PigImplCopyWithImpl<$Res> extends _$PigCopyWithImpl<$Res, _$PigImpl>
 
 /// @nodoc
 @JsonSerializable()
-class _$PigImpl implements _Pig {
-  const _$PigImpl(
+class _$PigCardModelImpl implements _PigCardModel {
+  const _$PigCardModelImpl(
       {this.id,
       this.name,
-      this.percent,
-      this.balance,
-      final Map<String, dynamic>? style = const <String, dynamic>{},
+      this.budget,
+      this.start_date,
+      this.end_date,
       this.updated_at,
       this.created_at,
       this.user_id,
-      this.status = StatusEnum.active})
-      : _style = style;
+      this.status = StatusEnum.active});
 
-  factory _$PigImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PigImplFromJson(json);
+  factory _$PigCardModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PigCardModelImplFromJson(json);
 
   @override
   final String? id;
   @override
   final String? name;
   @override
-  final num? percent;
+  final num? budget;
   @override
-  final num? balance;
-  final Map<String, dynamic>? _style;
+  final String? start_date;
   @override
-  @JsonKey()
-  Map<String, dynamic>? get style {
-    final value = _style;
-    if (value == null) return null;
-    if (_style is EqualUnmodifiableMapView) return _style;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
+  final String? end_date;
   @override
-  final DateTime? updated_at;
+  final String? updated_at;
   @override
-  final DateTime? created_at;
+  final String? created_at;
   @override
   final String? user_id;
+// @Default(<String, dynamic>{}) Map<String, dynamic>? style,
   @override
   @JsonKey()
   final StatusEnum status;
 
   @override
   String toString() {
-    return 'Pig(id: $id, name: $name, percent: $percent, balance: $balance, style: $style, updated_at: $updated_at, created_at: $created_at, user_id: $user_id, status: $status)';
+    return 'PigCardModel(id: $id, name: $name, budget: $budget, start_date: $start_date, end_date: $end_date, updated_at: $updated_at, created_at: $created_at, user_id: $user_id, status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PigImpl &&
+            other is _$PigCardModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.percent, percent) || other.percent == percent) &&
-            (identical(other.balance, balance) || other.balance == balance) &&
-            const DeepCollectionEquality().equals(other._style, _style) &&
+            (identical(other.budget, budget) || other.budget == budget) &&
+            (identical(other.start_date, start_date) ||
+                other.start_date == start_date) &&
+            (identical(other.end_date, end_date) ||
+                other.end_date == end_date) &&
             (identical(other.updated_at, updated_at) ||
                 other.updated_at == updated_at) &&
             (identical(other.created_at, created_at) ||
@@ -265,66 +266,58 @@ class _$PigImpl implements _Pig {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      percent,
-      balance,
-      const DeepCollectionEquality().hash(_style),
-      updated_at,
-      created_at,
-      user_id,
-      status);
+  int get hashCode => Object.hash(runtimeType, id, name, budget, start_date,
+      end_date, updated_at, created_at, user_id, status);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PigImplCopyWith<_$PigImpl> get copyWith =>
-      __$$PigImplCopyWithImpl<_$PigImpl>(this, _$identity);
+  _$$PigCardModelImplCopyWith<_$PigCardModelImpl> get copyWith =>
+      __$$PigCardModelImplCopyWithImpl<_$PigCardModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PigImplToJson(
+    return _$$PigCardModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _Pig implements Pig {
-  const factory _Pig(
+abstract class _PigCardModel implements PigCardModel {
+  const factory _PigCardModel(
       {final String? id,
       final String? name,
-      final num? percent,
-      final num? balance,
-      final Map<String, dynamic>? style,
-      final DateTime? updated_at,
-      final DateTime? created_at,
+      final num? budget,
+      final String? start_date,
+      final String? end_date,
+      final String? updated_at,
+      final String? created_at,
       final String? user_id,
-      final StatusEnum status}) = _$PigImpl;
+      final StatusEnum status}) = _$PigCardModelImpl;
 
-  factory _Pig.fromJson(Map<String, dynamic> json) = _$PigImpl.fromJson;
+  factory _PigCardModel.fromJson(Map<String, dynamic> json) =
+      _$PigCardModelImpl.fromJson;
 
   @override
   String? get id;
   @override
   String? get name;
   @override
-  num? get percent;
+  num? get budget;
   @override
-  num? get balance;
+  String? get start_date;
   @override
-  Map<String, dynamic>? get style;
+  String? get end_date;
   @override
-  DateTime? get updated_at;
+  String? get updated_at;
   @override
-  DateTime? get created_at;
+  String? get created_at;
   @override
   String? get user_id;
-  @override
+  @override // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
   StatusEnum get status;
   @override
   @JsonKey(ignore: true)
-  _$$PigImplCopyWith<_$PigImpl> get copyWith =>
+  _$$PigCardModelImplCopyWith<_$PigCardModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

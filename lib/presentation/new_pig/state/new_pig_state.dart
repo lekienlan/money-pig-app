@@ -9,5 +9,6 @@ class NewPigState with _$NewPigState {
     num? budget,
     String? startDate,
     String? endDate,
+    bool? isSubmitting,
   }) = _NewPigState;
 }

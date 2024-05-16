@@ -8,5 +8,10 @@
   "time_range": "khung thời gian",
   "next": "tiếp theo",
   "back": "quay lại",
-  "complete": "hoàn tất"
+  "complete": "hoàn tất",
+  "from": "từ",
+  "to": "đến",
+  "start_of_day": "đầu ngày",
+  "create": "tạo",
+  "pig": "heo"
 }

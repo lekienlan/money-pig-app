@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
+import 'package:remixicon/remixicon.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DateRangePickerWidget extends StatefulWidget {
@@ -21,14 +23,13 @@ class DateRangePickerWidget extends StatefulWidget {
 class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
   @override
   Widget build(BuildContext context) {
-    log(widget.startDate?.toString() ?? '');
     showDatePicker() {
       showDialog(
           context: context,
           builder: (_) => new AlertDialog(
                 insetPadding: EdgeInsets.zero,
                 contentPadding: EdgeInsets.zero,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
+                clipBehavior: Clip.antiAlias,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 content: Builder(
@@ -59,9 +60,9 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                             selectionMode: DateRangePickerSelectionMode.range,
                             backgroundColor: ColorName.white,
                             headerStyle: DateRangePickerHeaderStyle(
-                              backgroundColor: ColorName.primaryLight,
+                              backgroundColor: ColorName.surfacePrimary,
                               textStyle: AppTextStyle.headingXS(
-                                  color: ColorName.white),
+                                  color: ColorName.textSecondary),
                             ),
                             monthCellStyle: DateRangePickerMonthCellStyle(
                               textStyle: AppTextStyle.bodyS(
@@ -110,7 +111,11 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text('${'from'.tr().capitalize()} ${'start_of_day'.tr()}',
+            style: AppTextStyle.bodyM()),
+        SizedBox(height: 4),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
               side: BorderSide(width: 1, color: ColorName.textBorder),
@@ -121,11 +126,23 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
             onPressed: () {
               showDatePicker();
             },
-            child: Text(
-              (widget.startDate ?? '').toDate(),
-              style: AppTextStyle.headingM(color: ColorName.textSecondary),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  (widget.startDate ?? '').toDate(),
+                  style: AppTextStyle.headingM(color: ColorName.textSecondary),
+                ),
+                Icon(
+                  Remix.arrow_down_s_line,
+                  color: ColorName.textSecondary,
+                )
+              ],
             )),
         SizedBox(height: 40),
+        Text('${'to'.tr().capitalize()} ${'start_of_day'.tr()}',
+            style: AppTextStyle.bodyM()),
+        SizedBox(height: 4),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
               side: BorderSide(width: 1, color: ColorName.textBorder),
@@ -136,9 +153,18 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
             onPressed: () {
               showDatePicker();
             },
-            child: Text(
-              (widget.endDate ?? '').toDate(),
-              style: AppTextStyle.headingM(color: ColorName.textSecondary),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  isTruthy(widget.endDate) ? widget.endDate!.toDate() : '...',
+                  style: AppTextStyle.headingM(color: ColorName.textSecondary),
+                ),
+                Icon(
+                  Remix.arrow_down_s_line,
+                  color: ColorName.textSecondary,
+                )
+              ],
             )),
       ],
     );

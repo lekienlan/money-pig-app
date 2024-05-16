@@ -9,7 +9,7 @@ class SplashNotifier extends _$SplashNotifier {
   FutureOr<SplashState> build() async {
     ref.onDispose(() {});
 
-    await Future.delayed(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 1));
 
     return SplashState.authenticated();
   }

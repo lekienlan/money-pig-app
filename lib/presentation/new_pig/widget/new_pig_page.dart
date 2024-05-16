@@ -1,17 +1,17 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/presentation/new_pig/provider/new_pig_provider.dart';
+import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
+import 'package:money_pig/shared/theme/assets.gen.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/currency_input_formatter.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/widget/date_range_picker_widget.dart';
 import 'package:money_pig/shared/widget/header_widget.dart';
+import 'package:remixicon/remixicon.dart';
 
 class NewPigPage extends ConsumerStatefulWidget {
   final String? id;
@@ -26,8 +26,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
   TextEditingController budgetController = TextEditingController();
   PageController _pageViewController = PageController();
   int selectedPageIndex = 0;
-
-  DateTime selectedDate = DateTime.now();
+  bool isSubmitting = false;
 
   @override
   void didChangeDependencies() {
@@ -44,13 +43,6 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
     super.dispose();
     nameController.dispose();
     _pageViewController.dispose();
-  }
-
-  String renderTitle(int index) {
-    if (index == 0) return 'pig_name'.tr();
-    if (index == 1) return 'budget'.tr();
-    if (index == 2) return 'time_range'.tr();
-    return 'complete'.tr();
   }
 
   Widget build(BuildContext context) {
@@ -130,13 +122,279 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
     }
 
     Widget _newPigComplete() {
+      return Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            child: Container(
+              width: 4, // Thickness of the line
+              height: double.infinity,
+              color: ColorName.primaryUltraLight, // Color of the line
+            ),
+          ),
+          Column(
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: ColorName.primaryUltraLight,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Center(
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    child: Center(
+                      child: Icon(Remix.wallet_fill, color: ColorName.white),
+                    ),
+                    decoration: BoxDecoration(
+                      color: ColorName.primaryMain,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 32),
+              Container(
+                color: ColorName.white,
+                child: Column(
+                  children: [
+                    Text(
+                      newPigNotifier.name ?? '',
+                      textAlign: TextAlign.center,
+                      style:
+                          AppTextStyle.heading2XL(color: ColorName.textPrimary)
+                              .copyWith(
+                                  fontSize: dynamicFontSize(
+                                      text: nameController.text,
+                                      stepLength: 5,
+                                      scale: 0.9,
+                                      defaultFontSize: 64)),
+                    ),
+                    Text('${formatCurrency(newPigNotifier.budget)}đ',
+                        style: AppTextStyle.headingXL()),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 32,
+              ),
+              Container(
+                color: ColorName.white,
+                padding: EdgeInsets.all(4),
+                child: Column(
+                  children: [
+                    Text('${'from'.tr().capitalize()} ${'start_of_day'.tr()}',
+                        style: AppTextStyle.bodyS(color: ColorName.textBorder)),
+                    Text((newPigNotifier.startDate ?? '').toDate(),
+                        style: AppTextStyle.headingS()),
+                    SizedBox(height: 16),
+                    Text('${'to'.tr().capitalize()} ${'start_of_day'.tr()}',
+                        style: AppTextStyle.bodyS(color: ColorName.textBorder)),
+                    Text((newPigNotifier.endDate ?? '').toDate(),
+                        style: AppTextStyle.headingS())
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      );
+    }
+
+    List<Widget> pageList = [
+      _newPigName(),
+      _newPigBudget(),
+      _newPigTimeRange(),
+      _newPigComplete()
+    ];
+
+    Widget _actionButton() {
       return Column(
         children: [
-          Text(newPigNotifier.name ?? ''),
-          Text(newPigNotifier.budget.toString()),
-          Text(newPigNotifier.startDate ?? ''),
-          Text(newPigNotifier.endDate ?? ''),
+          if (selectedPageIndex == pageList.length - 1)
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    ref.read(newPigNotifierProvider.notifier).handleSubmit();
+                  },
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Container(
+                            width: 100,
+                            height: 100,
+                            child: TweenAnimationBuilder<double>(
+                              duration: Duration(milliseconds: 500),
+                              tween: Tween(
+                                  begin: 0,
+                                  end: newPigNotifier.isSubmitting ?? false
+                                      ? 1
+                                      : 0),
+                              builder: (context, value, _) =>
+                                  CircularProgressIndicator(
+                                value: value,
+                                strokeWidth: 24,
+                                backgroundColor: ColorName.primaryUltraLight,
+                              ),
+                            )),
+                      ),
+                      Center(
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Remix.add_fill,
+                                  size: 40,
+                                  color: ColorName.primaryMain,
+                                )
+                                // Assets.images.pigNosePng.image(width: 32),
+                                // Text(
+                                //   '${'create'.tr().capitalize()}',
+                                //   textAlign: TextAlign.center,
+                                //   style: AppTextStyle.headingS(
+                                //       color: ColorName.primaryMain),
+                                // ),
+                              ],
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            boxShadow: [AppShadow.normal],
+                            color: ColorName.white,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 12),
+              ],
+            )
+          else
+            ElevatedButton(
+                onPressed: ref
+                        .read(newPigNotifierProvider.notifier)
+                        .isEnabled(selectedPageIndex)
+                    ? () {
+                        setState(() {
+                          _pageViewController.animateToPage(
+                              selectedPageIndex + 1,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOut);
+                        });
+                      }
+                    : null,
+                child: Text(
+                  'next'.tr().capitalize(),
+                )),
+          if (selectedPageIndex > 0)
+            Column(
+              children: [
+                SizedBox(height: 4),
+                SafeArea(
+                  child: TextButton(
+                      style: TextButton.styleFrom(
+                          foregroundColor: ColorName.textTertiary),
+                      onPressed: () {
+                        setState(() {
+                          _pageViewController.animateToPage(
+                              selectedPageIndex - 1,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOut);
+                        });
+                      },
+                      child: Text(
+                        'back'.tr().capitalize(),
+                      )),
+                ),
+              ],
+            ),
+          SizedBox(height: 8),
         ],
+      );
+    }
+
+    Widget _stepper() {
+      return Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: AnimatedSwitcher(
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: SizeTransition(
+                      sizeFactor: animation,
+                      child: child,
+                    ),
+                  );
+                },
+                duration: Duration(milliseconds: 200),
+                child: Column(
+                  key: ValueKey<int>(selectedPageIndex),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        ref
+                            .read(newPigNotifierProvider.notifier)
+                            .renderTitle(selectedPageIndex)
+                            .capitalize(),
+                        style: AppTextStyle.headingL().copyWith()),
+                    if (selectedPageIndex < pageList.length - 1)
+                      Text.rich(
+                        TextSpan(
+                            children: [
+                              TextSpan(text: '${'next'.tr().capitalize()}: '),
+                              TextSpan(
+                                text: ref
+                                    .read(newPigNotifierProvider.notifier)
+                                    .renderTitle(selectedPageIndex + 1)
+                                    .capitalize(),
+                              )
+                            ],
+                            style: AppTextStyle.bodyS(
+                                color: ColorName.textBorder)),
+                      )
+                  ],
+                ),
+              ),
+            ),
+            TweenAnimationBuilder<double>(
+              duration: Duration(milliseconds: 200),
+              tween: Tween(
+                  begin: 0, end: (selectedPageIndex + 1) / pageList.length),
+              builder: (context, value, _) => Stack(
+                key: ValueKey(selectedPageIndex),
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 64,
+                    height: 64,
+                    child: CircularProgressIndicator(
+                      value: value,
+                      strokeWidth: 4,
+                      backgroundColor: ColorName.primaryUltraLight,
+                      color: ColorName.primaryLight,
+                    ),
+                  ),
+                  Text(
+                    '${(selectedPageIndex + 1).toString()}/${pageList.length.toString()}',
+                    style: AppTextStyle.headingS(),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       );
     }
 
@@ -150,61 +408,8 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
         child: Column(
           children: [
             SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: AnimatedSwitcher(
-                      transitionBuilder:
-                          (Widget child, Animation<double> animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: SizeTransition(
-                            sizeFactor: animation,
-                            child: child,
-                          ),
-                        );
-                      },
-                      duration: Duration(milliseconds: 200),
-                      child: Column(
-                        key: ValueKey<int>(selectedPageIndex),
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(renderTitle(selectedPageIndex).capitalize(),
-                              style: AppTextStyle.headingXL().copyWith()),
-                          if (selectedPageIndex < 3)
-                            Text.rich(
-                              TextSpan(
-                                  children: [
-                                    TextSpan(
-                                        text: '${'next'.tr().capitalize()}: '),
-                                    TextSpan(
-                                        text: renderTitle(selectedPageIndex + 1)
-                                            .capitalize(),
-                                        style: AppTextStyle.headingXS(
-                                            color: ColorName.textBorder))
-                                  ],
-                                  style: AppTextStyle.bodyM(
-                                      color: ColorName.textBorder)),
-                            )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: ColorName.primaryMain,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 60),
+            _stepper(),
+            SizedBox(height: 32),
             Flexible(
               child: PageView(
                   onPageChanged: (index) {
@@ -216,39 +421,9 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                     });
                   },
                   controller: _pageViewController,
-                  children: [
-                    _newPigName(),
-                    _newPigBudget(),
-                    _newPigTimeRange(),
-                    _newPigComplete()
-                  ]),
+                  children: pageList),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _pageViewController.animateToPage(selectedPageIndex + 1,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOut);
-                  });
-                },
-                child: Text(
-                  'next'.tr().capitalize(),
-                )),
-            if (selectedPageIndex > 0)
-              SafeArea(
-                child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _pageViewController.animateToPage(selectedPageIndex - 1,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut);
-                      });
-                    },
-                    child: Text(
-                      'back'.tr().capitalize(),
-                    )),
-              ),
-            SizedBox(height: 8),
+            _actionButton()
           ],
         ),
       ),

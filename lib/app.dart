@@ -41,6 +41,10 @@ class App extends ConsumerWidget {
                 if (states.contains(MaterialState.pressed)) {
                   return ColorName.primaryDark;
                 }
+
+                if (states.contains(MaterialState.disabled)) {
+                  return ColorName.textDisabled;
+                }
                 return ColorName.primaryMain;
               },
             ),

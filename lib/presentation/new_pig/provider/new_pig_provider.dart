@@ -1,4 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:money_pig/data/local/local_pig_service.dart';
+import 'package:money_pig/domain/model/pig_card_model.dart';
+import 'package:money_pig/presentation/income/provider/income_provider.dart';
+import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/new_pig/state/new_pig_state.dart';
+import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,11 +19,21 @@ class NewPigNotifier extends _$NewPigNotifier {
     return NewPigState(
       name: null,
       startDate: currentDate.toIso8601String(),
-      // budget: 200000,
-      // endDate:
-      //     DateTime(currentDate.year, currentDate.month + 1, currentDate.day)
-      //         .toIso8601String(),
     );
+  }
+
+  String renderTitle(int index) {
+    if (index == 0) return 'pig_name'.tr();
+    if (index == 1) return 'budget'.tr();
+    if (index == 2) return 'time_range'.tr();
+    return 'complete'.tr();
+  }
+
+  bool isEnabled(int index) {
+    if (index == 0 && isTruthy(state.name)) return true;
+    if (index == 1 && isTruthy(state.budget)) return true;
+    if (index == 2 && isTruthy(state.startDate)) return true;
+    return false;
   }
 
   void onChangeName(String? value) {
@@ -35,5 +51,23 @@ class NewPigNotifier extends _$NewPigNotifier {
 
   void onChangeTimeRange({String? startDate, String? endDate}) {
     state = state.copyWith(startDate: startDate, endDate: endDate);
+  }
+
+  Future<void> handleSubmit() async {
+    try {
+      state = state.copyWith(isSubmitting: true);
+      LocalPigService().createPig(PigCardModel(
+        name: state.name,
+        budget: state.budget,
+        start_date: state.startDate,
+        end_date: state.startDate,
+      ));
+
+      await Future.delayed(Duration(milliseconds: 500));
+      state = state.copyWith(isSubmitting: false);
+      ref.invalidate(pigListingNotifierProvider);
+      ref.invalidate(incomeNotifierProvider);
+      ref.read(routerProvider).go(HomeRoute.path);
+    } catch (err) {}
   }
 }

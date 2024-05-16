@@ -10,6 +10,7 @@ List<RouteBase> get $appRoutes => [
       $splashRoute,
       $homeRoute,
       $newPigRoute,
+      $newTransactionRoute,
       $pigDetailRoute,
       $eastlinRoute,
     ];
@@ -68,6 +69,29 @@ extension $NewPigRouteExtension on NewPigRoute {
 
   String get location => GoRouteData.$location(
         '/new-pig',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $newTransactionRoute => GoRouteData.$route(
+      path: '/transaction/new',
+      factory: $NewTransactionRouteExtension._fromState,
+    );
+
+extension $NewTransactionRouteExtension on NewTransactionRoute {
+  static NewTransactionRoute _fromState(GoRouterState state) =>
+      const NewTransactionRoute();
+
+  String get location => GoRouteData.$location(
+        '/transaction/new',
       );
 
   void go(BuildContext context) => context.go(location);

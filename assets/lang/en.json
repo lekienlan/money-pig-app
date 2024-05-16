@@ -8,5 +8,10 @@
   "time_range": "time range",
   "next": "next",
   "back": "go back",
-  "complete": "complete"
+  "complete": "complete",
+  "from": "from",
+  "to": "to",
+  "start_of_day": "start of day",
+  "create": "create",
+  "pig": "pig"
 }

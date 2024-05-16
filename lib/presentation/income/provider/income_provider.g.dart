@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash_provider.dart';
+part of 'income_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$splashNotifierHash() => r'b2ebea6591f4b682d40a0289dd77c237bd59f50b';
+String _$incomeNotifierHash() => r'780529b16600b78cd78d7774b41c29d36b4930af';
 
-/// See also [SplashNotifier].
-@ProviderFor(SplashNotifier)
-final splashNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<SplashNotifier, SplashState>.internal(
-  SplashNotifier.new,
-  name: r'splashNotifierProvider',
+/// See also [IncomeNotifier].
+@ProviderFor(IncomeNotifier)
+final incomeNotifierProvider =
+    AutoDisposeNotifierProvider<IncomeNotifier, IncomeState>.internal(
+  IncomeNotifier.new,
+  name: r'incomeNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$splashNotifierHash,
+      : _$incomeNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SplashNotifier = AutoDisposeAsyncNotifier<SplashState>;
+typedef _$IncomeNotifier = AutoDisposeNotifier<IncomeState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

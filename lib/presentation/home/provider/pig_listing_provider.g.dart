@@ -7,7 +7,7 @@ part of 'pig_listing_provider.dart';
 // **************************************************************************
 
 String _$pigListingNotifierHash() =>
-    r'bb9c6a0e1cbf3cb289e73426bb0860bf71a6c599';
+    r'69002205e368d3b9bf0f2fcebd26a00dceb0d484';
 
 /// See also [PigListingNotifier].
 @ProviderFor(PigListingNotifier)

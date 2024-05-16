@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'pig_listing_state.dart';
+part of 'income_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,25 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$PigListingState {
+mixin _$IncomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<PigCardModel> pigListing) data,
+    required TResult Function(num amount) data,
     required TResult Function() loading,
-    required TResult Function() empty,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PigCardModel> pigListing)? data,
+    TResult? Function(num amount)? data,
     TResult? Function()? loading,
-    TResult? Function()? empty,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PigCardModel> pigListing)? data,
+    TResult Function(num amount)? data,
     TResult Function()? loading,
-    TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -45,7 +42,6 @@ mixin _$PigListingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Data value) data,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +49,6 @@ mixin _$PigListingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Data value)? data,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +56,6 @@ mixin _$PigListingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Data value)? data,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -69,16 +63,16 @@ mixin _$PigListingState {
 }
 
 /// @nodoc
-abstract class $PigListingStateCopyWith<$Res> {
-  factory $PigListingStateCopyWith(
-          PigListingState value, $Res Function(PigListingState) then) =
-      _$PigListingStateCopyWithImpl<$Res, PigListingState>;
+abstract class $IncomeStateCopyWith<$Res> {
+  factory $IncomeStateCopyWith(
+          IncomeState value, $Res Function(IncomeState) then) =
+      _$IncomeStateCopyWithImpl<$Res, IncomeState>;
 }
 
 /// @nodoc
-class _$PigListingStateCopyWithImpl<$Res, $Val extends PigListingState>
-    implements $PigListingStateCopyWith<$Res> {
-  _$PigListingStateCopyWithImpl(this._value, this._then);
+class _$IncomeStateCopyWithImpl<$Res, $Val extends IncomeState>
+    implements $IncomeStateCopyWith<$Res> {
+  _$IncomeStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -92,12 +86,12 @@ abstract class _$$DataImplCopyWith<$Res> {
           _$DataImpl value, $Res Function(_$DataImpl) then) =
       __$$DataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PigCardModel> pigListing});
+  $Res call({num amount});
 }
 
 /// @nodoc
 class __$$DataImplCopyWithImpl<$Res>
-    extends _$PigListingStateCopyWithImpl<$Res, _$DataImpl>
+    extends _$IncomeStateCopyWithImpl<$Res, _$DataImpl>
     implements _$$DataImplCopyWith<$Res> {
   __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
       : super(_value, _then);
@@ -105,13 +99,13 @@ class __$$DataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pigListing = null,
+    Object? amount = null,
   }) {
     return _then(_$DataImpl(
-      null == pigListing
-          ? _value._pigListing
-          : pigListing // ignore: cast_nullable_to_non_nullable
-              as List<PigCardModel>,
+      null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as num,
     ));
   }
 }
@@ -119,20 +113,14 @@ class __$$DataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DataImpl implements _Data {
-  const _$DataImpl(final List<PigCardModel> pigListing)
-      : _pigListing = pigListing;
+  const _$DataImpl(this.amount);
 
-  final List<PigCardModel> _pigListing;
   @override
-  List<PigCardModel> get pigListing {
-    if (_pigListing is EqualUnmodifiableListView) return _pigListing;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_pigListing);
-  }
+  final num amount;
 
   @override
   String toString() {
-    return 'PigListingState.data(pigListing: $pigListing)';
+    return 'IncomeState.data(amount: $amount)';
   }
 
   @override
@@ -140,13 +128,11 @@ class _$DataImpl implements _Data {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DataImpl &&
-            const DeepCollectionEquality()
-                .equals(other._pigListing, _pigListing));
+            (identical(other.amount, amount) || other.amount == amount));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_pigListing));
+  int get hashCode => Object.hash(runtimeType, amount);
 
   @JsonKey(ignore: true)
   @override
@@ -157,36 +143,33 @@ class _$DataImpl implements _Data {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<PigCardModel> pigListing) data,
+    required TResult Function(num amount) data,
     required TResult Function() loading,
-    required TResult Function() empty,
     required TResult Function() error,
   }) {
-    return data(pigListing);
+    return data(amount);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PigCardModel> pigListing)? data,
+    TResult? Function(num amount)? data,
     TResult? Function()? loading,
-    TResult? Function()? empty,
     TResult? Function()? error,
   }) {
-    return data?.call(pigListing);
+    return data?.call(amount);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PigCardModel> pigListing)? data,
+    TResult Function(num amount)? data,
     TResult Function()? loading,
-    TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(pigListing);
+      return data(amount);
     }
     return orElse();
   }
@@ -196,7 +179,6 @@ class _$DataImpl implements _Data {
   TResult map<TResult extends Object?>({
     required TResult Function(_Data value) data,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
   }) {
     return data(this);
@@ -207,7 +189,6 @@ class _$DataImpl implements _Data {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Data value)? data,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
   }) {
     return data?.call(this);
@@ -218,7 +199,6 @@ class _$DataImpl implements _Data {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Data value)? data,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -229,10 +209,10 @@ class _$DataImpl implements _Data {
   }
 }
 
-abstract class _Data implements PigListingState {
-  const factory _Data(final List<PigCardModel> pigListing) = _$DataImpl;
+abstract class _Data implements IncomeState {
+  const factory _Data(final num amount) = _$DataImpl;
 
-  List<PigCardModel> get pigListing;
+  num get amount;
   @JsonKey(ignore: true)
   _$$DataImplCopyWith<_$DataImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -247,7 +227,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$PigListingStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$IncomeStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -261,7 +241,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'PigListingState.loading()';
+    return 'IncomeState.loading()';
   }
 
   @override
@@ -276,9 +256,8 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<PigCardModel> pigListing) data,
+    required TResult Function(num amount) data,
     required TResult Function() loading,
-    required TResult Function() empty,
     required TResult Function() error,
   }) {
     return loading();
@@ -287,9 +266,8 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PigCardModel> pigListing)? data,
+    TResult? Function(num amount)? data,
     TResult? Function()? loading,
-    TResult? Function()? empty,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -298,9 +276,8 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PigCardModel> pigListing)? data,
+    TResult Function(num amount)? data,
     TResult Function()? loading,
-    TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -315,7 +292,6 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Data value) data,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -326,7 +302,6 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Data value)? data,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -337,7 +312,6 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Data value)? data,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -348,122 +322,8 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements PigListingState {
+abstract class _Loading implements IncomeState {
   const factory _Loading() = _$LoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$EmptyImplCopyWith<$Res> {
-  factory _$$EmptyImplCopyWith(
-          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
-      __$$EmptyImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$EmptyImplCopyWithImpl<$Res>
-    extends _$PigListingStateCopyWithImpl<$Res, _$EmptyImpl>
-    implements _$$EmptyImplCopyWith<$Res> {
-  __$$EmptyImplCopyWithImpl(
-      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$EmptyImpl implements _Empty {
-  const _$EmptyImpl();
-
-  @override
-  String toString() {
-    return 'PigListingState.empty()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmptyImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<PigCardModel> pigListing) data,
-    required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function() error,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PigCardModel> pigListing)? data,
-    TResult? Function()? loading,
-    TResult? Function()? empty,
-    TResult? Function()? error,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PigCardModel> pigListing)? data,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Data value) data,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Data value)? data,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Data value)? data,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Empty implements PigListingState {
-  const factory _Empty() = _$EmptyImpl;
 }
 
 /// @nodoc
@@ -475,7 +335,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$PigListingStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$IncomeStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -489,7 +349,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'PigListingState.error()';
+    return 'IncomeState.error()';
   }
 
   @override
@@ -504,9 +364,8 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<PigCardModel> pigListing) data,
+    required TResult Function(num amount) data,
     required TResult Function() loading,
-    required TResult Function() empty,
     required TResult Function() error,
   }) {
     return error();
@@ -515,9 +374,8 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PigCardModel> pigListing)? data,
+    TResult? Function(num amount)? data,
     TResult? Function()? loading,
-    TResult? Function()? empty,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -526,9 +384,8 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PigCardModel> pigListing)? data,
+    TResult Function(num amount)? data,
     TResult Function()? loading,
-    TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -543,7 +400,6 @@ class _$ErrorImpl implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Data value) data,
     required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -554,7 +410,6 @@ class _$ErrorImpl implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Data value)? data,
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -565,7 +420,6 @@ class _$ErrorImpl implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Data value)? data,
     TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -576,6 +430,6 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements PigListingState {
+abstract class _Error implements IncomeState {
   const factory _Error() = _$ErrorImpl;
 }

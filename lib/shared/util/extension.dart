@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:money_pig/shared/util/enum.dart';
 
 extension StringExtension on String {
   String capitalize() {
@@ -9,6 +10,21 @@ extension StringExtension on String {
   String toDate() {
     if (isEmpty) return '';
     final date = DateTime.parse(this).toLocal();
-    return DateFormat('dd MMMM, yyyy', 'vi').format(date);
+    return DateFormat('dd MMMM, yyyy').format(date);
+  }
+}
+
+extension TransactionTypeExtension on TransactionTypeEnum {
+  String get stringValue {
+    switch (this) {
+      case TransactionTypeEnum.budget:
+        return 'budget';
+      case TransactionTypeEnum.expense:
+        return 'expense';
+      case TransactionTypeEnum.income:
+        return 'income';
+      default:
+        return '';
+    }
   }
 }

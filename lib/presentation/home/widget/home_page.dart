@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money_pig/presentation/income/provider/income_provider.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/router/app_router.dart';
@@ -15,6 +16,7 @@ import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/widget/loading_widget.dart';
 import 'package:money_pig/shared/widget/navigation_bar_widget.dart';
+import 'package:remixicon/remixicon.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -22,6 +24,9 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pigListingNotifier = ref.watch(pigListingNotifierProvider);
+    final incomeNotifier = ref.watch(incomeNotifierProvider);
+
+    log('$incomeNotifier');
 
     return Scaffold(
         appBar: AppBar(
@@ -36,9 +41,14 @@ class HomePage extends ConsumerWidget {
               slivers: [
                 SliverPadding(
                   padding: EdgeInsets.symmetric(horizontal: 24),
-                  sliver: SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _UserIncome(ref),
+                  sliver: incomeNotifier.maybeWhen(
+                    data: (amount) => SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _UserIncome(ref: ref, incomeAmount: amount),
+                    ),
+                    orElse: () => SliverPersistentHeader(
+                      delegate: _UserIncome(ref: ref, incomeAmount: null),
+                    ),
                   ),
                 ),
                 SliverToBoxAdapter(child: SizedBox(height: 16)),
@@ -57,6 +67,8 @@ class HomePage extends ConsumerWidget {
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           // Ensure index is within bounds
+                          if (index == 0) return _NewPig(ref);
+
                           if (index < pigListing.length) {
                             return PigCardWidget(
                               pig: pigListing[index],
@@ -78,19 +90,19 @@ class HomePage extends ConsumerWidget {
               right: 0,
               bottom: 0,
               child: Container(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withOpacity(0),
-                      ColorName.surfaceSecondary
-                    ],
-                    stops: [0, 0.6],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  )),
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  alignment: Alignment.center,
-                  child: _NewPig(ref)),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  colors: [
+                    Colors.white.withOpacity(0),
+                    ColorName.surfaceSecondary
+                  ],
+                  stops: [0, 0.8],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                )),
+                padding: EdgeInsets.symmetric(vertical: 16),
+                alignment: Alignment.center,
+              ),
             )
           ],
         ),
@@ -99,9 +111,10 @@ class HomePage extends ConsumerWidget {
 }
 
 class _UserIncome extends SliverPersistentHeaderDelegate {
-  final WidgetRef ref;
+  final WidgetRef? ref;
+  final num? incomeAmount;
 
-  _UserIncome(this.ref);
+  _UserIncome({this.ref, this.incomeAmount});
 
   @override
   double get minExtent => 60;
@@ -118,7 +131,7 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     final isScrolled = shrinkOffset > 10;
-    log(shrinkOffset.toString());
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: isScrolled ? 8 : 0),
       padding: EdgeInsets.symmetric(horizontal: isScrolled ? 12 : 16),
@@ -144,14 +157,14 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
                   ],
                 ),
               Text(
-                '${formatCurrency(120000)}đ',
+                '${formatCurrency(incomeAmount)}đ',
                 style: AppTextStyle.headingM(color: ColorName.textPrimary),
               ),
             ],
           ),
           GestureDetector(
             onTap: () {
-              ref.read(routerProvider).push(NewPigRoute.path);
+              ref?.read(routerProvider).push(NewTransactionRoute.path);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -173,15 +186,29 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
 Widget _NewPig(WidgetRef ref) {
   return GestureDetector(
     onTap: () => ref.read(routerProvider).push('/new-pig'),
-    child: Column(
-      children: [
-        Assets.images.pigNosePng.image(width: 32),
-        SizedBox(height: 2),
-        Text(
-          'new_pig'.tr().capitalize(),
-          style: AppTextStyle.headingXS(color: ColorName.primaryMain),
-        )
-      ],
+    child: Container(
+      decoration: BoxDecoration(
+          color: ColorName.white,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [AppShadow.light]),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Remix.add_fill,
+              size: 32,
+              color: ColorName.primaryMain,
+            ),
+            // Assets.images.pigNosePng.image(width: 32),
+            SizedBox(height: 2),
+            Text(
+              'new_pig'.tr().capitalize(),
+              style: AppTextStyle.headingXS(color: ColorName.primaryMain),
+            )
+          ],
+        ),
+      ),
     ),
   );
 }
