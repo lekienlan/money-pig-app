@@ -50,6 +50,9 @@ class LocalPigService {
 
   Future<List<PigCardModel>> getPigListing() async {
     final Database db = await _localDb.database;
+
+    // await _localDb.dropTables();
+
     final List<Map<String, dynamic>> list = await db.rawQuery('''
     SELECT
       pigs.*,
@@ -70,13 +73,51 @@ class LocalPigService {
         .map((item) => PigCardModel.fromJson({
               'id': item['id'],
               'name': item['name'],
-              'startDate': item['start_date'],
-              'endDate': item['end_date'],
-              'updatedAt': item['updated_at'],
-              'createdAt': item['created_at'],
+              'start_date': item['start_date'],
+              'end_date': item['end_date'],
+              'updated_at': item['updated_at'],
+              'created_at': item['created_at'],
               'status': item['status'],
               'budget': item['amount'],
             }))
         .toList();
+  }
+
+  Future<PigCardModel> getPigDetail(String id) async {
+    final Database db = await _localDb.database;
+
+    // await _localDb.dropTables();
+
+    final List<Map<String, dynamic>> list = await db.rawQuery('''
+    SELECT
+      pigs.*,
+      periods.id as period_id,
+      periods.start_date,
+      periods.end_date,
+      transactions.id as transaction_id,
+      transactions.amount,
+      transactions.period_id as transaction_period_id
+    FROM pigs
+    LEFT JOIN periods ON pigs.id = periods.pig_id
+    LEFT JOIN transactions ON periods.id = transactions.period_id
+     WHERE transactions.type = 'budget' AND pigs.id = '${id}'
+    ORDER BY pigs.created_at DESC
+  ''');
+
+    if (list.isNotEmpty) {
+      final item = list.first;
+      return PigCardModel.fromJson({
+        'id': item['id'],
+        'name': item['name'],
+        'start_date': item['start_date'],
+        'end_date': item['end_date'],
+        'updated_at': item['updated_at'],
+        'created_at': item['created_at'],
+        'status': item['status'],
+        'budget': item['amount'],
+      });
+    } else {
+      throw Exception('Pig not found');
+    }
   }
 }

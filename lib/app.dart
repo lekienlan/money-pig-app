@@ -22,7 +22,7 @@ class App extends ConsumerWidget {
           colorScheme: ColorScheme(
             primary: ColorName.primaryMain,
             brightness: Brightness.light,
-            onPrimary: ColorName.primaryDark,
+            onPrimary: ColorName.neutral100,
             secondary: ColorName.primaryLight,
             onSecondary: ColorName.textSecondary,
             error: ColorName.pink700,

@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/domain/repository/transaction_repository.dart';
-import 'package:money_pig/presentation/income/provider/amount_input_provider.dart';
 import 'package:money_pig/presentation/income/state/income_state.dart';
-import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -105,7 +105,7 @@ extension $NewTransactionRouteExtension on NewTransactionRoute {
 }
 
 RouteBase get $pigDetailRoute => GoRouteData.$route(
-      path: '/new-pig/:id',
+      path: '/pig-detail/:id',
       factory: $PigDetailRouteExtension._fromState,
     );
 
@@ -115,7 +115,7 @@ extension $PigDetailRouteExtension on PigDetailRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/new-pig/${Uri.encodeComponent(id)}',
+        '/pig-detail/${Uri.encodeComponent(id)}',
       );
 
   void go(BuildContext context) => context.go(location);

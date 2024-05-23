@@ -14,8 +14,7 @@ import 'package:money_pig/shared/widget/header_widget.dart';
 import 'package:remixicon/remixicon.dart';
 
 class NewPigPage extends ConsumerStatefulWidget {
-  final String? id;
-  const NewPigPage({this.id, super.key});
+  const NewPigPage({super.key});
 
   @override
   NewPigPageState createState() => NewPigPageState();

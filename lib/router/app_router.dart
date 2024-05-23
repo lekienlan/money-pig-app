@@ -8,6 +8,7 @@ import 'package:money_pig/presentation/eastlin/widget/eastlin_page.dart';
 import 'package:money_pig/presentation/home/widget/home_page.dart';
 import 'package:money_pig/presentation/income/widget/income_input_page.dart';
 import 'package:money_pig/presentation/new_pig/widget/new_pig_page.dart';
+import 'package:money_pig/presentation/pig_detail/widget/pig_detail_page.dart';
 
 import 'package:money_pig/presentation/splash/widget/splash_page.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
@@ -61,18 +62,18 @@ class NewPigRoute extends GoRouteData {
   static const path = '/new-pig';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return NewPigPage();
-    // return CustomTransitionPage(
-    //   child: const NewPigPage(),
-    //   transitionDuration: const Duration(milliseconds: 200),
-    //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //     return FadeTransition(
-    //       opacity: animation,
-    //       child: child,
-    //     );
-    //   },
-    // );
+  Page buildPage(BuildContext context, GoRouterState state) {
+    // return NewPigPage();
+    return CustomTransitionPage(
+      child: const NewPigPage(),
+      transitionDuration: const Duration(milliseconds: 200),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+    );
   }
 }
 
@@ -97,11 +98,11 @@ class PigDetailRoute extends GoRouteData {
   final String id;
   const PigDetailRoute({this.id = ''});
 
-  static const path = '/new-pig/:id';
+  static const path = '/pig-detail/:id';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return NewPigPage(id: id);
+    return PigDetailPage(id: id);
   }
 }
 

@@ -16,6 +16,7 @@ class LocalDatabaseService {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'money_pig.db');
+    // dropTables();
     return await openDatabase(path, version: 1, onCreate: _createDatabase);
   }
 

@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money_pig/domain/model/pig_card_model.dart';
 import 'package:money_pig/presentation/income/provider/income_provider.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/assets.gen.dart';
 
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/extension.dart';
@@ -54,7 +54,18 @@ class HomePage extends ConsumerWidget {
                 SliverToBoxAdapter(child: SizedBox(height: 16)),
                 pigListingNotifier.when(
                   loading: () => SliverToBoxAdapter(child: LoadingWidget()),
-                  empty: () => SliverToBoxAdapter(child: Text('empty')),
+                  empty: () => SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    sliver: SliverGrid.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return _NewPig(ref);
+                      },
+                      itemCount: 1,
+                    ),
+                  ),
                   error: () => SliverToBoxAdapter(child: Text('error')),
                   data: (pigListing) {
                     return SliverPadding(
@@ -69,15 +80,21 @@ class HomePage extends ConsumerWidget {
                           // Ensure index is within bounds
                           if (index == 0) return _NewPig(ref);
 
-                          if (index < pigListing.length) {
+                          final pigIndex = index - 1;
+
+                          if (pigIndex < pigListing.length) {
+                            PigCardModel pigCard = pigListing[pigIndex];
                             return PigCardWidget(
-                              pig: pigListing[index],
+                              pig: pigCard,
+                              onClick: () => ref
+                                  .read(routerProvider)
+                                  .push('/pig-detail/${pigCard.id}'),
                             );
                           } else {
                             return null; // Return null if index is out of bounds
                           }
                         },
-                        itemCount: pigListing.length,
+                        itemCount: pigListing.length + 1,
                       ),
                     );
                   },
