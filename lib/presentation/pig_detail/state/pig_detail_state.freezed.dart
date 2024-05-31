@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PigDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PigCardModel data) data,
+    required TResult Function(PigModel data) data,
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function() error,
@@ -26,7 +26,7 @@ mixin _$PigDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PigCardModel data)? data,
+    TResult? Function(PigModel data)? data,
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function()? error,
@@ -34,7 +34,7 @@ mixin _$PigDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PigCardModel data)? data,
+    TResult Function(PigModel data)? data,
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function()? error,
@@ -92,9 +92,9 @@ abstract class _$$DataImplCopyWith<$Res> {
           _$DataImpl value, $Res Function(_$DataImpl) then) =
       __$$DataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PigCardModel data});
+  $Res call({PigModel data});
 
-  $PigCardModelCopyWith<$Res> get data;
+  $PigModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -113,14 +113,14 @@ class __$$DataImplCopyWithImpl<$Res>
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as PigCardModel,
+              as PigModel,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $PigCardModelCopyWith<$Res> get data {
-    return $PigCardModelCopyWith<$Res>(_value.data, (value) {
+  $PigModelCopyWith<$Res> get data {
+    return $PigModelCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value));
     });
   }
@@ -132,7 +132,7 @@ class _$DataImpl implements _Data {
   const _$DataImpl(this.data);
 
   @override
-  final PigCardModel data;
+  final PigModel data;
 
   @override
   String toString() {
@@ -159,7 +159,7 @@ class _$DataImpl implements _Data {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PigCardModel data) data,
+    required TResult Function(PigModel data) data,
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function() error,
@@ -170,7 +170,7 @@ class _$DataImpl implements _Data {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PigCardModel data)? data,
+    TResult? Function(PigModel data)? data,
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function()? error,
@@ -181,7 +181,7 @@ class _$DataImpl implements _Data {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PigCardModel data)? data,
+    TResult Function(PigModel data)? data,
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function()? error,
@@ -232,9 +232,9 @@ class _$DataImpl implements _Data {
 }
 
 abstract class _Data implements PigDetailState {
-  const factory _Data(final PigCardModel data) = _$DataImpl;
+  const factory _Data(final PigModel data) = _$DataImpl;
 
-  PigCardModel get data;
+  PigModel get data;
   @JsonKey(ignore: true)
   _$$DataImplCopyWith<_$DataImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -278,7 +278,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PigCardModel data) data,
+    required TResult Function(PigModel data) data,
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function() error,
@@ -289,7 +289,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PigCardModel data)? data,
+    TResult? Function(PigModel data)? data,
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function()? error,
@@ -300,7 +300,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PigCardModel data)? data,
+    TResult Function(PigModel data)? data,
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function()? error,
@@ -392,7 +392,7 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PigCardModel data) data,
+    required TResult Function(PigModel data) data,
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function() error,
@@ -403,7 +403,7 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PigCardModel data)? data,
+    TResult? Function(PigModel data)? data,
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function()? error,
@@ -414,7 +414,7 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PigCardModel data)? data,
+    TResult Function(PigModel data)? data,
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function()? error,
@@ -506,7 +506,7 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PigCardModel data) data,
+    required TResult Function(PigModel data) data,
     required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function() error,
@@ -517,7 +517,7 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PigCardModel data)? data,
+    TResult? Function(PigModel data)? data,
     TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function()? error,
@@ -528,7 +528,7 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PigCardModel data)? data,
+    TResult Function(PigModel data)? data,
     TResult Function()? loading,
     TResult Function()? empty,
     TResult Function()? error,

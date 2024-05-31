@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:money_pig/domain/model/category_model.dart';
 import 'package:money_pig/domain/model/transaction_model.dart';
+import 'package:money_pig/domain/repository/category_repository.dart';
 import 'package:money_pig/domain/repository/transaction_repository.dart';
-import 'package:money_pig/presentation/income/state/income_state.dart';
+import 'package:money_pig/presentation/transaction/state/income_state.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,6 +15,7 @@ class IncomeNotifier extends _$IncomeNotifier {
   @override
   IncomeState build() {
     fetchIncome();
+    fetchCategoryListing();
     return IncomeState.loading();
   }
 
@@ -23,19 +26,21 @@ class IncomeNotifier extends _$IncomeNotifier {
       final income = await TransactionRepository()
           .getTransactionAmount(type: TransactionTypeEnum.income);
 
-      log('$income');
       state = IncomeState.data(income - budget);
     } catch (err) {
       state = IncomeState.data(0);
     }
   }
 
-  Future<void> handleAddIncome(num? amount) async {
+  Future<void> fetchCategoryListing() async {
     try {
-      await TransactionRepository().createTransaction(
-          TransactionModel(amount: amount, type: TransactionTypeEnum.income));
-
-      ref.invalidateSelf();
+      // await CategoryRepository().createCategory(CategoryModel(
+      //   name: 'lương',
+      //   type: TransactionTypeEnum.expense,
+      // ));
+      final resp = await CategoryRepository()
+          .getCategoryListing(types: [TransactionTypeEnum.expense]);
+      log("${resp}");
     } catch (err) {}
   }
 }

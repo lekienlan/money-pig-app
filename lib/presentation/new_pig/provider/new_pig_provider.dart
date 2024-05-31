@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:money_pig/data/local/local_pig_service.dart';
-import 'package:money_pig/domain/model/pig_card_model.dart';
-import 'package:money_pig/presentation/income/provider/income_provider.dart';
+import 'package:money_pig/domain/model/pig_model.dart';
+import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/new_pig/state/new_pig_state.dart';
 import 'package:money_pig/router/app_router.dart';
@@ -56,11 +56,11 @@ class NewPigNotifier extends _$NewPigNotifier {
   Future<void> handleSubmit() async {
     try {
       state = state.copyWith(isSubmitting: true);
-      LocalPigService().createPig(PigCardModel(
+      LocalPigService().createPig(PigModel(
         name: state.name,
         budget: state.budget,
         start_date: state.startDate,
-        end_date: state.startDate,
+        end_date: state.endDate,
       ));
 
       await Future.delayed(Duration(milliseconds: 500));

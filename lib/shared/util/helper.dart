@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:money_pig/shared/util/constant.dart';
 
 double dynamicFontSize({
   String text = '',
@@ -34,7 +35,7 @@ String formatCurrency(num? value) {
   final RegExp regex = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
   formattedValue =
       formattedValue.replaceAllMapped(regex, (Match match) => '${match[1]}.');
-  return formattedValue;
+  return "${formattedValue}đ";
 }
 
 bool isTruthy(dynamic value) {
@@ -52,4 +53,13 @@ Future<String?> getDeviceId() async {
     return androidDeviceInfo.id; // unique ID on Android
   }
   return null;
+}
+
+String sanitizeText(String? string) {
+  return string
+          ?.replaceAll(
+              RegExp("[${RegExp.escape(SPECIAL_CHARACTERS)}]", multiLine: true),
+              '')
+          .trim() ??
+      '';
 }

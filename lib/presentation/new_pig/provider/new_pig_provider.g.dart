@@ -6,7 +6,7 @@ part of 'new_pig_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$newPigNotifierHash() => r'5fecb6bfaed455dd423393f0592216d0e210354d';
+String _$newPigNotifierHash() => r'2c5e820683eb12cb85ed720910335f60a2a28b0d';
 
 /// See also [NewPigNotifier].
 @ProviderFor(NewPigNotifier)

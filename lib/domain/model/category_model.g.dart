@@ -1,37 +1,39 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pig_card_model.dart';
+part of 'category_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PigCardModelImpl _$$PigCardModelImplFromJson(Map<String, dynamic> json) =>
-    _$PigCardModelImpl(
+_$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
+    _$CategoryModelImpl(
       id: json['id'] as String?,
       name: json['name'] as String?,
-      budget: json['budget'] as num?,
-      start_date: json['start_date'] as String?,
-      end_date: json['end_date'] as String?,
-      updated_at: json['updated_at'] as String?,
+      code: json['code'] as String?,
+      type: $enumDecodeNullable(_$TransactionTypeEnumEnumMap, json['type']),
       created_at: json['created_at'] as String?,
-      user_id: json['user_id'] as String?,
+      updated_at: json['updated_at'] as String?,
       status: $enumDecodeNullable(_$StatusEnumEnumMap, json['status']) ??
           StatusEnum.active,
     );
 
-Map<String, dynamic> _$$PigCardModelImplToJson(_$PigCardModelImpl instance) =>
+Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'budget': instance.budget,
-      'start_date': instance.start_date,
-      'end_date': instance.end_date,
-      'updated_at': instance.updated_at,
+      'code': instance.code,
+      'type': _$TransactionTypeEnumEnumMap[instance.type],
       'created_at': instance.created_at,
-      'user_id': instance.user_id,
+      'updated_at': instance.updated_at,
       'status': _$StatusEnumEnumMap[instance.status]!,
     };
+
+const _$TransactionTypeEnumEnumMap = {
+  TransactionTypeEnum.budget: 'budget',
+  TransactionTypeEnum.expense: 'expense',
+  TransactionTypeEnum.income: 'income',
+};
 
 const _$StatusEnumEnumMap = {
   StatusEnum.active: 'active',

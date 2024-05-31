@@ -12,6 +12,11 @@ abstract class PigModel with _$PigModel {
     String? updated_at,
     String? created_at,
     String? user_id,
+    String? period_id,
+    String? start_date,
+    String? end_date,
+    num? budget,
+    num? expense,
     // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
     @Default(StatusEnum.active) StatusEnum status,
   }) = _PigModel;

@@ -12,9 +12,16 @@ class NumPadWidget extends StatefulWidget {
   final Function(String?) onChange;
   final Function()? onComplete;
   final num? value;
+  final Color? color;
+  final String? title;
 
   const NumPadWidget(
-      {super.key, required this.onChange, this.value, this.onComplete});
+      {super.key,
+      required this.onChange,
+      this.value,
+      this.onComplete,
+      this.color,
+      this.title});
 
   @override
   State<NumPadWidget> createState() => _NumPadWidgetState();
@@ -70,7 +77,7 @@ class _NumPadWidgetState extends State<NumPadWidget> {
         );
       }
 
-      if (text == 'action') return _buildLongButton();
+      if (text == 'action') return _buildActionButton();
 
       return StaggeredGridTile.extent(
         crossAxisCellCount: 1,
@@ -80,22 +87,23 @@ class _NumPadWidgetState extends State<NumPadWidget> {
     }).toList();
   }
 
-  Widget _buildLongButton() {
+  Widget _buildActionButton() {
     return StaggeredGridTile.extent(
         crossAxisCellCount: 1,
         mainAxisExtent:
             56 * 3 + 16, // Adjust based on button height and spacing
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(4),
-          ),
-          onPressed: () {
-            if (isTruthy(widget.onComplete)) {
-              widget.onComplete!();
-            }
-          },
+              padding: EdgeInsets.all(4), backgroundColor: widget.color),
+          onPressed: isTruthy(widget.value)
+              ? () {
+                  if (isTruthy(widget.onComplete)) {
+                    widget.onComplete!();
+                  }
+                }
+              : null,
           child: Text(
-            "${'add'.tr().capitalize()} ${'income'.tr()}",
+            "${'add'.tr().capitalize()} ${widget.title?.tr()}",
             textAlign: TextAlign.center,
             style: AppTextStyle.headingS(color: ColorName.white),
           ),

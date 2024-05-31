@@ -1,4 +1,6 @@
-import 'package:money_pig/domain/model/pig_card_model.dart';
+import 'dart:developer';
+
+import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
@@ -7,7 +9,7 @@ import 'local_database_service.dart';
 class LocalPigService {
   final LocalDatabaseService _localDb = LocalDatabaseService.instance;
 
-  Future<void> createPig(PigCardModel data) async {
+  Future<void> createPig(PigModel data) async {
     final Database db = await _localDb.database;
     String pigId = Uuid().v4();
     String periodId = Uuid().v4();
@@ -48,29 +50,44 @@ class LocalPigService {
     });
   }
 
-  Future<List<PigCardModel>> getPigListing() async {
+  Future<List<PigModel>> getPigListing() async {
     final Database db = await _localDb.database;
 
     // await _localDb.dropTables();
 
     final List<Map<String, dynamic>> list = await db.rawQuery('''
+   SELECT
+    pigs.*,
+    periods.id AS period_id,
+    periods.start_date,
+    periods.end_date,
+    IFNULL(budget_transactions.total_budget, 0) AS budget,
+    IFNULL(expenses.total_expense, 0) AS expense
+FROM pigs
+LEFT JOIN periods ON pigs.id = periods.pig_id
+LEFT JOIN (
     SELECT
-      pigs.*,
-      periods.id as period_id,
-      periods.start_date,
-      periods.end_date,
-      transactions.id as transaction_id,
-      transactions.amount,
-      transactions.period_id as transaction_period_id
-    FROM pigs
-    LEFT JOIN periods ON pigs.id = periods.pig_id
-    LEFT JOIN transactions ON periods.id = transactions.period_id
-     WHERE transactions.type = 'budget'
-    ORDER BY pigs.created_at DESC
+        periods.pig_id,
+        SUM(transactions.amount) AS total_budget
+    FROM transactions
+    JOIN periods ON transactions.period_id = periods.id
+    WHERE transactions.type = 'budget'
+    GROUP BY periods.pig_id
+) AS budget_transactions ON pigs.id = budget_transactions.pig_id
+LEFT JOIN (
+    SELECT
+        periods.pig_id,
+        SUM(transactions.amount) AS total_expense
+    FROM transactions
+    JOIN periods ON transactions.period_id = periods.id
+    WHERE transactions.type = 'expense'
+    GROUP BY periods.pig_id
+) AS expenses ON pigs.id = expenses.pig_id
+ORDER BY pigs.created_at DESC;
   ''');
 
     return list
-        .map((item) => PigCardModel.fromJson({
+        .map((item) => PigModel.fromJson({
               'id': item['id'],
               'name': item['name'],
               'start_date': item['start_date'],
@@ -78,35 +95,54 @@ class LocalPigService {
               'updated_at': item['updated_at'],
               'created_at': item['created_at'],
               'status': item['status'],
-              'budget': item['amount'],
+              'period_id': item['period_id'],
+              'budget': item['budget'],
+              'expense': item['expense'],
             }))
         .toList();
   }
 
-  Future<PigCardModel> getPigDetail(String id) async {
+  Future<PigModel> getPigDetail(String id) async {
     final Database db = await _localDb.database;
 
     // await _localDb.dropTables();
 
     final List<Map<String, dynamic>> list = await db.rawQuery('''
+SELECT
+    pigs.*,
+    periods.id AS period_id,
+    periods.start_date,
+    periods.end_date,
+    IFNULL(budget_transactions.total_budget, 0) AS budget,
+    IFNULL(expenses.total_expense, 0) AS expense
+FROM pigs
+LEFT JOIN periods ON pigs.id = periods.pig_id
+LEFT JOIN (
     SELECT
-      pigs.*,
-      periods.id as period_id,
-      periods.start_date,
-      periods.end_date,
-      transactions.id as transaction_id,
-      transactions.amount,
-      transactions.period_id as transaction_period_id
-    FROM pigs
-    LEFT JOIN periods ON pigs.id = periods.pig_id
-    LEFT JOIN transactions ON periods.id = transactions.period_id
-     WHERE transactions.type = 'budget' AND pigs.id = '${id}'
-    ORDER BY pigs.created_at DESC
+        periods.pig_id,
+        SUM(transactions.amount) AS total_budget
+    FROM transactions
+    JOIN periods ON transactions.period_id = periods.id
+    WHERE transactions.type = 'budget'
+    GROUP BY periods.pig_id
+) AS budget_transactions ON pigs.id = budget_transactions.pig_id
+LEFT JOIN (
+    SELECT
+        periods.pig_id,
+        SUM(transactions.amount) AS total_expense
+    FROM transactions
+    JOIN periods ON transactions.period_id = periods.id
+    WHERE transactions.type = 'expense'
+    GROUP BY periods.pig_id
+) AS expenses ON pigs.id = expenses.pig_id
+WHERE pigs.id = '${id}'
+ORDER BY pigs.created_at DESC;
   ''');
 
     if (list.isNotEmpty) {
       final item = list.first;
-      return PigCardModel.fromJson({
+      log('$item');
+      return PigModel.fromJson({
         'id': item['id'],
         'name': item['name'],
         'start_date': item['start_date'],
@@ -114,7 +150,9 @@ class LocalPigService {
         'updated_at': item['updated_at'],
         'created_at': item['created_at'],
         'status': item['status'],
-        'budget': item['amount'],
+        'period_id': item['period_id'],
+        'budget': item['budget'],
+        'expense': item['expense'],
       });
     } else {
       throw Exception('Pig not found');

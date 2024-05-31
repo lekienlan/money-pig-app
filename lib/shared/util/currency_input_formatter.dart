@@ -14,7 +14,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     double value = double.parse(newValue.text.replaceAll(regex, ''));
 
-    String newText = '${formatCurrency(value)}đ';
+    String newText = formatCurrency(value);
 
     return newValue.copyWith(
         text: newText,

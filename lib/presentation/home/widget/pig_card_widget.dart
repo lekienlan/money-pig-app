@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
-import 'package:money_pig/domain/model/pig_card_model.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
@@ -10,7 +11,7 @@ import 'package:money_pig/shared/util/helper.dart';
 import 'package:remixicon/remixicon.dart';
 
 class PigCardWidget extends StatelessWidget {
-  final PigCardModel? pig;
+  final PigModel? pig;
   final Function? onClick;
   PigCardWidget({
     this.pig,
@@ -20,6 +21,9 @@ class PigCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final balance = (pig?.budget ?? 0) - (pig?.expense ?? 0);
+    final percent = balance / (pig?.budget ?? 0) * 100;
+
     return GestureDetector(
       onTap: () {
         if (isTruthy(onClick)) onClick!();
@@ -28,7 +32,7 @@ class PigCardWidget extends StatelessWidget {
           builder: (BuildContext context, BoxConstraints constraints) {
         return Container(
           decoration: BoxDecoration(
-              color: ColorName.primaryExtraLight,
+              color: ColorName.white,
               borderRadius: BorderRadius.circular(24),
               boxShadow: [AppShadow.light]),
           child: ClipRRect(
@@ -38,9 +42,19 @@ class PigCardWidget extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   width: constraints.maxWidth,
-                  height: constraints.maxHeight * ((90.toDouble()) / 100),
+                  height: constraints.maxHeight * percent.toDouble() / 100,
                   child: Container(
-                    color: ColorName.primaryLight,
+                    decoration: BoxDecoration(
+                      color: ColorName.primaryLight,
+                      // gradient: LinearGradient(
+                      //   colors: [
+                      //     ColorName.primaryExtraLight,
+                      //     ColorName.primaryMain
+                      //   ],
+                      //   begin: Alignment.topCenter,
+                      //   end: Alignment.bottomCenter,
+                      // ),
+                    ),
                   ),
                 ),
                 Container(
@@ -62,32 +76,12 @@ class PigCardWidget extends StatelessWidget {
                                   text: pig?.name ?? '',
                                   defaultFontSize: 20,
                                   stepLength: 6,
-                                  scale: 0.8,
+                                  scale: 0.9,
                                 ),
                               ),
                             ),
                           ),
-                          Column(
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color:
-                                      ColorName.primaryMain.withOpacity(0.75),
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Remix.wallet_fill,
-                                    color: ColorName.white,
-                                    size: 24,
-                                  ),
-                                ),
-                              ),
-                              // Spacer()
-                            ],
-                          )
+                          PigCardIcon()
                         ],
                       ),
                       Container(
@@ -96,11 +90,12 @@ class PigCardWidget extends StatelessWidget {
                           children: [
                             Text(
                               'balance'.tr().capitalize(),
-                              style: AppTextStyle.bodyS(color: ColorName.white),
+                              style: AppTextStyle.bodyXS(
+                                  color: ColorName.primaryExtraLight),
                             ),
-                            Text('${formatCurrency(pig?.budget ?? 0)}đ',
+                            Text(formatCurrency(balance),
                                 style: AppTextStyle.headingS(
-                                  color: ColorName.white,
+                                  color: ColorName.primaryExtraLight,
                                 ).copyWith(
                                   overflow: TextOverflow.ellipsis,
                                 )),
@@ -115,6 +110,41 @@ class PigCardWidget extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+}
+
+class PigCardIcon extends StatelessWidget {
+  const PigCardIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: ColorName.primaryUltraLight.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Center(
+        child: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: ColorName.primaryMain,
+          ),
+          child: Center(
+            child: Icon(
+              Remix.heart_fill,
+              color: ColorName.white,
+              size: 24,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

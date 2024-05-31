@@ -24,7 +24,12 @@ mixin _$PigModel {
   String? get name => throw _privateConstructorUsedError;
   String? get updated_at => throw _privateConstructorUsedError;
   String? get created_at => throw _privateConstructorUsedError;
-  String? get user_id =>
+  String? get user_id => throw _privateConstructorUsedError;
+  String? get period_id => throw _privateConstructorUsedError;
+  String? get start_date => throw _privateConstructorUsedError;
+  String? get end_date => throw _privateConstructorUsedError;
+  num? get budget => throw _privateConstructorUsedError;
+  num? get expense =>
       throw _privateConstructorUsedError; // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
   StatusEnum get status => throw _privateConstructorUsedError;
 
@@ -45,6 +50,11 @@ abstract class $PigModelCopyWith<$Res> {
       String? updated_at,
       String? created_at,
       String? user_id,
+      String? period_id,
+      String? start_date,
+      String? end_date,
+      num? budget,
+      num? expense,
       StatusEnum status});
 }
 
@@ -66,6 +76,11 @@ class _$PigModelCopyWithImpl<$Res, $Val extends PigModel>
     Object? updated_at = freezed,
     Object? created_at = freezed,
     Object? user_id = freezed,
+    Object? period_id = freezed,
+    Object? start_date = freezed,
+    Object? end_date = freezed,
+    Object? budget = freezed,
+    Object? expense = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +104,26 @@ class _$PigModelCopyWithImpl<$Res, $Val extends PigModel>
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
               as String?,
+      period_id: freezed == period_id
+          ? _value.period_id
+          : period_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      start_date: freezed == start_date
+          ? _value.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      end_date: freezed == end_date
+          ? _value.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      budget: freezed == budget
+          ? _value.budget
+          : budget // ignore: cast_nullable_to_non_nullable
+              as num?,
+      expense: freezed == expense
+          ? _value.expense
+          : expense // ignore: cast_nullable_to_non_nullable
+              as num?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -111,6 +146,11 @@ abstract class _$$PigModelImplCopyWith<$Res>
       String? updated_at,
       String? created_at,
       String? user_id,
+      String? period_id,
+      String? start_date,
+      String? end_date,
+      num? budget,
+      num? expense,
       StatusEnum status});
 }
 
@@ -130,6 +170,11 @@ class __$$PigModelImplCopyWithImpl<$Res>
     Object? updated_at = freezed,
     Object? created_at = freezed,
     Object? user_id = freezed,
+    Object? period_id = freezed,
+    Object? start_date = freezed,
+    Object? end_date = freezed,
+    Object? budget = freezed,
+    Object? expense = freezed,
     Object? status = null,
   }) {
     return _then(_$PigModelImpl(
@@ -153,6 +198,26 @@ class __$$PigModelImplCopyWithImpl<$Res>
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
               as String?,
+      period_id: freezed == period_id
+          ? _value.period_id
+          : period_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      start_date: freezed == start_date
+          ? _value.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      end_date: freezed == end_date
+          ? _value.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      budget: freezed == budget
+          ? _value.budget
+          : budget // ignore: cast_nullable_to_non_nullable
+              as num?,
+      expense: freezed == expense
+          ? _value.expense
+          : expense // ignore: cast_nullable_to_non_nullable
+              as num?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -170,6 +235,11 @@ class _$PigModelImpl implements _PigModel {
       this.updated_at,
       this.created_at,
       this.user_id,
+      this.period_id,
+      this.start_date,
+      this.end_date,
+      this.budget,
+      this.expense,
       this.status = StatusEnum.active});
 
   factory _$PigModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -185,6 +255,16 @@ class _$PigModelImpl implements _PigModel {
   final String? created_at;
   @override
   final String? user_id;
+  @override
+  final String? period_id;
+  @override
+  final String? start_date;
+  @override
+  final String? end_date;
+  @override
+  final num? budget;
+  @override
+  final num? expense;
 // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
   @override
   @JsonKey()
@@ -192,7 +272,7 @@ class _$PigModelImpl implements _PigModel {
 
   @override
   String toString() {
-    return 'PigModel(id: $id, name: $name, updated_at: $updated_at, created_at: $created_at, user_id: $user_id, status: $status)';
+    return 'PigModel(id: $id, name: $name, updated_at: $updated_at, created_at: $created_at, user_id: $user_id, period_id: $period_id, start_date: $start_date, end_date: $end_date, budget: $budget, expense: $expense, status: $status)';
   }
 
   @override
@@ -207,13 +287,21 @@ class _$PigModelImpl implements _PigModel {
             (identical(other.created_at, created_at) ||
                 other.created_at == created_at) &&
             (identical(other.user_id, user_id) || other.user_id == user_id) &&
+            (identical(other.period_id, period_id) ||
+                other.period_id == period_id) &&
+            (identical(other.start_date, start_date) ||
+                other.start_date == start_date) &&
+            (identical(other.end_date, end_date) ||
+                other.end_date == end_date) &&
+            (identical(other.budget, budget) || other.budget == budget) &&
+            (identical(other.expense, expense) || other.expense == expense) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, updated_at, created_at, user_id, status);
+  int get hashCode => Object.hash(runtimeType, id, name, updated_at, created_at,
+      user_id, period_id, start_date, end_date, budget, expense, status);
 
   @JsonKey(ignore: true)
   @override
@@ -236,6 +324,11 @@ abstract class _PigModel implements PigModel {
       final String? updated_at,
       final String? created_at,
       final String? user_id,
+      final String? period_id,
+      final String? start_date,
+      final String? end_date,
+      final num? budget,
+      final num? expense,
       final StatusEnum status}) = _$PigModelImpl;
 
   factory _PigModel.fromJson(Map<String, dynamic> json) =
@@ -251,6 +344,16 @@ abstract class _PigModel implements PigModel {
   String? get created_at;
   @override
   String? get user_id;
+  @override
+  String? get period_id;
+  @override
+  String? get start_date;
+  @override
+  String? get end_date;
+  @override
+  num? get budget;
+  @override
+  num? get expense;
   @override // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
   StatusEnum get status;
   @override

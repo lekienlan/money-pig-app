@@ -22,9 +22,9 @@ class HeaderWidget extends ConsumerWidget implements PreferredSizeWidget {
         centerTitle: true,
         scrolledUnderElevation: 0.0,
         backgroundColor: Colors.transparent,
-        leadingWidth: 52,
+        leadingWidth: 44,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 4),
           child: InkWell(
             borderRadius: BorderRadius.circular(100),
             onTap: () {

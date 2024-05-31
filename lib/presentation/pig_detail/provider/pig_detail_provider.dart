@@ -1,5 +1,4 @@
 import 'package:money_pig/domain/repository/pig_repository.dart';
-import 'package:money_pig/presentation/home/state/pig_listing_state.dart';
 import 'package:money_pig/presentation/pig_detail/state/pig_detail_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -7,10 +7,10 @@ extension StringExtension on String {
     return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 
-  String toDate() {
+  String toDate({String? format}) {
     if (isEmpty) return '';
     final date = DateTime.parse(this).toLocal();
-    return DateFormat('dd MMMM, yyyy').format(date);
+    return DateFormat(format ?? 'dd MMMM, yyyy').format(date);
   }
 }
 

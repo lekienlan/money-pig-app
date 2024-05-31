@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/presentation/new_pig/provider/new_pig_provider.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
@@ -33,7 +34,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
     super.didChangeDependencies();
     nameController.text = newPigNotifier.name ?? '';
     budgetController.text = isTruthy(newPigNotifier.budget)
-        ? '${formatCurrency(newPigNotifier.budget)}đ'
+        ? formatCurrency(newPigNotifier.budget)
         : '';
   }
 
@@ -133,27 +134,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
           ),
           Column(
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: ColorName.primaryUltraLight,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Center(
-                  child: Container(
-                    width: 48,
-                    height: 48,
-                    child: Center(
-                      child: Icon(Remix.wallet_fill, color: ColorName.white),
-                    ),
-                    decoration: BoxDecoration(
-                      color: ColorName.primaryMain,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                ),
-              ),
+              PigCardIcon(),
               SizedBox(height: 32),
               Container(
                 color: ColorName.white,
@@ -171,7 +152,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                                       scale: 0.9,
                                       defaultFontSize: 64)),
                     ),
-                    Text('${formatCurrency(newPigNotifier.budget)}đ',
+                    Text(formatCurrency(newPigNotifier.budget),
                         style: AppTextStyle.headingXL()),
                   ],
                 ),
@@ -403,7 +384,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
         title: 'new_pig'.tr().capitalize(),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
             SizedBox(height: 12),

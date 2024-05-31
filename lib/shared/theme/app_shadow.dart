@@ -19,4 +19,13 @@ abstract class AppShadow {
       blurRadius: 4,
       spreadRadius: 0,
       color: ColorName.neutral800.withOpacity(0.3));
+
+  static BoxShadow withSpreadRadius(double spreadRadius) {
+    return BoxShadow(
+      offset: Offset(0, 0),
+      blurRadius: 2,
+      color: ColorName.neutral800.withOpacity(0.1),
+      spreadRadius: spreadRadius,
+    );
+  }
 }

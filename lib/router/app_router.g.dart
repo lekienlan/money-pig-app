@@ -82,16 +82,24 @@ extension $NewPigRouteExtension on NewPigRoute {
 }
 
 RouteBase get $newTransactionRoute => GoRouteData.$route(
-      path: '/transaction/new',
+      path: '/transaction-input',
       factory: $NewTransactionRouteExtension._fromState,
     );
 
 extension $NewTransactionRouteExtension on NewTransactionRoute {
   static NewTransactionRoute _fromState(GoRouterState state) =>
-      const NewTransactionRoute();
+      NewTransactionRoute(
+        type: _$TransactionTypeEnumEnumMap
+            ._$fromName(state.uri.queryParameters['type']!),
+        periodId: state.uri.queryParameters['period-id'],
+      );
 
   String get location => GoRouteData.$location(
-        '/transaction/new',
+        '/transaction-input',
+        queryParams: {
+          'type': _$TransactionTypeEnumEnumMap[type],
+          if (periodId != null) 'period-id': periodId,
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -102,6 +110,17 @@ extension $NewTransactionRouteExtension on NewTransactionRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+const _$TransactionTypeEnumEnumMap = {
+  TransactionTypeEnum.budget: 'budget',
+  TransactionTypeEnum.expense: 'expense',
+  TransactionTypeEnum.income: 'income',
+};
+
+extension<T extends Enum> on Map<T, String> {
+  T _$fromName(String value) =>
+      entries.singleWhere((element) => element.value == value).key;
 }
 
 RouteBase get $pigDetailRoute => GoRouteData.$route(

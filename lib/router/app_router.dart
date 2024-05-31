@@ -2,16 +2,19 @@
 // @AdaptiveAutoRouter
 // @CustomAutoRouter
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_pig/presentation/eastlin/widget/eastlin_page.dart';
 import 'package:money_pig/presentation/home/widget/home_page.dart';
-import 'package:money_pig/presentation/income/widget/income_input_page.dart';
+import 'package:money_pig/presentation/transaction/widget/transaction_input_page.dart';
 import 'package:money_pig/presentation/new_pig/widget/new_pig_page.dart';
 import 'package:money_pig/presentation/pig_detail/widget/pig_detail_page.dart';
 
 import 'package:money_pig/presentation/splash/widget/splash_page.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/widget/bottom_sheet_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -79,18 +82,22 @@ class NewPigRoute extends GoRouteData {
 
 @TypedGoRoute<NewTransactionRoute>(path: NewTransactionRoute.path)
 class NewTransactionRoute extends GoRouteData {
-  const NewTransactionRoute();
+  final TransactionTypeEnum type;
+  final String? periodId;
+  const NewTransactionRoute({required this.type, this.periodId});
 
-  static const path = '/transaction/new';
+  static const path = '/transaction-input';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return BottomSheetPage(
       builder: (_) => ClipRRect(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          child: IncomeInputPage()),
+          child: TransactionInputPage(type: type, periodId: periodId)),
     );
   }
+
+  // Method to generate the location string
 }
 
 @TypedGoRoute<PigDetailRoute>(path: PigDetailRoute.path)

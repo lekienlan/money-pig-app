@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:money_pig/domain/model/pig_card_model.dart';
-import 'package:money_pig/presentation/income/provider/income_provider.dart';
+import 'package:money_pig/domain/model/pig_model.dart';
+import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/router/app_router.dart';
@@ -12,6 +13,7 @@ import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
 
 import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/widget/loading_widget.dart';
@@ -26,8 +28,6 @@ class HomePage extends ConsumerWidget {
     final pigListingNotifier = ref.watch(pigListingNotifierProvider);
     final incomeNotifier = ref.watch(incomeNotifierProvider);
 
-    log('$incomeNotifier');
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: ColorName.surfaceSecondary,
@@ -40,7 +40,7 @@ class HomePage extends ConsumerWidget {
               // shrinkWrap: true,
               slivers: [
                 SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   sliver: incomeNotifier.maybeWhen(
                     data: (amount) => SliverPersistentHeader(
                       pinned: true,
@@ -51,25 +51,25 @@ class HomePage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                SliverToBoxAdapter(child: SizedBox(height: 16)),
                 pigListingNotifier.when(
                   loading: () => SliverToBoxAdapter(child: LoadingWidget()),
-                  empty: () => SliverPadding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    sliver: SliverGrid.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return _NewPig(ref);
-                      },
-                      itemCount: 1,
+                  empty: () => SliverFillRemaining(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: MediaQuery.of(context).size.height / 2,
+                          child: _NewPig(ref),
+                        )
+                      ],
                     ),
                   ),
                   error: () => SliverToBoxAdapter(child: Text('error')),
                   data: (pigListing) {
                     return SliverPadding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                       sliver: SliverGrid.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -83,7 +83,7 @@ class HomePage extends ConsumerWidget {
                           final pigIndex = index - 1;
 
                           if (pigIndex < pigListing.length) {
-                            PigCardModel pigCard = pigListing[pigIndex];
+                            PigModel pigCard = pigListing[pigIndex];
                             return PigCardWidget(
                               pig: pigCard,
                               onClick: () => ref
@@ -174,14 +174,16 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
                   ],
                 ),
               Text(
-                '${formatCurrency(incomeAmount)}đ',
+                formatCurrency(incomeAmount),
                 style: AppTextStyle.headingM(color: ColorName.textPrimary),
               ),
             ],
           ),
           GestureDetector(
             onTap: () {
-              ref?.read(routerProvider).push(NewTransactionRoute.path);
+              ref?.read(routerProvider).push(NewTransactionRoute(
+                    type: TransactionTypeEnum.income,
+                  ).location);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:money_pig/domain/model/pig_card_model.dart';
 import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
@@ -22,8 +21,10 @@ class LocalTransactionService {
       'created_at': DateTime.now().toIso8601String(),
       'date': DateTime.now().toIso8601String(),
       'amount': data.amount,
+      'note': data.note,
       'type': data.type?.stringValue,
-      'status': 'active'
+      'status': 'active',
+      'period_id': data.period_id
     });
   }
 
@@ -42,8 +43,30 @@ class LocalTransactionService {
     return sum;
   }
 
-  Future<TransactionModel> getTransaction() async {
+  Future<List<TransactionModel>> getTransactionListing(
+      {List<TransactionTypeEnum>? types, String? period_id}) async {
     final Database db = await _localDb.database;
-    return TransactionModel();
+    // Generate the SQL query string
+    String query = "SELECT * FROM transactions WHERE type IN (";
+    for (int i = 0; i < (types?.length ?? 0); i++) {
+      query += "'${types?[i].stringValue}'";
+      if (i < (types?.length ?? 0) - 1) {
+        query += ", ";
+      }
+    }
+    query += ") AND period_id = '$period_id' ORDER BY created_at DESC;";
+
+    final List<Map<String, dynamic>> list = await db.rawQuery(query);
+    return list
+        .map((item) => TransactionModel.fromJson({
+              "id": item["id"],
+              "amount": item["amount"],
+              "type": item["type"],
+              "note": item["note"],
+              "created_at": item["created_at"],
+              "period_id": item["period_id"],
+              "status": item["status"],
+            }))
+        .toList();
   }
 }
