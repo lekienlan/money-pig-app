@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,6 +15,7 @@ abstract class CategoryModel with _$CategoryModel {
     TransactionTypeEnum? type,
     String? created_at,
     String? updated_at,
+    StyleModel? style,
     @Default(StatusEnum.active) StatusEnum status,
   }) = _CategoryModel;
 

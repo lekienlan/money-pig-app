@@ -19,6 +19,7 @@ mixin _$TransactionInputState {
   num? get amount => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   TransactionTypeEnum? get type => throw _privateConstructorUsedError;
+  CategoryModel? get selectedCategory => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionInputStateCopyWith<TransactionInputState> get copyWith =>
@@ -31,7 +32,13 @@ abstract class $TransactionInputStateCopyWith<$Res> {
           $Res Function(TransactionInputState) then) =
       _$TransactionInputStateCopyWithImpl<$Res, TransactionInputState>;
   @useResult
-  $Res call({num? amount, String? note, TransactionTypeEnum? type});
+  $Res call(
+      {num? amount,
+      String? note,
+      TransactionTypeEnum? type,
+      CategoryModel? selectedCategory});
+
+  $CategoryModelCopyWith<$Res>? get selectedCategory;
 }
 
 /// @nodoc
@@ -51,6 +58,7 @@ class _$TransactionInputStateCopyWithImpl<$Res,
     Object? amount = freezed,
     Object? note = freezed,
     Object? type = freezed,
+    Object? selectedCategory = freezed,
   }) {
     return _then(_value.copyWith(
       amount: freezed == amount
@@ -65,7 +73,23 @@ class _$TransactionInputStateCopyWithImpl<$Res,
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as TransactionTypeEnum?,
+      selectedCategory: freezed == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as CategoryModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryModelCopyWith<$Res>? get selectedCategory {
+    if (_value.selectedCategory == null) {
+      return null;
+    }
+
+    return $CategoryModelCopyWith<$Res>(_value.selectedCategory!, (value) {
+      return _then(_value.copyWith(selectedCategory: value) as $Val);
+    });
   }
 }
 
@@ -78,7 +102,14 @@ abstract class _$$TransactionInputStateImplCopyWith<$Res>
       __$$TransactionInputStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({num? amount, String? note, TransactionTypeEnum? type});
+  $Res call(
+      {num? amount,
+      String? note,
+      TransactionTypeEnum? type,
+      CategoryModel? selectedCategory});
+
+  @override
+  $CategoryModelCopyWith<$Res>? get selectedCategory;
 }
 
 /// @nodoc
@@ -96,6 +127,7 @@ class __$$TransactionInputStateImplCopyWithImpl<$Res>
     Object? amount = freezed,
     Object? note = freezed,
     Object? type = freezed,
+    Object? selectedCategory = freezed,
   }) {
     return _then(_$TransactionInputStateImpl(
       amount: freezed == amount
@@ -110,6 +142,10 @@ class __$$TransactionInputStateImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as TransactionTypeEnum?,
+      selectedCategory: freezed == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as CategoryModel?,
     ));
   }
 }
@@ -117,7 +153,8 @@ class __$$TransactionInputStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TransactionInputStateImpl implements _TransactionInputState {
-  const _$TransactionInputStateImpl({this.amount, this.note, this.type});
+  const _$TransactionInputStateImpl(
+      {this.amount, this.note, this.type, this.selectedCategory});
 
   @override
   final num? amount;
@@ -125,10 +162,12 @@ class _$TransactionInputStateImpl implements _TransactionInputState {
   final String? note;
   @override
   final TransactionTypeEnum? type;
+  @override
+  final CategoryModel? selectedCategory;
 
   @override
   String toString() {
-    return 'TransactionInputState(amount: $amount, note: $note, type: $type)';
+    return 'TransactionInputState(amount: $amount, note: $note, type: $type, selectedCategory: $selectedCategory)';
   }
 
   @override
@@ -138,11 +177,14 @@ class _$TransactionInputStateImpl implements _TransactionInputState {
             other is _$TransactionInputStateImpl &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.note, note) || other.note == note) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, amount, note, type);
+  int get hashCode =>
+      Object.hash(runtimeType, amount, note, type, selectedCategory);
 
   @JsonKey(ignore: true)
   @override
@@ -156,7 +198,8 @@ abstract class _TransactionInputState implements TransactionInputState {
   const factory _TransactionInputState(
       {final num? amount,
       final String? note,
-      final TransactionTypeEnum? type}) = _$TransactionInputStateImpl;
+      final TransactionTypeEnum? type,
+      final CategoryModel? selectedCategory}) = _$TransactionInputStateImpl;
 
   @override
   num? get amount;
@@ -164,6 +207,8 @@ abstract class _TransactionInputState implements TransactionInputState {
   String? get note;
   @override
   TransactionTypeEnum? get type;
+  @override
+  CategoryModel? get selectedCategory;
   @override
   @JsonKey(ignore: true)
   _$$TransactionInputStateImplCopyWith<_$TransactionInputStateImpl>

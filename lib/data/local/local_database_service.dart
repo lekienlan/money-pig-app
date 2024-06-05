@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class LocalDatabaseService {
   static final LocalDatabaseService instance =
@@ -51,6 +51,7 @@ class LocalDatabaseService {
         "type TEXT, "
         "code TEXT, "
         "name TEXT, "
+        "style JSON, "
         "updated_at TEXT, "
         "created_at TEXT) ");
 
@@ -71,16 +72,27 @@ class LocalDatabaseService {
   }
 
   Future<void> onUpgrade(Database db, int version, int version2) async {
-    onCreate(db, version);
-  }
+    // await db.delete('categories');
 
-  Future<void> onDowngrade(Database db, int version, int version2) async {
-    log('drop');
+    // await db.execute("ALTER TABLE categories DROP COLUMN style");
+    // await db.execute("ALTER TABLE categories ADD COLUMN style TEXT");
+
     // await db.execute('DROP TABLE IF EXISTS pigs');
     // await db.execute('DROP TABLE IF EXISTS transactions');
     // await db.execute('DROP TABLE IF EXISTS periods');
     // await db.execute('DROP TABLE IF EXISTS categories');
+    // onCreate(db, version);
+  }
 
-    // Loop through the tables and drop each one
+  Future<void> onDowngrade(Database db, int version, int version2) async {
+    log('drop');
+    // await db.delete('categories');
+    // await db.delete('categories');
+    // await db.execute("ALTER TABLE categories DROP COLUMN style");
+    // await db.execute("ALTER TABLE categories ADD COLUMN style TEXT");
+    // await db.execute('DROP TABLE IF EXISTS pigs');
+    // await db.execute('DROP TABLE IF EXISTS transactions');
+    // await db.execute('DROP TABLE IF EXISTS periods');
+    // await db.execute('DROP TABLE IF EXISTS categories');
   }
 }

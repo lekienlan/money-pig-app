@@ -2,18 +2,17 @@
 // @AdaptiveAutoRouter
 // @CustomAutoRouter
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_pig/presentation/category_input/widget/category_input_page.dart';
+import 'package:money_pig/presentation/category_listing/widget/category_listing_page.dart';
 import 'package:money_pig/presentation/eastlin/widget/eastlin_page.dart';
 import 'package:money_pig/presentation/home/widget/home_page.dart';
-import 'package:money_pig/presentation/transaction/widget/transaction_input_page.dart';
+import 'package:money_pig/presentation/income_listing/widget/income_listing_page.dart';
 import 'package:money_pig/presentation/new_pig/widget/new_pig_page.dart';
 import 'package:money_pig/presentation/pig_detail/widget/pig_detail_page.dart';
-
 import 'package:money_pig/presentation/splash/widget/splash_page.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/presentation/transaction/widget/transaction_input_page.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/widget/bottom_sheet_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -53,22 +52,10 @@ class HomeRoute extends GoRouteData {
   static const path = '/home';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const HomePage();
-  }
-}
-
-@TypedGoRoute<NewPigRoute>(path: NewPigRoute.path)
-class NewPigRoute extends GoRouteData {
-  const NewPigRoute();
-
-  static const path = '/new-pig';
-
-  @override
   Page buildPage(BuildContext context, GoRouterState state) {
-    // return NewPigPage();
     return CustomTransitionPage(
-      child: const NewPigPage(),
+      child: const HomePage(),
+      key: ValueKey(state.fullPath),
       transitionDuration: const Duration(milliseconds: 200),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
@@ -80,11 +67,28 @@ class NewPigRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<NewTransactionRoute>(path: NewTransactionRoute.path)
-class NewTransactionRoute extends GoRouteData {
+@TypedGoRoute<NewPigRoute>(path: NewPigRoute.path)
+class NewPigRoute extends GoRouteData {
+  const NewPigRoute();
+
+  static const path = '/new-pig';
+
+  @override
+  Page buildPage(BuildContext context, GoRouterState state) {
+    return BottomSheetPage(
+        builder: (_) => ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              child: NewPigPage(),
+              key: ValueKey(state.fullPath),
+            ));
+  }
+}
+
+@TypedGoRoute<TransactionInputRoute>(path: TransactionInputRoute.path)
+class TransactionInputRoute extends GoRouteData {
   final TransactionTypeEnum type;
   final String? periodId;
-  const NewTransactionRoute({required this.type, this.periodId});
+  const TransactionInputRoute({required this.type, this.periodId});
 
   static const path = '/transaction-input';
 
@@ -96,8 +100,6 @@ class NewTransactionRoute extends GoRouteData {
           child: TransactionInputPage(type: type, periodId: periodId)),
     );
   }
-
-  // Method to generate the location string
 }
 
 @TypedGoRoute<PigDetailRoute>(path: PigDetailRoute.path)
@@ -108,8 +110,72 @@ class PigDetailRoute extends GoRouteData {
   static const path = '/pig-detail/:id';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return PigDetailPage(id: id);
+  Page buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      child: PigDetailPage(id: id),
+      key: ValueKey(state.fullPath),
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return ScaleTransition(
+          scale: animation,
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+@TypedGoRoute<CategoryListingRoute>(path: CategoryListingRoute.path)
+class CategoryListingRoute extends GoRouteData {
+  const CategoryListingRoute();
+
+  static const path = '/category-listing';
+
+  @override
+  Page buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      child: const CategoryListingPage(),
+      transitionDuration: const Duration(milliseconds: 200),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+@TypedGoRoute<IncomeListingRoute>(path: IncomeListingRoute.path)
+class IncomeListingRoute extends GoRouteData {
+  const IncomeListingRoute();
+
+  static const path = '/income-listing';
+
+  @override
+  Page buildPage(BuildContext context, GoRouterState state) {
+    return BottomSheetPage(
+      builder: (_) => ClipRRect(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          child: IncomeListingPage()),
+    );
+  }
+}
+
+@TypedGoRoute<CategoryInputRoute>(path: CategoryInputRoute.path)
+class CategoryInputRoute extends GoRouteData {
+  final TransactionTypeEnum? type;
+  const CategoryInputRoute({this.type});
+
+  static const path = '/category-input';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return BottomSheetPage(
+      builder: (_) => ClipRRect(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          child: CategoryInputPage(type: type)),
+    );
   }
 }
 

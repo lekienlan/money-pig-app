@@ -26,6 +26,8 @@ mixin _$TransactionModel {
   TransactionTypeEnum? get type => throw _privateConstructorUsedError;
   String? get created_at => throw _privateConstructorUsedError;
   String? get period_id => throw _privateConstructorUsedError;
+  String? get category_id => throw _privateConstructorUsedError;
+  CategoryModel? get category => throw _privateConstructorUsedError;
   StatusEnum get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +49,11 @@ abstract class $TransactionModelCopyWith<$Res> {
       TransactionTypeEnum? type,
       String? created_at,
       String? period_id,
+      String? category_id,
+      CategoryModel? category,
       StatusEnum status});
+
+  $CategoryModelCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -69,6 +75,8 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
     Object? type = freezed,
     Object? created_at = freezed,
     Object? period_id = freezed,
+    Object? category_id = freezed,
+    Object? category = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -96,11 +104,31 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
           ? _value.period_id
           : period_id // ignore: cast_nullable_to_non_nullable
               as String?,
+      category_id: freezed == category_id
+          ? _value.category_id
+          : category_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryModel?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusEnum,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryModelCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $CategoryModelCopyWith<$Res>(_value.category!, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -119,7 +147,12 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
       TransactionTypeEnum? type,
       String? created_at,
       String? period_id,
+      String? category_id,
+      CategoryModel? category,
       StatusEnum status});
+
+  @override
+  $CategoryModelCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -139,6 +172,8 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? created_at = freezed,
     Object? period_id = freezed,
+    Object? category_id = freezed,
+    Object? category = freezed,
     Object? status = null,
   }) {
     return _then(_$TransactionModelImpl(
@@ -166,6 +201,14 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
           ? _value.period_id
           : period_id // ignore: cast_nullable_to_non_nullable
               as String?,
+      category_id: freezed == category_id
+          ? _value.category_id
+          : category_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryModel?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -184,6 +227,8 @@ class _$TransactionModelImpl implements _TransactionModel {
       this.type,
       this.created_at,
       this.period_id,
+      this.category_id,
+      this.category,
       this.status = StatusEnum.active});
 
   factory _$TransactionModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -202,12 +247,16 @@ class _$TransactionModelImpl implements _TransactionModel {
   @override
   final String? period_id;
   @override
+  final String? category_id;
+  @override
+  final CategoryModel? category;
+  @override
   @JsonKey()
   final StatusEnum status;
 
   @override
   String toString() {
-    return 'TransactionModel(id: $id, amount: $amount, note: $note, type: $type, created_at: $created_at, period_id: $period_id, status: $status)';
+    return 'TransactionModel(id: $id, amount: $amount, note: $note, type: $type, created_at: $created_at, period_id: $period_id, category_id: $category_id, category: $category, status: $status)';
   }
 
   @override
@@ -223,13 +272,17 @@ class _$TransactionModelImpl implements _TransactionModel {
                 other.created_at == created_at) &&
             (identical(other.period_id, period_id) ||
                 other.period_id == period_id) &&
+            (identical(other.category_id, category_id) ||
+                other.category_id == category_id) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, amount, note, type, created_at, period_id, status);
+  int get hashCode => Object.hash(runtimeType, id, amount, note, type,
+      created_at, period_id, category_id, category, status);
 
   @JsonKey(ignore: true)
   @override
@@ -254,6 +307,8 @@ abstract class _TransactionModel implements TransactionModel {
       final TransactionTypeEnum? type,
       final String? created_at,
       final String? period_id,
+      final String? category_id,
+      final CategoryModel? category,
       final StatusEnum status}) = _$TransactionModelImpl;
 
   factory _TransactionModel.fromJson(Map<String, dynamic> json) =
@@ -271,6 +326,10 @@ abstract class _TransactionModel implements TransactionModel {
   String? get created_at;
   @override
   String? get period_id;
+  @override
+  String? get category_id;
+  @override
+  CategoryModel? get category;
   @override
   StatusEnum get status;
   @override

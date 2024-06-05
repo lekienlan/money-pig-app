@@ -1,17 +1,13 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
-import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
+import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
@@ -161,27 +157,32 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (!isScrolled)
-                Column(
-                  children: [
-                    Text('income'.tr().capitalize(),
-                        style: AppTextStyle.bodyS()),
-                    SizedBox(height: 4),
-                  ],
+          GestureDetector(
+            onTap: () {
+              ref?.read(routerProvider).push(IncomeListingRoute.path);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (!isScrolled)
+                  Column(
+                    children: [
+                      Text('income'.tr().capitalize(),
+                          style: AppTextStyle.bodyS()),
+                      SizedBox(height: 4),
+                    ],
+                  ),
+                Text(
+                  formatCurrency(incomeAmount),
+                  style: AppTextStyle.headingM(color: ColorName.textPrimary),
                 ),
-              Text(
-                formatCurrency(incomeAmount),
-                style: AppTextStyle.headingM(color: ColorName.textPrimary),
-              ),
-            ],
+              ],
+            ),
           ),
           GestureDetector(
             onTap: () {
-              ref?.read(routerProvider).push(NewTransactionRoute(
+              ref?.read(routerProvider).push(TransactionInputRoute(
                     type: TransactionTypeEnum.income,
                   ).location);
             },

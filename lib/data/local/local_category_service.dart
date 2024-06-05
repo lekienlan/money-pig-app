@@ -1,12 +1,14 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:money_pig/domain/model/category_model.dart';
+import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
-
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
+
 import 'local_database_service.dart';
 
 class LocalCategoryService {
@@ -23,6 +25,7 @@ class LocalCategoryService {
       'updated_at': DateTime.now().toIso8601String(),
       'created_at': DateTime.now().toIso8601String(),
       'type': data.type?.stringValue,
+      'style': jsonEncode(data.style?.toJson())
     });
   }
 
@@ -47,15 +50,18 @@ class LocalCategoryService {
     query += "ORDER BY created_at DESC;";
 
     final List<Map<String, dynamic>> list = await db.rawQuery(query);
-    return list
-        .map((item) => CategoryModel.fromJson({
-              "id": item["id"],
-              "name": item["name"],
-              "type": item["type"],
-              "code": item["code"],
-              "created_at": item["created_at"],
-              "updated_at": item["updated_at"],
-            }))
-        .toList();
+    log("${list}");
+    return list.map((item) {
+      log("${StyleModel.fromJson(jsonDecode(item["style"]))}");
+      return CategoryModel.fromJson({
+        "id": item["id"],
+        "name": item["name"],
+        "type": item["type"],
+        "code": item["code"],
+        "created_at": item["created_at"],
+        "updated_at": item["updated_at"],
+        "style": StyleModel.fromJson(jsonDecode(item["style"])).toJson()
+      });
+    }).toList();
   }
 }

@@ -5,7 +5,6 @@ import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/presentation/new_pig/provider/new_pig_provider.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/assets.gen.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/currency_input_formatter.dart';
 import 'package:money_pig/shared/util/extension.dart';
@@ -60,7 +59,6 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
               .read(newPigNotifierProvider.notifier)
               .onChangeName(nameController.text);
         },
-        cursorColor: ColorName.textPrimary,
         style: TextStyle(
             color: ColorName.textPrimary,
             fontWeight: FontWeight.w600,
@@ -89,7 +87,6 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
               .read(newPigNotifierProvider.notifier)
               .onChangeBudget(budgetController.text);
         },
-        cursorColor: ColorName.textPrimary,
         style: TextStyle(
             color: ColorName.textPrimary,
             fontWeight: FontWeight.w600,

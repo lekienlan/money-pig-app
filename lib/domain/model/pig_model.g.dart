@@ -18,6 +18,9 @@ _$PigModelImpl _$$PigModelImplFromJson(Map<String, dynamic> json) =>
       end_date: json['end_date'] as String?,
       budget: json['budget'] as num?,
       expense: json['expense'] as num?,
+      style: json['style'] == null
+          ? null
+          : StyleModel.fromJson(json['style'] as Map<String, dynamic>),
       status: $enumDecodeNullable(_$StatusEnumEnumMap, json['status']) ??
           StatusEnum.active,
     );
@@ -34,6 +37,7 @@ Map<String, dynamic> _$$PigModelImplToJson(_$PigModelImpl instance) =>
       'end_date': instance.end_date,
       'budget': instance.budget,
       'expense': instance.expense,
+      'style': instance.style,
       'status': _$StatusEnumEnumMap[instance.status]!,
     };
 

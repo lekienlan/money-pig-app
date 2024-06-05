@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money_pig/presentation/category_listing/widget/category_listing_page.dart';
+import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:remixicon/remixicon.dart';
@@ -9,6 +13,27 @@ class NavigationBarWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    _getCurrentIndex() {
+      final uri = router.routeInformationProvider.value.uri.toString();
+      switch (uri) {
+        case CategoryListingRoute.path:
+          return 1;
+      }
+
+      return 0;
+    }
+
+    _onTap(int index) {
+      switch (index) {
+        case 0:
+          ref.read(routerProvider).go(HomeRoute.path);
+        case 1:
+          ref.read(routerProvider).go(CategoryListingRoute.path);
+      }
+    }
+
     return SafeArea(
       child: Container(
         height: 54,
@@ -26,10 +51,12 @@ class NavigationBarWidget extends ConsumerWidget {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               elevation: 0,
+              currentIndex: _getCurrentIndex(),
               selectedFontSize: 0,
               unselectedFontSize: 0,
               iconSize: 24,
               backgroundColor: ColorName.white,
+              onTap: _onTap,
               items: [
                 BottomNavigationBarItem(
                     icon: Icon(Remix.home_5_fill), label: ''),

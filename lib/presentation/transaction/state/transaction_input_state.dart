@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_pig/domain/model/category_model.dart';
 import 'package:money_pig/shared/util/enum.dart';
 
 part 'transaction_input_state.freezed.dart';
@@ -9,5 +10,6 @@ class TransactionInputState with _$TransactionInputState {
     num? amount,
     String? note,
     TransactionTypeEnum? type,
+    CategoryModel? selectedCategory,
   }) = _TransactionInputState;
 }

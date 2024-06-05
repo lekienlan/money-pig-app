@@ -72,6 +72,8 @@ class App extends ConsumerWidget {
               Size(double.infinity, 32), // Adjust the height as needed
             ),
           )),
+          textSelectionTheme:
+              TextSelectionThemeData(cursorColor: ColorName.textSecondary),
           inputDecorationTheme: InputDecorationTheme(
               hintStyle: TextStyle(color: ColorName.textDisabled))),
       routerConfig: router,

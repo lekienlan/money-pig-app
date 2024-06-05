@@ -26,6 +26,7 @@ mixin _$CategoryModel {
   TransactionTypeEnum? get type => throw _privateConstructorUsedError;
   String? get created_at => throw _privateConstructorUsedError;
   String? get updated_at => throw _privateConstructorUsedError;
+  StyleModel? get style => throw _privateConstructorUsedError;
   StatusEnum get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +48,10 @@ abstract class $CategoryModelCopyWith<$Res> {
       TransactionTypeEnum? type,
       String? created_at,
       String? updated_at,
+      StyleModel? style,
       StatusEnum status});
+
+  $StyleModelCopyWith<$Res>? get style;
 }
 
 /// @nodoc
@@ -69,6 +73,7 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
     Object? type = freezed,
     Object? created_at = freezed,
     Object? updated_at = freezed,
+    Object? style = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -96,11 +101,27 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
               as String?,
+      style: freezed == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as StyleModel?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusEnum,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StyleModelCopyWith<$Res>? get style {
+    if (_value.style == null) {
+      return null;
+    }
+
+    return $StyleModelCopyWith<$Res>(_value.style!, (value) {
+      return _then(_value.copyWith(style: value) as $Val);
+    });
   }
 }
 
@@ -119,7 +140,11 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
       TransactionTypeEnum? type,
       String? created_at,
       String? updated_at,
+      StyleModel? style,
       StatusEnum status});
+
+  @override
+  $StyleModelCopyWith<$Res>? get style;
 }
 
 /// @nodoc
@@ -139,6 +164,7 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? created_at = freezed,
     Object? updated_at = freezed,
+    Object? style = freezed,
     Object? status = null,
   }) {
     return _then(_$CategoryModelImpl(
@@ -166,6 +192,10 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
               as String?,
+      style: freezed == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as StyleModel?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -184,6 +214,7 @@ class _$CategoryModelImpl implements _CategoryModel {
       this.type,
       this.created_at,
       this.updated_at,
+      this.style,
       this.status = StatusEnum.active});
 
   factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -202,12 +233,14 @@ class _$CategoryModelImpl implements _CategoryModel {
   @override
   final String? updated_at;
   @override
+  final StyleModel? style;
+  @override
   @JsonKey()
   final StatusEnum status;
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, code: $code, type: $type, created_at: $created_at, updated_at: $updated_at, status: $status)';
+    return 'CategoryModel(id: $id, name: $name, code: $code, type: $type, created_at: $created_at, updated_at: $updated_at, style: $style, status: $status)';
   }
 
   @override
@@ -223,13 +256,14 @@ class _$CategoryModelImpl implements _CategoryModel {
                 other.created_at == created_at) &&
             (identical(other.updated_at, updated_at) ||
                 other.updated_at == updated_at) &&
+            (identical(other.style, style) || other.style == style) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, code, type, created_at, updated_at, status);
+      runtimeType, id, name, code, type, created_at, updated_at, style, status);
 
   @JsonKey(ignore: true)
   @override
@@ -253,6 +287,7 @@ abstract class _CategoryModel implements CategoryModel {
       final TransactionTypeEnum? type,
       final String? created_at,
       final String? updated_at,
+      final StyleModel? style,
       final StatusEnum status}) = _$CategoryModelImpl;
 
   factory _CategoryModel.fromJson(Map<String, dynamic> json) =
@@ -270,6 +305,8 @@ abstract class _CategoryModel implements CategoryModel {
   String? get created_at;
   @override
   String? get updated_at;
+  @override
+  StyleModel? get style;
   @override
   StatusEnum get status;
   @override

@@ -29,8 +29,8 @@ mixin _$PigModel {
   String? get start_date => throw _privateConstructorUsedError;
   String? get end_date => throw _privateConstructorUsedError;
   num? get budget => throw _privateConstructorUsedError;
-  num? get expense =>
-      throw _privateConstructorUsedError; // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
+  num? get expense => throw _privateConstructorUsedError;
+  StyleModel? get style => throw _privateConstructorUsedError;
   StatusEnum get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +55,10 @@ abstract class $PigModelCopyWith<$Res> {
       String? end_date,
       num? budget,
       num? expense,
+      StyleModel? style,
       StatusEnum status});
+
+  $StyleModelCopyWith<$Res>? get style;
 }
 
 /// @nodoc
@@ -81,6 +84,7 @@ class _$PigModelCopyWithImpl<$Res, $Val extends PigModel>
     Object? end_date = freezed,
     Object? budget = freezed,
     Object? expense = freezed,
+    Object? style = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -124,11 +128,27 @@ class _$PigModelCopyWithImpl<$Res, $Val extends PigModel>
           ? _value.expense
           : expense // ignore: cast_nullable_to_non_nullable
               as num?,
+      style: freezed == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as StyleModel?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusEnum,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StyleModelCopyWith<$Res>? get style {
+    if (_value.style == null) {
+      return null;
+    }
+
+    return $StyleModelCopyWith<$Res>(_value.style!, (value) {
+      return _then(_value.copyWith(style: value) as $Val);
+    });
   }
 }
 
@@ -151,7 +171,11 @@ abstract class _$$PigModelImplCopyWith<$Res>
       String? end_date,
       num? budget,
       num? expense,
+      StyleModel? style,
       StatusEnum status});
+
+  @override
+  $StyleModelCopyWith<$Res>? get style;
 }
 
 /// @nodoc
@@ -175,6 +199,7 @@ class __$$PigModelImplCopyWithImpl<$Res>
     Object? end_date = freezed,
     Object? budget = freezed,
     Object? expense = freezed,
+    Object? style = freezed,
     Object? status = null,
   }) {
     return _then(_$PigModelImpl(
@@ -218,6 +243,10 @@ class __$$PigModelImplCopyWithImpl<$Res>
           ? _value.expense
           : expense // ignore: cast_nullable_to_non_nullable
               as num?,
+      style: freezed == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as StyleModel?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -240,6 +269,7 @@ class _$PigModelImpl implements _PigModel {
       this.end_date,
       this.budget,
       this.expense,
+      this.style,
       this.status = StatusEnum.active});
 
   factory _$PigModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -265,14 +295,15 @@ class _$PigModelImpl implements _PigModel {
   final num? budget;
   @override
   final num? expense;
-// @Default(<String, dynamic>{}) Map<String, dynamic>? style,
+  @override
+  final StyleModel? style;
   @override
   @JsonKey()
   final StatusEnum status;
 
   @override
   String toString() {
-    return 'PigModel(id: $id, name: $name, updated_at: $updated_at, created_at: $created_at, user_id: $user_id, period_id: $period_id, start_date: $start_date, end_date: $end_date, budget: $budget, expense: $expense, status: $status)';
+    return 'PigModel(id: $id, name: $name, updated_at: $updated_at, created_at: $created_at, user_id: $user_id, period_id: $period_id, start_date: $start_date, end_date: $end_date, budget: $budget, expense: $expense, style: $style, status: $status)';
   }
 
   @override
@@ -295,13 +326,14 @@ class _$PigModelImpl implements _PigModel {
                 other.end_date == end_date) &&
             (identical(other.budget, budget) || other.budget == budget) &&
             (identical(other.expense, expense) || other.expense == expense) &&
+            (identical(other.style, style) || other.style == style) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, updated_at, created_at,
-      user_id, period_id, start_date, end_date, budget, expense, status);
+      user_id, period_id, start_date, end_date, budget, expense, style, status);
 
   @JsonKey(ignore: true)
   @override
@@ -329,6 +361,7 @@ abstract class _PigModel implements PigModel {
       final String? end_date,
       final num? budget,
       final num? expense,
+      final StyleModel? style,
       final StatusEnum status}) = _$PigModelImpl;
 
   factory _PigModel.fromJson(Map<String, dynamic> json) =
@@ -354,7 +387,9 @@ abstract class _PigModel implements PigModel {
   num? get budget;
   @override
   num? get expense;
-  @override // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
+  @override
+  StyleModel? get style;
+  @override
   StatusEnum get status;
   @override
   @JsonKey(ignore: true)

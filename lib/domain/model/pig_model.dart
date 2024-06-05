@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/shared/util/enum.dart';
 
 part 'pig_model.freezed.dart';
@@ -17,7 +18,7 @@ abstract class PigModel with _$PigModel {
     String? end_date,
     num? budget,
     num? expense,
-    // @Default(<String, dynamic>{}) Map<String, dynamic>? style,
+    StyleModel? style,
     @Default(StatusEnum.active) StatusEnum status,
   }) = _PigModel;
 

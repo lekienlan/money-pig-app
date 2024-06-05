@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:money_pig/domain/model/category_model.dart';
-import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/domain/repository/category_repository.dart';
 import 'package:money_pig/domain/repository/transaction_repository.dart';
 import 'package:money_pig/presentation/transaction/state/income_state.dart';
@@ -34,13 +30,8 @@ class IncomeNotifier extends _$IncomeNotifier {
 
   Future<void> fetchCategoryListing() async {
     try {
-      // await CategoryRepository().createCategory(CategoryModel(
-      //   name: 'lương',
-      //   type: TransactionTypeEnum.expense,
-      // ));
-      final resp = await CategoryRepository()
+      await CategoryRepository()
           .getCategoryListing(types: [TransactionTypeEnum.expense]);
-      log("${resp}");
     } catch (err) {}
   }
 }

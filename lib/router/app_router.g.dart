@@ -10,8 +10,11 @@ List<RouteBase> get $appRoutes => [
       $splashRoute,
       $homeRoute,
       $newPigRoute,
-      $newTransactionRoute,
+      $transactionInputRoute,
       $pigDetailRoute,
+      $categoryListingRoute,
+      $incomeListingRoute,
+      $categoryInputRoute,
       $eastlinRoute,
     ];
 
@@ -81,14 +84,14 @@ extension $NewPigRouteExtension on NewPigRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $newTransactionRoute => GoRouteData.$route(
+RouteBase get $transactionInputRoute => GoRouteData.$route(
       path: '/transaction-input',
-      factory: $NewTransactionRouteExtension._fromState,
+      factory: $TransactionInputRouteExtension._fromState,
     );
 
-extension $NewTransactionRouteExtension on NewTransactionRoute {
-  static NewTransactionRoute _fromState(GoRouterState state) =>
-      NewTransactionRoute(
+extension $TransactionInputRouteExtension on TransactionInputRoute {
+  static TransactionInputRoute _fromState(GoRouterState state) =>
+      TransactionInputRoute(
         type: _$TransactionTypeEnumEnumMap
             ._$fromName(state.uri.queryParameters['type']!),
         periodId: state.uri.queryParameters['period-id'],
@@ -145,6 +148,90 @@ extension $PigDetailRouteExtension on PigDetailRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $categoryListingRoute => GoRouteData.$route(
+      path: '/category-listing',
+      factory: $CategoryListingRouteExtension._fromState,
+    );
+
+extension $CategoryListingRouteExtension on CategoryListingRoute {
+  static CategoryListingRoute _fromState(GoRouterState state) =>
+      const CategoryListingRoute();
+
+  String get location => GoRouteData.$location(
+        '/category-listing',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $incomeListingRoute => GoRouteData.$route(
+      path: '/income-listing',
+      factory: $IncomeListingRouteExtension._fromState,
+    );
+
+extension $IncomeListingRouteExtension on IncomeListingRoute {
+  static IncomeListingRoute _fromState(GoRouterState state) =>
+      const IncomeListingRoute();
+
+  String get location => GoRouteData.$location(
+        '/income-listing',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $categoryInputRoute => GoRouteData.$route(
+      path: '/category-input',
+      factory: $CategoryInputRouteExtension._fromState,
+    );
+
+extension $CategoryInputRouteExtension on CategoryInputRoute {
+  static CategoryInputRoute _fromState(GoRouterState state) =>
+      CategoryInputRoute(
+        type: _$convertMapValue('type', state.uri.queryParameters,
+            _$TransactionTypeEnumEnumMap._$fromName),
+      );
+
+  String get location => GoRouteData.$location(
+        '/category-input',
+        queryParams: {
+          if (type != null) 'type': _$TransactionTypeEnumEnumMap[type!],
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+T? _$convertMapValue<T>(
+  String key,
+  Map<String, String> map,
+  T Function(String) converter,
+) {
+  final value = map[key];
+  return value == null ? null : converter(value);
 }
 
 RouteBase get $eastlinRoute => GoRouteData.$route(

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:money_pig/domain/model/category_model.dart';
 import 'package:money_pig/domain/repository/category_repository.dart';
-import 'package:money_pig/presentation/category/state/category_listing_state.dart';
+import 'package:money_pig/presentation/category_listing/state/category_listing_state.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,7 +21,7 @@ class CategoryListingNotifier extends _$CategoryListingNotifier {
   Future<void> fetchCategoryListing({List<TransactionTypeEnum>? types}) async {
     try {
       final resp = await categoryRepository.getCategoryListing(types: types);
-
+      log("$resp");
       state = CategoryListingState.data(resp);
     } catch (err) {
       state = CategoryListingState.empty();

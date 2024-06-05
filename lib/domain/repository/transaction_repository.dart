@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:money_pig/data/local/local_transaction_service.dart';
 import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/shared/util/enum.dart';
@@ -43,7 +41,6 @@ class TransactionRepository implements TransactionRepositoryProtocol {
         period_id: period_id,
       );
     } catch (err) {
-      log('$err');
       throw Error();
     }
   }
