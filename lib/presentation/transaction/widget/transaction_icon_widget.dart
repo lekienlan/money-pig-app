@@ -22,7 +22,7 @@ class TransactionIconWidget extends StatelessWidget {
           angle: rotation ?? 0,
           child: Icon(
             icon,
-            size: 18,
+            size: 16,
             color: iconColor,
           ),
         ),

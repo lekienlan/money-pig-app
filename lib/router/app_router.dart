@@ -2,7 +2,7 @@
 // @AdaptiveAutoRouter
 // @CustomAutoRouter
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_pig/presentation/category_input/widget/category_input_page.dart';
 import 'package:money_pig/presentation/category_listing/widget/category_listing_page.dart';
@@ -109,18 +109,16 @@ class PigDetailRoute extends GoRouteData {
 
   static const path = '/pig-detail/:id';
 
+  // @override
+  // Widget build(BuildContext context, GoRouterState state) {
+  //   return PigDetailPage(id: id);
+  // }
+
   @override
   Page buildPage(BuildContext context, GoRouterState state) {
-    return CustomTransitionPage(
+    return CupertinoPage(
       child: PigDetailPage(id: id),
       key: ValueKey(state.fullPath),
-      transitionDuration: const Duration(milliseconds: 300),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return ScaleTransition(
-          scale: animation,
-          child: child,
-        );
-      },
     );
   }
 }

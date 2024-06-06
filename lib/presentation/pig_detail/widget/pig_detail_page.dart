@@ -16,7 +16,6 @@ import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/widget/header_widget.dart';
-import 'package:money_pig/shared/widget/loading_widget.dart';
 import 'package:remixicon/remixicon.dart';
 
 class PigDetailPage extends ConsumerStatefulWidget {
@@ -38,13 +37,13 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
         ref.watch(pigDetailNotifierProvider(widget.id ?? ''));
 
     return Hero(
-      tag: "balance-${widget.id}",
+      tag: "pig-${widget.id}",
       child: Scaffold(
           appBar: HeaderWidget(
             background: Colors.transparent,
           ),
           body: pigDetailNotifier.maybeWhen(
-              orElse: () => LoadingWidget(),
+              orElse: () => SizedBox(),
               data: (pig) => Column(
                     children: [
                       Padding(
@@ -181,7 +180,7 @@ class _TransactionListingSheet extends StatelessWidget {
                 physics: ClampingScrollPhysics(),
                 controller: scrollController,
                 child: Container(
-                  height: 32,
+                  height: 40,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -190,8 +189,8 @@ class _TransactionListingSheet extends StatelessWidget {
                         width: 148,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: ColorName.textBorder),
-                        height: 4,
+                            color: ColorName.textDisabled),
+                        height: 8,
                       )
                     ],
                   ),

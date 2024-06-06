@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,13 +18,16 @@ class LocalDatabaseService {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'money_pig.db');
+    String path =
+        join(await getDatabasesPath(), "money_pig_${dotenv.get('ENV')}.db");
 
-    return await openDatabase(path,
-        version: 1,
-        onCreate: onCreate,
-        onUpgrade: onUpgrade,
-        onDowngrade: onDowngrade);
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: onCreate,
+      onUpgrade: onUpgrade,
+      onDowngrade: onDowngrade,
+    );
   }
 
   Future<void> onCreate(Database db, int version) async {

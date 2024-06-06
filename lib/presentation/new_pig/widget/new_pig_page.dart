@@ -126,13 +126,20 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
             child: Container(
               width: 4, // Thickness of the line
               height: double.infinity,
-              color: ColorName.primaryUltraLight, // Color of the line
+              decoration: BoxDecoration(
+                color: ColorName.primaryExtraLight,
+                // gradient: LinearGradient(
+                //   colors: [ColorName.primaryMain, ColorName.primaryUltraLight],
+                //   begin: Alignment.topCenter,
+                //   end: Alignment.bottomCenter,
+                // ),
+              ), // Color of the line
             ),
           ),
           Column(
             children: [
               PigCardIcon(),
-              SizedBox(height: 32),
+              SizedBox(height: 24),
               Container(
                 color: ColorName.white,
                 child: Column(
@@ -167,10 +174,16 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                     Text((newPigNotifier.startDate ?? '').toDate(),
                         style: AppTextStyle.headingS()),
                     SizedBox(height: 16),
-                    Text('${'to'.tr().capitalize()} ${'start_of_day'.tr()}',
-                        style: AppTextStyle.bodyS(color: ColorName.textBorder)),
-                    Text((newPigNotifier.endDate ?? '').toDate(),
-                        style: AppTextStyle.headingS())
+                    if (isTruthy(newPigNotifier.endDate))
+                      Column(
+                        children: [
+                          Text('${'to'.tr().capitalize()} ${'end_of_day'.tr()}',
+                              style: AppTextStyle.bodyS(
+                                  color: ColorName.textBorder)),
+                          Text((newPigNotifier.endDate ?? '').toDate(),
+                              style: AppTextStyle.headingS())
+                        ],
+                      )
                   ],
                 ),
               )
@@ -214,7 +227,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                                   CircularProgressIndicator(
                                 value: value,
                                 strokeWidth: 24,
-                                backgroundColor: ColorName.primaryUltraLight,
+                                backgroundColor: ColorName.primaryExtraLight,
                               ),
                             )),
                       ),

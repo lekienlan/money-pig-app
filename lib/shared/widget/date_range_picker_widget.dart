@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
@@ -140,7 +138,7 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
               ],
             )),
         SizedBox(height: 40),
-        Text('${'to'.tr().capitalize()} ${'start_of_day'.tr()}',
+        Text('${'to'.tr().capitalize()} ${'end_of_day'.tr()}',
             style: AppTextStyle.bodyM()),
         SizedBox(height: 4),
         ElevatedButton(

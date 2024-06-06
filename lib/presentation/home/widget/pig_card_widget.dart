@@ -24,7 +24,7 @@ class PigCardWidget extends StatelessWidget {
     final percent = balance / (pig?.budget ?? 0) * 100;
 
     return Hero(
-      tag: "balance-${pig?.id}",
+      tag: "pig-${pig?.id}",
       child: GestureDetector(
         onTap: () {
           if (isTruthy(onClick)) onClick!();
@@ -47,14 +47,6 @@ class PigCardWidget extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: ColorName.primaryLight,
-                        // gradient: LinearGradient(
-                        //   colors: [
-                        //     ColorName.primaryExtraLight,
-                        //     ColorName.primaryMain
-                        //   ],
-                        //   begin: Alignment.topCenter,
-                        //   end: Alignment.bottomCenter,
-                        // ),
                       ),
                     ),
                   ),
@@ -72,7 +64,7 @@ class PigCardWidget extends StatelessWidget {
                                 '${pig?.name}',
                                 style: TextStyle(
                                   color: ColorName.primaryDark,
-                                  fontWeight: FontWeight.w600,
+                                  // fontWeight: FontWeight.w600,
                                   fontSize: dynamicFontSize(
                                     text: pig?.name ?? '',
                                     defaultFontSize: 20,
@@ -92,11 +84,16 @@ class PigCardWidget extends StatelessWidget {
                               Text(
                                 'balance'.tr().capitalize(),
                                 style: AppTextStyle.bodyXS(
-                                    color: ColorName.primaryExtraLight),
+                                  color: percent < 30
+                                      ? ColorName.primaryExtraLight
+                                      : ColorName.primaryUltraLight,
+                                ),
                               ),
                               Text(formatCurrency(balance),
                                   style: AppTextStyle.headingS(
-                                    color: ColorName.primaryExtraLight,
+                                    color: percent < 30
+                                        ? ColorName.primaryExtraLight
+                                        : ColorName.primaryUltraLight,
                                   ).copyWith(
                                     overflow: TextOverflow.ellipsis,
                                   )),
@@ -123,26 +120,17 @@ class PigCardIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 48,
-      height: 48,
-      decoration: BoxDecoration(
-        color: ColorName.primaryUltraLight.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Center(
-        child: Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: ColorName.primaryMain,
-          ),
-          child: Center(
-            child: IconSelectWidget(
-              icon: Remix.heart_fill,
-              size: 24,
-            ),
+    return Center(
+      child: Container(
+        width: 32,
+        height: 32,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          color: ColorName.primaryMain,
+        ),
+        child: Center(
+          child: IconSelectWidget(
+            icon: Remix.heart_fill,
           ),
         ),
       ),

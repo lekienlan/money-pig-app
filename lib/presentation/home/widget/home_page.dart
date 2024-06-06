@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
@@ -25,6 +26,10 @@ class HomePage extends ConsumerWidget {
     final incomeNotifier = ref.watch(incomeNotifierProvider);
 
     return Scaffold(
+        floatingActionButton: Text(
+          "${dotenv.get('ENV')}",
+          style: AppTextStyle.bodyXS(),
+        ),
         appBar: AppBar(
           backgroundColor: ColorName.surfaceSecondary,
           scrolledUnderElevation: 0.0,

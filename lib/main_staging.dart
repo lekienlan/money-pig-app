@@ -1,9 +1,8 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:money_pig/shared/theme/assets.gen.dart';
-import 'package:money_pig/start.dart';
+import 'flavors.dart';
+
+import 'main.dart' as runner;
 
 Future<void> main() async {
-  await dotenv.load(fileName: Assets.env.envStaging);
-
-  await start();
+  F.appFlavor = Flavor.staging;
+  await runner.main();
 }
