@@ -1,0 +1,59 @@
+app:
+  android:
+    flavorDimensions: 'default'
+  ios:
+    generateDummyAssets: true
+
+flavors:
+  development:
+    app:
+      name: 'Money Pig Development'
+    android:
+      icon: 'assets/app_logo_development.png'
+      applicationId: 'development.moneypig.app'
+      buildTypes:
+        - debug
+        - release
+    ios:
+      icon: 'assets/app_logo_development.png'
+      buildTypes:
+        - debug
+        - release
+      bundleId: 'development.moneypig.app'
+      buildSettings:
+        PRODUCT_BUNDLE_IDENTIFIER: 'development.moneypig.app'
+  staging:
+    app:
+      name: 'Money Pig Staging'
+
+    android:
+      icon: 'assets/app_logo_staging.png'
+      applicationId: 'staging.moneypig.app'
+      buildTypes:
+        - debug
+        - release
+    ios:
+      icon: 'assets/app_logo_staging.png'
+      buildTypes:
+        - debug
+        - release
+      bundleId: 'staging.moneypig.app'
+      buildSettings:
+        PRODUCT_BUNDLE_IDENTIFIER: 'staging.moneypig.app'
+  production:
+    app:
+      name: 'Money Pig'
+    android:
+      icon: 'assets/app_logo.png'
+      applicationId: 'com.moneypig.app'
+      buildTypes:
+        - debug
+        - release
+    ios:
+      icon: 'assets/app_logo.png'
+      buildTypes:
+        - debug
+        - release
+      bundleId: 'com.moneypig.app'
+      buildSettings:
+        PRODUCT_BUNDLE_IDENTIFIER: 'com.moneypig.app'
