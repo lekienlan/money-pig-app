@@ -6,6 +6,7 @@ import 'package:money_pig/shared/theme/app_text_style.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
+import 'package:money_pig/shared/util/icon_mapper.dart';
 import 'package:money_pig/shared/widget/icon_select_widget.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -33,9 +34,10 @@ class PigCardWidget extends StatelessWidget {
             builder: (BuildContext context, BoxConstraints constraints) {
           return Container(
             decoration: BoxDecoration(
-                color: ColorName.white,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [AppShadow.light]),
+              color: ColorName.textDisabled,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [AppShadow.light],
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: Stack(
@@ -46,63 +48,54 @@ class PigCardWidget extends StatelessWidget {
                     height: constraints.maxHeight * percent.toDouble() / 100,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: ColorName.primaryLight,
+                        color: ColorName.white,
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(12),
+                  Positioned(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text('${pig?.name}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: ColorName.textTertiary,
+                                fontSize: dynamicFontSize(
+                                  text: pig?.name ?? '',
+                                  defaultFontSize: 24,
+                                  stepLength: 10,
+                                  scale: 0.85,
+                                ))),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                      right: 12,
+                      top: 12,
+                      child: PigCardIcon(
+                        icon: IconMapper.iconList[pig?.style?.icon],
+                      )),
+                  Positioned(
+                    bottom: 12,
+                    left: 12,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                '${pig?.name}',
-                                style: TextStyle(
-                                  color: ColorName.primaryDark,
-                                  // fontWeight: FontWeight.w600,
-                                  fontSize: dynamicFontSize(
-                                    text: pig?.name ?? '',
-                                    defaultFontSize: 20,
-                                    stepLength: 6,
-                                    scale: 0.9,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            PigCardIcon()
-                          ],
-                        ),
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'balance'.tr().capitalize(),
-                                style: AppTextStyle.bodyXS(
-                                  color: percent < 30
-                                      ? ColorName.primaryExtraLight
-                                      : ColorName.primaryUltraLight,
-                                ),
-                              ),
-                              Text(formatCurrency(balance),
-                                  style: AppTextStyle.headingS(
-                                    color: percent < 30
-                                        ? ColorName.primaryExtraLight
-                                        : ColorName.primaryUltraLight,
-                                  ).copyWith(
-                                    overflow: TextOverflow.ellipsis,
-                                  )),
-                            ],
+                        Text(
+                          'balance'.tr().capitalize(),
+                          style: AppTextStyle.bodyXS(
+                            color: ColorName.textTertiary,
                           ),
-                        )
+                        ),
+                        Text(formatCurrency(balance),
+                            style: AppTextStyle.headingXS(
+                              color: ColorName.primaryMain,
+                            ).copyWith(
+                              overflow: TextOverflow.ellipsis,
+                            )),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -114,9 +107,9 @@ class PigCardWidget extends StatelessWidget {
 }
 
 class PigCardIcon extends StatelessWidget {
-  const PigCardIcon({
-    super.key,
-  });
+  final IconData? icon;
+  final Function(String?, IconData?)? onChange;
+  const PigCardIcon({super.key, this.icon, this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +123,8 @@ class PigCardIcon extends StatelessWidget {
         ),
         child: Center(
           child: IconSelectWidget(
-            icon: Remix.heart_fill,
+            onChange: onChange,
+            icon: icon ?? Remix.heart_fill,
           ),
         ),
       ),

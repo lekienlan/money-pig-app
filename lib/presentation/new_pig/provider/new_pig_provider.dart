@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:money_pig/data/local/local_pig_service.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
-import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
+import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
 import 'package:money_pig/presentation/new_pig/state/new_pig_state.dart';
+import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,9 +18,7 @@ class NewPigNotifier extends _$NewPigNotifier {
     DateTime currentDate =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     return NewPigState(
-      name: null,
-      startDate: currentDate.toIso8601String(),
-    );
+        name: null, startDate: currentDate.toIso8601String(), icon: 'sports');
   }
 
   String renderTitle(int index) {
@@ -53,6 +52,10 @@ class NewPigNotifier extends _$NewPigNotifier {
     state = state.copyWith(startDate: startDate, endDate: endDate);
   }
 
+  void onChangeIcon(String? key) {
+    state = state.copyWith(icon: key);
+  }
+
   Future<void> handleSubmit() async {
     try {
       state = state.copyWith(isSubmitting: true);
@@ -61,9 +64,10 @@ class NewPigNotifier extends _$NewPigNotifier {
         budget: state.budget,
         start_date: state.startDate,
         end_date: state.endDate,
+        style: StyleModel(icon: state.icon),
       ));
 
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(Duration(milliseconds: 200));
       state = state.copyWith(isSubmitting: false);
       ref.invalidate(pigListingNotifierProvider);
       ref.invalidate(incomeNotifierProvider);

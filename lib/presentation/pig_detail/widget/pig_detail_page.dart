@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +17,10 @@ import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
+import 'package:money_pig/shared/util/icon_mapper.dart';
 import 'package:money_pig/shared/widget/header_widget.dart';
 import 'package:remixicon/remixicon.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class PigDetailPage extends ConsumerStatefulWidget {
   final String? id;
@@ -27,8 +31,56 @@ class PigDetailPage extends ConsumerStatefulWidget {
 }
 
 class PigDetailPageState extends ConsumerState<PigDetailPage> {
+  final _scrollController = ScrollController();
+  final _transactionListingSheetController = DraggableScrollableController();
+  final _transactionListingController = ScrollController();
+
+  void _scrollListener() {
+    if (_scrollController.offset < 0) {
+      // At the top of the scroll
+      _transactionListingSheetController.animateTo(
+        0.4,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
+    }
+
+    if (_scrollController.offset > 10) {
+      _transactionListingSheetController.animateTo(
+        0.2,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
+    }
+  }
+
+  void _transactionListingScrollListener() {
+    log("$_transactionListingController");
+    if (_transactionListingController.offset > 10) {
+      _transactionListingSheetController.animateTo(
+        1,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_scrollListener);
+    _transactionListingController
+        .addListener(_transactionListingScrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _transactionListingController
+        .removeListener(_transactionListingScrollListener);
+    _scrollController.dispose();
+    _transactionListingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,7 +92,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
       tag: "pig-${widget.id}",
       child: Scaffold(
           appBar: HeaderWidget(
-            background: Colors.transparent,
+            background: ColorName.surfaceSecondary,
           ),
           body: pigDetailNotifier.maybeWhen(
               orElse: () => SizedBox(),
@@ -65,12 +117,14 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                                 ),
                                 SizedBox(height: 4),
                                 Text(
-                                  '${pig.start_date?.toDate(format: 'dd MMMM') ?? ''} => ${pig.end_date?.toDate(format: 'dd MMMM') ?? ''}',
-                                  style: AppTextStyle.heading2XS(),
+                                  '${pig.start_date?.toDate(format: 'dd MMMM') ?? ''} → ${pig.end_date?.toDate(format: 'dd MMMM') ?? ''}',
+                                  style: AppTextStyle.bodyS(),
                                 )
                               ],
                             ),
-                            PigCardIcon()
+                            PigCardIcon(
+                              icon: IconMapper.iconList[pig.style?.icon],
+                            )
                           ],
                         ),
                       ),
@@ -78,67 +132,92 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                         child: Stack(
                           children: [
                             Container(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
                                 decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      ColorName.surfaceSecondary,
-                                      ColorName.primaryExtraLight
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                  ),
+                                  color: ColorName.surfaceSecondary,
                                 ),
                                 child: Column(children: [
                                   SizedBox(
                                     height: 8,
                                   ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () => ref
-                                              .read(routerProvider)
-                                              .push(TransactionInputRoute(
-                                                type:
-                                                    TransactionTypeEnum.budget,
-                                                periodId: pig.period_id,
-                                              ).location),
-                                          child: _BudgetExpenseCard(
-                                            title: 'budget',
-                                            amount: pig.budget,
-                                            color: ColorName.green500,
-                                            icon: Remix.arrow_down_line,
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 16),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: () => ref
+                                                .read(routerProvider)
+                                                .push(TransactionInputRoute(
+                                                  type: TransactionTypeEnum
+                                                      .budget,
+                                                  periodId: pig.period_id,
+                                                ).location),
+                                            child: _BudgetExpenseCard(
+                                              title: 'budget',
+                                              amount: pig.budget,
+                                              color: ColorName.green500,
+                                              icon: Remix.arrow_down_line,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () => ref
-                                              .read(routerProvider)
-                                              .push(TransactionInputRoute(
-                                                type:
-                                                    TransactionTypeEnum.expense,
-                                                periodId: pig.period_id,
-                                              ).location),
-                                          child: _BudgetExpenseCard(
-                                            title: 'expense',
-                                            amount: pig.expense,
-                                            color: ColorName.orange500,
-                                            icon: Remix.arrow_up_line,
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: () => ref
+                                                .read(routerProvider)
+                                                .push(TransactionInputRoute(
+                                                  type: TransactionTypeEnum
+                                                      .expense,
+                                                  periodId: pig.period_id,
+                                                ).location),
+                                            child: _BudgetExpenseCard(
+                                              title: 'expense',
+                                              amount: pig.expense,
+                                              color: ColorName.orange500,
+                                              icon: Remix.arrow_up_line,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomScrollView(
+                                      controller: _scrollController,
+                                      slivers: [
+                                        SliverToBoxAdapter(
+                                          child: SizedBox(
+                                            height: 16,
                                           ),
                                         ),
-                                      )
-                                    ],
+                                        SliverPadding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 16),
+                                          sliver: SliverToBoxAdapter(
+                                            child: _Calendar(),
+                                          ),
+                                        ),
+                                        SliverList(
+                                          delegate: SliverChildBuilderDelegate(
+                                            (context, index) => ListTile(
+                                                title: Text('Item $index')),
+                                            childCount:
+                                                50, // Ensure enough items to scroll
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   )
                                 ])),
                             _TransactionListingSheet(
-                              ref: ref,
-                              pig: pig,
-                            ),
+                                ref: ref,
+                                pig: pig,
+                                sheetController:
+                                    _transactionListingSheetController,
+                                listController: _transactionListingController),
                           ],
                         ),
                       ),
@@ -148,11 +227,33 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
   }
 }
 
+class _Calendar extends StatelessWidget {
+  const _Calendar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(boxShadow: [AppShadow.normal]),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: SfCalendar(
+              view: CalendarView.month,
+              monthViewSettings: MonthViewSettings(showAgenda: true),
+            )));
+  }
+}
+
 class _TransactionListingSheet extends StatelessWidget {
   final PigModel? pig;
+  final ScrollController? listController;
+  final DraggableScrollableController? sheetController;
   const _TransactionListingSheet({
     super.key,
     this.pig,
+    this.sheetController,
+    this.listController,
     required this.ref,
   });
 
@@ -161,9 +262,10 @@ class _TransactionListingSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.6,
+      controller: sheetController,
+      initialChildSize: 0.4,
       snap: true,
-      snapSizes: [0.6, 1],
+      snapSizes: [0.4, 1],
       minChildSize: 0.2,
       maxChildSize: 1,
       builder: (BuildContext context, ScrollController scrollController) {
@@ -198,6 +300,7 @@ class _TransactionListingSheet extends StatelessWidget {
               ),
               Expanded(
                 child: CustomScrollView(
+                  controller: listController,
                   slivers: [
                     SliverAppBar(
                       backgroundColor: ColorName.white,
@@ -227,6 +330,24 @@ class _TransactionListingSheet extends StatelessWidget {
                             )
                           ],
                         ),
+                      ),
+                    ),
+                    // SliverToBoxAdapter(
+                    //   child: SingleChildScrollView(
+                    //     scrollDirection: Axis.horizontal,
+                    //     child: Row(
+                    //       children: List.generate(14, (index) {
+                    //         return Padding(
+                    //           padding: const EdgeInsets.only(right: 8),
+                    //           child: DayOfWeekWidget(),
+                    //         );
+                    //       }),
+                    //     ),
+                    //   ),
+                    // ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        height: 8,
                       ),
                     ),
                     ref

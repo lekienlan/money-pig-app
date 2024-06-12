@@ -21,6 +21,7 @@ mixin _$NewPigState {
   String? get startDate => throw _privateConstructorUsedError;
   String? get endDate => throw _privateConstructorUsedError;
   bool? get isSubmitting => throw _privateConstructorUsedError;
+  String? get icon => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPigStateCopyWith<NewPigState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $NewPigStateCopyWith<$Res> {
       num? budget,
       String? startDate,
       String? endDate,
-      bool? isSubmitting});
+      bool? isSubmitting,
+      String? icon});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$NewPigStateCopyWithImpl<$Res, $Val extends NewPigState>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? isSubmitting = freezed,
+    Object? icon = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -81,6 +84,10 @@ class _$NewPigStateCopyWithImpl<$Res, $Val extends NewPigState>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool?,
+      icon: freezed == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$NewPigStateImplCopyWith<$Res>
       num? budget,
       String? startDate,
       String? endDate,
-      bool? isSubmitting});
+      bool? isSubmitting,
+      String? icon});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$NewPigStateImplCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? isSubmitting = freezed,
+    Object? icon = freezed,
   }) {
     return _then(_$NewPigStateImpl(
       name: freezed == name
@@ -139,6 +148,10 @@ class __$$NewPigStateImplCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool?,
+      icon: freezed == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$NewPigStateImpl implements _NewPigState {
       this.budget,
       this.startDate,
       this.endDate,
-      this.isSubmitting});
+      this.isSubmitting,
+      this.icon});
 
   @override
   final String? name;
@@ -163,10 +177,12 @@ class _$NewPigStateImpl implements _NewPigState {
   final String? endDate;
   @override
   final bool? isSubmitting;
+  @override
+  final String? icon;
 
   @override
   String toString() {
-    return 'NewPigState(name: $name, budget: $budget, startDate: $startDate, endDate: $endDate, isSubmitting: $isSubmitting)';
+    return 'NewPigState(name: $name, budget: $budget, startDate: $startDate, endDate: $endDate, isSubmitting: $isSubmitting, icon: $icon)';
   }
 
   @override
@@ -180,12 +196,13 @@ class _$NewPigStateImpl implements _NewPigState {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting));
+                other.isSubmitting == isSubmitting) &&
+            (identical(other.icon, icon) || other.icon == icon));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, budget, startDate, endDate, isSubmitting);
+  int get hashCode => Object.hash(
+      runtimeType, name, budget, startDate, endDate, isSubmitting, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -200,7 +217,8 @@ abstract class _NewPigState implements NewPigState {
       final num? budget,
       final String? startDate,
       final String? endDate,
-      final bool? isSubmitting}) = _$NewPigStateImpl;
+      final bool? isSubmitting,
+      final String? icon}) = _$NewPigStateImpl;
 
   @override
   String? get name;
@@ -212,6 +230,8 @@ abstract class _NewPigState implements NewPigState {
   String? get endDate;
   @override
   bool? get isSubmitting;
+  @override
+  String? get icon;
   @override
   @JsonKey(ignore: true)
   _$$NewPigStateImplCopyWith<_$NewPigStateImpl> get copyWith =>

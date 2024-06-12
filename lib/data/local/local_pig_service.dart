@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:money_pig/domain/model/pig_model.dart';
+import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
+
 import 'local_database_service.dart';
 
 class LocalPigService {
@@ -20,7 +23,7 @@ class LocalPigService {
       await txn.insert('pigs', {
         'id': pigId,
         'name': data.name,
-        'style': '{}',
+        'style': jsonEncode(data.style?.toJson()),
         'updated_at': DateTime.now().toIso8601String(),
         'created_at': DateTime.now().toIso8601String(),
         'user_id': id, // Assuming user_id is part of your schema
@@ -98,6 +101,7 @@ ORDER BY pigs.created_at DESC;
               'period_id': item['period_id'],
               'budget': item['budget'],
               'expense': item['expense'],
+              "style": StyleModel.fromJson(jsonDecode(item["style"])).toJson()
             }))
         .toList();
   }
@@ -153,6 +157,7 @@ ORDER BY pigs.created_at DESC;
         'period_id': item['period_id'],
         'budget': item['budget'],
         'expense': item['expense'],
+        "style": StyleModel.fromJson(jsonDecode(item["style"])).toJson()
       });
     } else {
       throw Exception('Pig not found');

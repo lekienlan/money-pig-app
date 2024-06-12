@@ -109,18 +109,18 @@ class PigDetailRoute extends GoRouteData {
 
   static const path = '/pig-detail/:id';
 
-  // @override
-  // Widget build(BuildContext context, GoRouterState state) {
-  //   return PigDetailPage(id: id);
-  // }
-
   @override
-  Page buildPage(BuildContext context, GoRouterState state) {
-    return CupertinoPage(
-      child: PigDetailPage(id: id),
-      key: ValueKey(state.fullPath),
-    );
+  Widget build(BuildContext context, GoRouterState state) {
+    return PigDetailPage(id: id);
   }
+
+  // @override
+  // Page buildPage(BuildContext context, GoRouterState state) {
+  //   return CupertinoPage(
+  //     child: PigDetailPage(id: id),
+  //     key: ValueKey(state.fullPath),
+  //   );
+  // }
 }
 
 @TypedGoRoute<CategoryListingRoute>(path: CategoryListingRoute.path)

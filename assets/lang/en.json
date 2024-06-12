@@ -13,6 +13,7 @@
   "from": "from",
   "to": "to",
   "start_of_day": "start of day",
+  "end_of_day": "end of day",
   "create": "create",
   "pig": "pig",
   "category": "category"

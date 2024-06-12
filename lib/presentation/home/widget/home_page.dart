@@ -26,10 +26,6 @@ class HomePage extends ConsumerWidget {
     final incomeNotifier = ref.watch(incomeNotifierProvider);
 
     return Scaffold(
-        floatingActionButton: Text(
-          "${dotenv.get('ENV')}",
-          style: AppTextStyle.bodyXS(),
-        ),
         appBar: AppBar(
           backgroundColor: ColorName.surfaceSecondary,
           scrolledUnderElevation: 0.0,
@@ -70,21 +66,21 @@ class HomePage extends ConsumerWidget {
                   data: (pigListing) {
                     return SliverPadding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                       sliver: SliverGrid.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 16,
+                          childAspectRatio: 4 / 5,
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           // Ensure index is within bounds
-                          if (index == 0) return _NewPig(ref);
 
-                          final pigIndex = index - 1;
+                          if (index == pigListing.length) return _NewPig(ref);
 
-                          if (pigIndex < pigListing.length) {
-                            PigModel pigCard = pigListing[pigIndex];
+                          if (index < pigListing.length) {
+                            PigModel pigCard = pigListing[index];
                             return PigCardWidget(
                               pig: pigCard,
                               onClick: () => ref
@@ -100,31 +96,22 @@ class HomePage extends ConsumerWidget {
                     );
                   },
                 ),
-                SliverToBoxAdapter(child: SizedBox(height: 80)),
+                SliverToBoxAdapter(
+                  child: Text(
+                    "${dotenv.get('ENV')}",
+                    textAlign: TextAlign.center,
+                    style: AppTextStyle.bodyXS(),
+                  ),
+                ),
+                SliverToBoxAdapter(child: SizedBox(height: 120)),
               ],
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  colors: [
-                    Colors.white.withOpacity(0),
-                    ColorName.surfaceSecondary
-                  ],
-                  stops: [0, 0.8],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                )),
-                padding: EdgeInsets.symmetric(vertical: 16),
-                alignment: Alignment.center,
-              ),
-            )
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: NavigationBarWidget(),
+            ),
           ],
-        ),
-        bottomNavigationBar: NavigationBarWidget());
+        ));
   }
 }
 

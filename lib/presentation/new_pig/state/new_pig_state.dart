@@ -10,5 +10,6 @@ class NewPigState with _$NewPigState {
     String? startDate,
     String? endDate,
     bool? isSubmitting,
+    String? icon,
   }) = _NewPigState;
 }

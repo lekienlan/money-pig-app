@@ -58,12 +58,17 @@ class Assets {
   Assets._();
 
   static const AssetGenImage appLogo = AssetGenImage('assets/app_logo.png');
+  static const AssetGenImage appLogoDevelopment =
+      AssetGenImage('assets/app_logo_development.png');
+  static const AssetGenImage appLogoStaging =
+      AssetGenImage('assets/app_logo_staging.png');
   static const $AssetsEnvGen env = $AssetsEnvGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLangGen lang = $AssetsLangGen();
 
   /// List of all assets
-  static List<AssetGenImage> get values => [appLogo];
+  static List<AssetGenImage> get values =>
+      [appLogo, appLogoDevelopment, appLogoStaging];
 }
 
 class AssetGenImage {

@@ -9,6 +9,7 @@ import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/currency_input_formatter.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
+import 'package:money_pig/shared/util/icon_mapper.dart';
 import 'package:money_pig/shared/widget/date_range_picker_widget.dart';
 import 'package:money_pig/shared/widget/header_widget.dart';
 import 'package:remixicon/remixicon.dart';
@@ -138,7 +139,13 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
           ),
           Column(
             children: [
-              PigCardIcon(),
+              PigCardIcon(
+                icon: IconMapper.iconList[newPigNotifier.icon],
+                onChange: (key, _) {
+                  setState(() {});
+                  ref.read(newPigNotifierProvider.notifier).onChangeIcon(key);
+                },
+              ),
               SizedBox(height: 24),
               Container(
                 color: ColorName.white,
@@ -202,14 +209,34 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
 
     Widget _actionButton() {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          if (selectedPageIndex < pageList.length - 1)
+            Text.rich(
+              TextSpan(children: [
+                TextSpan(text: '${'next'.tr().capitalize()}: '),
+                TextSpan(
+                  text: ref
+                      .read(newPigNotifierProvider.notifier)
+                      .renderTitle(selectedPageIndex + 1)
+                      .capitalize(),
+                )
+              ], style: AppTextStyle.bodyXS(color: ColorName.textBorder)),
+            ),
+          SizedBox(
+            height: 8,
+          ),
           if (selectedPageIndex == pageList.length - 1)
             Column(
               children: [
                 GestureDetector(
-                  onTap: () {
-                    ref.read(newPigNotifierProvider.notifier).handleSubmit();
-                  },
+                  onTap: isTruthy(newPigNotifier.isSubmitting)
+                      ? null
+                      : () {
+                          ref
+                              .read(newPigNotifierProvider.notifier)
+                              .handleSubmit();
+                        },
                   child: Stack(
                     children: [
                       Center(
@@ -282,7 +309,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                       }
                     : null,
                 child: Text(
-                  'next'.tr().capitalize(),
+                  "${'add'.tr().capitalize()} ${ref.read(newPigNotifierProvider.notifier).renderTitle(selectedPageIndex)}",
                 )),
           if (selectedPageIndex > 0)
             Column(
@@ -339,21 +366,6 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                             .renderTitle(selectedPageIndex)
                             .capitalize(),
                         style: AppTextStyle.headingL().copyWith()),
-                    if (selectedPageIndex < pageList.length - 1)
-                      Text.rich(
-                        TextSpan(
-                            children: [
-                              TextSpan(text: '${'next'.tr().capitalize()}: '),
-                              TextSpan(
-                                text: ref
-                                    .read(newPigNotifierProvider.notifier)
-                                    .renderTitle(selectedPageIndex + 1)
-                                    .capitalize(),
-                              )
-                            ],
-                            style: AppTextStyle.bodyS(
-                                color: ColorName.textBorder)),
-                      )
                   ],
                 ),
               ),
