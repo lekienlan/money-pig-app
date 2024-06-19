@@ -5,7 +5,9 @@ import 'package:money_pig/presentation/category_listing/provider/category_listin
 import 'package:money_pig/presentation/category_listing/widget/category_item_widget.dart';
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/widget/navigation_bar_widget.dart';
+import 'package:remixicon/remixicon.dart';
 
 class CategoryListingPage extends ConsumerStatefulWidget {
   const CategoryListingPage({super.key});
@@ -42,23 +44,47 @@ class _CategoryListingPageState extends ConsumerState<CategoryListingPage> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
-                          height: 40,
-                          child: CategoryItemWidget(
-                            isSelected: true,
-                            onTap: () {
-                              ref
-                                  .read(routerProvider)
-                                  .push(CategoryInputRoute.path);
-                            },
-                            category: category,
-                          ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 40,
+                              child: CategoryItemWidget(
+                                isSelected: true,
+                                onTap: () {
+                                  ref
+                                      .read(routerProvider)
+                                      .push("/category-detail/${category.id}");
+                                },
+                                category: category,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   );
                 },
               ),
+              SliverToBoxAdapter(
+                  child: GestureDetector(
+                onTap: () {
+                  // Define your onPressed action here
+                  ref.read(routerProvider).push(
+                      CategoryInputRoute(type: TransactionTypeEnum.expense)
+                          .location);
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: ColorName.white, // background color
+                    shape: BoxShape.circle, // makes the container circular
+                  ), // padding inside the container
+                  child: Icon(
+                    Remix.add_fill,
+                  ),
+                ),
+              )),
             ],
           );
         },

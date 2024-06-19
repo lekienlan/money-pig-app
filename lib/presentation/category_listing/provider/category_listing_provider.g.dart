@@ -7,7 +7,7 @@ part of 'category_listing_provider.dart';
 // **************************************************************************
 
 String _$categoryListingNotifierHash() =>
-    r'f2ff403b531bf877e553b965b8a1ba4e940f2bdb';
+    r'ed9a8ac17647eeee1d3e44fb344291c8dbaeff33';
 
 /// Copied from Dart SDK
 class _SystemHash {

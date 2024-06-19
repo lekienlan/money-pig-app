@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category_input_provider.dart';
+part of 'category_detail_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$categoryInputNotifierHash() =>
-    r'192a08882b94b9e13a829fbc025b9b4489c89405';
+String _$categoryDetailNotifierHash() =>
+    r'b873cc4431458704dbebde92dd402341b08d052a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,36 +30,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$CategoryInputNotifier
-    extends BuildlessAutoDisposeNotifier<CategoryInputState> {
-  late final String? id;
+abstract class _$CategoryDetailNotifier
+    extends BuildlessAutoDisposeNotifier<CategoryDetailState> {
+  late final String id;
 
-  CategoryInputState build(
-    String? id,
+  CategoryDetailState build(
+    String id,
   );
 }
 
-/// See also [CategoryInputNotifier].
-@ProviderFor(CategoryInputNotifier)
-const categoryInputNotifierProvider = CategoryInputNotifierFamily();
+/// See also [CategoryDetailNotifier].
+@ProviderFor(CategoryDetailNotifier)
+const categoryDetailNotifierProvider = CategoryDetailNotifierFamily();
 
-/// See also [CategoryInputNotifier].
-class CategoryInputNotifierFamily extends Family<CategoryInputState> {
-  /// See also [CategoryInputNotifier].
-  const CategoryInputNotifierFamily();
+/// See also [CategoryDetailNotifier].
+class CategoryDetailNotifierFamily extends Family<CategoryDetailState> {
+  /// See also [CategoryDetailNotifier].
+  const CategoryDetailNotifierFamily();
 
-  /// See also [CategoryInputNotifier].
-  CategoryInputNotifierProvider call(
-    String? id,
+  /// See also [CategoryDetailNotifier].
+  CategoryDetailNotifierProvider call(
+    String id,
   ) {
-    return CategoryInputNotifierProvider(
+    return CategoryDetailNotifierProvider(
       id,
     );
   }
 
   @override
-  CategoryInputNotifierProvider getProviderOverride(
-    covariant CategoryInputNotifierProvider provider,
+  CategoryDetailNotifierProvider getProviderOverride(
+    covariant CategoryDetailNotifierProvider provider,
   ) {
     return call(
       provider.id,
@@ -78,30 +78,30 @@ class CategoryInputNotifierFamily extends Family<CategoryInputState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'categoryInputNotifierProvider';
+  String? get name => r'categoryDetailNotifierProvider';
 }
 
-/// See also [CategoryInputNotifier].
-class CategoryInputNotifierProvider extends AutoDisposeNotifierProviderImpl<
-    CategoryInputNotifier, CategoryInputState> {
-  /// See also [CategoryInputNotifier].
-  CategoryInputNotifierProvider(
-    String? id,
+/// See also [CategoryDetailNotifier].
+class CategoryDetailNotifierProvider extends AutoDisposeNotifierProviderImpl<
+    CategoryDetailNotifier, CategoryDetailState> {
+  /// See also [CategoryDetailNotifier].
+  CategoryDetailNotifierProvider(
+    String id,
   ) : this._internal(
-          () => CategoryInputNotifier()..id = id,
-          from: categoryInputNotifierProvider,
-          name: r'categoryInputNotifierProvider',
+          () => CategoryDetailNotifier()..id = id,
+          from: categoryDetailNotifierProvider,
+          name: r'categoryDetailNotifierProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$categoryInputNotifierHash,
-          dependencies: CategoryInputNotifierFamily._dependencies,
+                  : _$categoryDetailNotifierHash,
+          dependencies: CategoryDetailNotifierFamily._dependencies,
           allTransitiveDependencies:
-              CategoryInputNotifierFamily._allTransitiveDependencies,
+              CategoryDetailNotifierFamily._allTransitiveDependencies,
           id: id,
         );
 
-  CategoryInputNotifierProvider._internal(
+  CategoryDetailNotifierProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -111,11 +111,11 @@ class CategoryInputNotifierProvider extends AutoDisposeNotifierProviderImpl<
     required this.id,
   }) : super.internal();
 
-  final String? id;
+  final String id;
 
   @override
-  CategoryInputState runNotifierBuild(
-    covariant CategoryInputNotifier notifier,
+  CategoryDetailState runNotifierBuild(
+    covariant CategoryDetailNotifier notifier,
   ) {
     return notifier.build(
       id,
@@ -123,10 +123,10 @@ class CategoryInputNotifierProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  Override overrideWith(CategoryInputNotifier Function() create) {
+  Override overrideWith(CategoryDetailNotifier Function() create) {
     return ProviderOverride(
       origin: this,
-      override: CategoryInputNotifierProvider._internal(
+      override: CategoryDetailNotifierProvider._internal(
         () => create()..id = id,
         from: from,
         name: null,
@@ -139,14 +139,14 @@ class CategoryInputNotifierProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeNotifierProviderElement<CategoryInputNotifier, CategoryInputState>
-      createElement() {
-    return _CategoryInputNotifierProviderElement(this);
+  AutoDisposeNotifierProviderElement<CategoryDetailNotifier,
+      CategoryDetailState> createElement() {
+    return _CategoryDetailNotifierProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is CategoryInputNotifierProvider && other.id == id;
+    return other is CategoryDetailNotifierProvider && other.id == id;
   }
 
   @override
@@ -158,19 +158,19 @@ class CategoryInputNotifierProvider extends AutoDisposeNotifierProviderImpl<
   }
 }
 
-mixin CategoryInputNotifierRef
-    on AutoDisposeNotifierProviderRef<CategoryInputState> {
+mixin CategoryDetailNotifierRef
+    on AutoDisposeNotifierProviderRef<CategoryDetailState> {
   /// The parameter `id` of this provider.
-  String? get id;
+  String get id;
 }
 
-class _CategoryInputNotifierProviderElement
-    extends AutoDisposeNotifierProviderElement<CategoryInputNotifier,
-        CategoryInputState> with CategoryInputNotifierRef {
-  _CategoryInputNotifierProviderElement(super.provider);
+class _CategoryDetailNotifierProviderElement
+    extends AutoDisposeNotifierProviderElement<CategoryDetailNotifier,
+        CategoryDetailState> with CategoryDetailNotifierRef {
+  _CategoryDetailNotifierProviderElement(super.provider);
 
   @override
-  String? get id => (origin as CategoryInputNotifierProvider).id;
+  String get id => (origin as CategoryDetailNotifierProvider).id;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

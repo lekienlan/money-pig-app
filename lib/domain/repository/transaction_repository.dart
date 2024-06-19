@@ -22,11 +22,14 @@ class TransactionRepository implements TransactionRepositoryProtocol {
   }
 
   @override
-  Future<num> getTransactionAmount({TransactionTypeEnum? type}) async {
+  Future<num> getTransactionAmount({
+    TransactionTypeEnum? type,
+    String? date,
+    String? period_id,
+  }) async {
     try {
       return await transactionService.getTransactionAmount(
-        type: type,
-      );
+          type: type, date: date, period_id: period_id);
     } catch (err) {
       throw Error();
     }

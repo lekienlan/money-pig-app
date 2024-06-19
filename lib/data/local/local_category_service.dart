@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:money_pig/domain/model/category_model.dart';
 import 'package:money_pig/domain/model/style_model.dart';
@@ -50,9 +49,7 @@ class LocalCategoryService {
     query += "ORDER BY created_at DESC;";
 
     final List<Map<String, dynamic>> list = await db.rawQuery(query);
-    log("${list}");
     return list.map((item) {
-      log("${StyleModel.fromJson(jsonDecode(item["style"]))}");
       return CategoryModel.fromJson({
         "id": item["id"],
         "name": item["name"],
@@ -63,5 +60,56 @@ class LocalCategoryService {
         "style": StyleModel.fromJson(jsonDecode(item["style"])).toJson()
       });
     }).toList();
+  }
+
+  Future<CategoryModel> getCategoryDetail(String id) async {
+    final Database db = await _localDb.database;
+    final List<Map<String, dynamic>> results = await db.query(
+      'categories',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (results.isNotEmpty) {
+      final Map<String, dynamic> item = results.first;
+      return CategoryModel.fromJson({
+        "id": item["id"],
+        "name": item["name"],
+        "type": item["type"],
+        "code": item["code"],
+        "created_at": item["created_at"],
+        "updated_at": item["updated_at"],
+        "style": StyleModel.fromJson(jsonDecode(item["style"])).toJson()
+      });
+    } else {
+      throw Exception('Category not found');
+    }
+  }
+
+  Future<void> updateCategory(CategoryModel data) async {
+    final Database db = await _localDb.database;
+
+    await db.update(
+      'categories',
+      {
+        "name": data.name,
+        "code": data.code,
+        'updated_at': DateTime.now().toIso8601String(),
+        'type': data.type?.stringValue,
+        'style': jsonEncode(data.style?.toJson())
+      },
+      where: 'id = ?',
+      whereArgs: [data.id],
+    );
+  }
+
+  Future<void> deleteCategory(String id) async {
+    final Database db = await _localDb.database;
+
+    await db.delete(
+      'categories',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }

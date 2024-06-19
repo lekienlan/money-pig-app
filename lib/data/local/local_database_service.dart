@@ -23,7 +23,7 @@ class LocalDatabaseService {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: onCreate,
       onUpgrade: onUpgrade,
       onDowngrade: onDowngrade,
@@ -75,7 +75,12 @@ class LocalDatabaseService {
         ")");
   }
 
-  Future<void> onUpgrade(Database db, int version, int version2) async {
+  Future<void> onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute(
+          "ALTER TABLE categories ADD COLUMN status TEXT DEFAULT 'active';");
+    }
+
     // await db.delete('categories');
 
     // await db.execute("ALTER TABLE categories DROP COLUMN style");
@@ -98,5 +103,15 @@ class LocalDatabaseService {
     // await db.execute('DROP TABLE IF EXISTS transactions');
     // await db.execute('DROP TABLE IF EXISTS periods');
     // await db.execute('DROP TABLE IF EXISTS categories');
+  }
+
+  Future<void> printTableColumns(String tableName) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> tableInfo =
+        await db.rawQuery("PRAGMA table_info($tableName);");
+    print("Columns in $tableName:");
+    for (var column in tableInfo) {
+      print("${column['name']} - ${column['type']}");
+    }
   }
 }

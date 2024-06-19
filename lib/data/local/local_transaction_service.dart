@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/domain/model/transaction_model.dart';
@@ -18,7 +17,6 @@ class LocalTransactionService {
     String transactionId = Uuid().v4();
     final Database db = await _localDb.database;
 
-    log('$data');
     await db.insert('transactions', {
       'id': transactionId,
       'updated_at': DateTime.now().toIso8601String(),
@@ -33,13 +31,29 @@ class LocalTransactionService {
     });
   }
 
-  Future<num> getTransactionAmount({TransactionTypeEnum? type}) async {
+  Future<num> getTransactionAmount({
+    TransactionTypeEnum? type,
+    String? date,
+    String? period_id,
+  }) async {
     final Database db = await _localDb.database;
 
-    final List<Map<String, dynamic>> resp = await db.rawQuery('''
+    String query = '''
       SELECT SUM(amount) AS totalAmount FROM transactions
       WHERE type = '${type?.stringValue}'
-  ''');
+  ''';
+
+    // Add the created_at filter if provided
+    if (date != null) {
+      query += " AND DATE(created_at) = DATE('$date')";
+    }
+
+    // Add the period_id filter if provided
+    if (period_id != null) {
+      query += " AND period_id = '$period_id'";
+    }
+
+    final List<Map<String, dynamic>> resp = await db.rawQuery(query);
 
     num sum = (resp.isNotEmpty && resp[0]['totalAmount'] != null)
         ? resp[0]['totalAmount'] as double
@@ -72,7 +86,6 @@ class LocalTransactionService {
 
     final List<Map<String, dynamic>> list = await db.rawQuery(query);
 
-    log("$list");
     return list
         .map((item) => TransactionModel.fromJson({
               "id": item["id"],

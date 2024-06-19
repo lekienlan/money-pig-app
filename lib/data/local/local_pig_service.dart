@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/domain/model/style_model.dart';
@@ -55,6 +54,8 @@ class LocalPigService {
 
   Future<List<PigModel>> getPigListing() async {
     final Database db = await _localDb.database;
+
+    await _localDb.printTableColumns('categories');
 
     // await _localDb.dropTables();
 
@@ -145,7 +146,6 @@ ORDER BY pigs.created_at DESC;
 
     if (list.isNotEmpty) {
       final item = list.first;
-      log('$item');
       return PigModel.fromJson({
         'id': item['id'],
         'name': item['name'],

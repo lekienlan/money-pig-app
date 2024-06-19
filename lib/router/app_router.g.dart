@@ -15,6 +15,7 @@ List<RouteBase> get $appRoutes => [
       $categoryListingRoute,
       $incomeListingRoute,
       $categoryInputRoute,
+      $categoryDetailRoute,
       $eastlinRoute,
     ];
 
@@ -232,6 +233,31 @@ T? _$convertMapValue<T>(
 ) {
   final value = map[key];
   return value == null ? null : converter(value);
+}
+
+RouteBase get $categoryDetailRoute => GoRouteData.$route(
+      path: '/category-detail/:id',
+      factory: $CategoryDetailRouteExtension._fromState,
+    );
+
+extension $CategoryDetailRouteExtension on CategoryDetailRoute {
+  static CategoryDetailRoute _fromState(GoRouterState state) =>
+      CategoryDetailRoute(
+        id: state.pathParameters['id']! ?? '',
+      );
+
+  String get location => GoRouteData.$location(
+        '/category-detail/${Uri.encodeComponent(id)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $eastlinRoute => GoRouteData.$route(

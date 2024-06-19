@@ -27,48 +27,46 @@ class App extends ConsumerWidget {
             onSecondary: ColorName.textSecondary,
             error: ColorName.pink700,
             onError: ColorName.textSecondary,
-            background: ColorName.surfaceSecondary,
-            onBackground: ColorName.textSecondary,
-            surface: ColorName.white,
+            surface: ColorName.surfaceSecondary,
             onSurface: ColorName.textSecondary,
           ),
           fontFamily: FontFamily.inter,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.pressed)) {
+            backgroundColor: WidgetStateProperty.resolveWith<Color>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.pressed)) {
                   return ColorName.primaryDark;
                 }
 
-                if (states.contains(MaterialState.disabled)) {
+                if (states.contains(WidgetState.disabled)) {
                   return ColorName.textDisabled;
                 }
                 return ColorName.primaryMain;
               },
             ),
-            textStyle: MaterialStateProperty.all<TextStyle>(
+            textStyle: WidgetStateProperty.all<TextStyle>(
               AppTextStyle.headingXS(color: ColorName.white),
             ),
-            foregroundColor: MaterialStatePropertyAll(ColorName.white),
-            shape: MaterialStatePropertyAll(
+            foregroundColor: WidgetStatePropertyAll(ColorName.white),
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            elevation: MaterialStatePropertyAll(0),
-            minimumSize: MaterialStateProperty.all<Size>(
+            elevation: WidgetStatePropertyAll(0),
+            minimumSize: WidgetStateProperty.all<Size>(
               Size(double.infinity, 40), // Adjust the height as needed
             ),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           )),
           textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
-            textStyle: MaterialStateProperty.all<TextStyle>(
+            textStyle: WidgetStateProperty.all<TextStyle>(
               AppTextStyle.bodyS(),
             ),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            minimumSize: MaterialStateProperty.all<Size>(
+            minimumSize: WidgetStateProperty.all<Size>(
               Size(double.infinity, 32), // Adjust the height as needed
             ),
           )),

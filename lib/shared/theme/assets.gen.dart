@@ -60,6 +60,8 @@ class Assets {
   static const AssetGenImage appLogo = AssetGenImage('assets/app_logo.png');
   static const AssetGenImage appLogoDevelopment =
       AssetGenImage('assets/app_logo_development.png');
+  static const AssetGenImage appLogoDevelopment2 =
+      AssetGenImage('assets/app_logo_development_2.png');
   static const AssetGenImage appLogoStaging =
       AssetGenImage('assets/app_logo_staging.png');
   static const $AssetsEnvGen env = $AssetsEnvGen();
@@ -68,7 +70,7 @@ class Assets {
 
   /// List of all assets
   static List<AssetGenImage> get values =>
-      [appLogo, appLogoDevelopment, appLogoStaging];
+      [appLogo, appLogoDevelopment, appLogoDevelopment2, appLogoStaging];
 }
 
 class AssetGenImage {

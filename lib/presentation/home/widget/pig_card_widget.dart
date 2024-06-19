@@ -36,7 +36,7 @@ class PigCardWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: ColorName.textDisabled,
               borderRadius: BorderRadius.circular(24),
-              boxShadow: [AppShadow.light],
+              boxShadow: [AppShadow.hard],
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),

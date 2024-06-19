@@ -15,7 +15,8 @@ import 'package:money_pig/shared/widget/header_widget.dart';
 
 class CategoryInputPage extends ConsumerStatefulWidget {
   final TransactionTypeEnum? type;
-  const CategoryInputPage({super.key, this.type});
+  final String? id;
+  const CategoryInputPage({super.key, this.type, this.id});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -23,16 +24,24 @@ class CategoryInputPage extends ConsumerStatefulWidget {
 }
 
 class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
-  TextEditingController nameController = TextEditingController();
+  // TextEditingController nameController = TextEditingController();
   double _baseWidth = 50;
   double _maxWidth = 200;
 
   @override
   Widget build(BuildContext context) {
+    final categoryInputNotifier =
+        ref.watch(categoryInputNotifierProvider((widget.id)));
+
+    final type = widget.type ?? categoryInputNotifier.type;
+    final nameController =
+        ref.watch(StateProvider<TextEditingController>((ref) {
+      return TextEditingController(text: categoryInputNotifier.name ?? '');
+    }));
+
     double calculatedWidth =
         _baseWidth + (nameController.text.length * 7).toDouble();
     double textFieldWidth = calculatedWidth.clamp(_baseWidth, _maxWidth);
-    final categoryInputNotifier = ref.watch(categoryInputNotifierProvider);
 
     return Scaffold(
       appBar: HeaderWidget(title: 'category'.tr().capitalize()),
@@ -49,20 +58,21 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
               icon: categoryInputNotifier.icon,
               onChangeIcon: (key, _) {
                 ref
-                    .read(categoryInputNotifierProvider.notifier)
+                    .read(categoryInputNotifierProvider(widget.id).notifier)
                     .onChangeIcon(key);
               },
               isSelected: true,
               category: CategoryModel(
-                type: widget.type,
+                type: type,
               ),
               customWidget: Container(
                 width: textFieldWidth,
                 child: Center(
                     child: TextField(
                   textAlign: TextAlign.center,
+                  controller: nameController,
                   style: AppTextStyle.bodyM(
-                    color: widget.type == TransactionTypeEnum.expense
+                    color: type == TransactionTypeEnum.expense
                         ? ColorName.orange500
                         : ColorName.green500,
                   ),
@@ -77,7 +87,8 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                       String text = sanitizeText(value);
 
                       ref
-                          .read(categoryInputNotifierProvider.notifier)
+                          .read(
+                              categoryInputNotifierProvider(widget.id).notifier)
                           .onChangeName(text);
                       nameController.text = text;
                     });
@@ -91,10 +102,11 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                 onPressed: isTruthy(categoryInputNotifier.name)
                     ? () async {
                         await ref
-                            .read(categoryInputNotifierProvider.notifier)
+                            .read(categoryInputNotifierProvider(widget.id)
+                                .notifier)
                             .onComplete(
                                 name: categoryInputNotifier.name,
-                                type: widget.type,
+                                type: type,
                                 style: StyleModel(
                                   icon: categoryInputNotifier.icon,
                                 ));

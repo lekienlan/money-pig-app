@@ -177,6 +177,23 @@ class CategoryInputRoute extends GoRouteData {
   }
 }
 
+@TypedGoRoute<CategoryDetailRoute>(path: CategoryDetailRoute.path)
+class CategoryDetailRoute extends GoRouteData {
+  final String id;
+  const CategoryDetailRoute({this.id = ''});
+
+  static const path = '/category-detail/:id';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return BottomSheetPage(
+      builder: (_) => ClipRRect(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          child: CategoryInputPage(id: id)),
+    );
+  }
+}
+
 @TypedGoRoute<EastlinRoute>(path: EastlinRoute.path)
 class EastlinRoute extends GoRouteData {
   const EastlinRoute();
