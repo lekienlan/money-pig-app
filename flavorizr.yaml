@@ -7,7 +7,7 @@ app:
 flavors:
   development:
     app:
-      name: 'Money Pig Development'
+      name: 'Money Pig Dev'
     android:
       icon: 'assets/app_logo_development.png'
       applicationId: 'development.moneypig.app'

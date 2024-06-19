@@ -3,5 +3,5 @@
 
 FLUTTER_TARGET=lib/main_development.dart
 ASSET_PREFIX=development
-BUNDLE_NAME=Money Pig Development
-BUNDLE_DISPLAY_NAME=Money Pig Development
+BUNDLE_NAME=Money Pig Dev
+BUNDLE_DISPLAY_NAME=Money Pig Dev
