@@ -34,6 +34,7 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
         ref.watch(categoryInputNotifierProvider((widget.id)));
 
     final type = widget.type ?? categoryInputNotifier.type;
+
     final nameController =
         ref.watch(StateProvider<TextEditingController>((ref) {
       return TextEditingController(text: categoryInputNotifier.name ?? '');
@@ -69,6 +70,7 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                 width: textFieldWidth,
                 child: Center(
                     child: TextField(
+                  key: GlobalKey(),
                   textAlign: TextAlign.center,
                   controller: nameController,
                   style: AppTextStyle.bodyM(
@@ -90,7 +92,6 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                           .read(
                               categoryInputNotifierProvider(widget.id).notifier)
                           .onChangeName(text);
-                      nameController.text = text;
                     });
                   },
                   autofocus: true,
@@ -114,7 +115,7 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                       }
                     : null,
                 child: Text(
-                  "${'create'.tr().capitalize()} ${'category'.tr()}",
+                  "${(isTruthy(widget.id) ? 'edit' : 'create').tr().capitalize()} ${'category'.tr()}",
                 )),
           ],
         ),

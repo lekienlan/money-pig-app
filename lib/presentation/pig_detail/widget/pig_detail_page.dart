@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/presentation/pig_detail/provider/pig_detail_provider.dart';
@@ -39,15 +40,15 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
 
   void _transactionListingScrollListener() {
     // Check if scroll is from user behavior
-    // if (_transactionListingController.position.userScrollDirection !=
-    //         ScrollDirection.idle &&
-    //     _transactionListingController.offset > 10) {
-    //   _transactionListingSheetController.animateTo(
-    //     1,
-    //     duration: Duration(milliseconds: 100),
-    //     curve: Curves.linear,
-    //   );
-    // }
+    if (_transactionListingController.position.userScrollDirection !=
+            ScrollDirection.idle &&
+        _transactionListingController.offset < 0) {
+      _transactionListingSheetController.animateTo(
+        0.32,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
+    }
   }
 
   @override

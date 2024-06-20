@@ -4,6 +4,7 @@ import 'package:money_pig/shared/util/enum.dart';
 
 abstract class CategoryRepositoryProtocol {
   Future<void> createCategory(CategoryModel data);
+  Future<void> updateCategory(CategoryModel data);
   Future<void> getCategoryDetail(String id);
   Future<List<CategoryModel>> getCategoryListing(
       {List<TransactionTypeEnum>? types});
@@ -16,6 +17,15 @@ class CategoryRepository implements CategoryRepositoryProtocol {
   Future<void> createCategory(CategoryModel data) async {
     try {
       await categoryService.createCategory(data);
+    } catch (err) {
+      throw Error();
+    }
+  }
+
+  @override
+  Future<void> updateCategory(CategoryModel data) async {
+    try {
+      await categoryService.updateCategory(data);
     } catch (err) {
       throw Error();
     }

@@ -30,11 +30,20 @@ class CategoryInputNotifier extends _$CategoryInputNotifier {
 
   Future<void> onComplete(
       {String? name, TransactionTypeEnum? type, StyleModel? style}) async {
-    await CategoryRepository().createCategory(CategoryModel(
-      name: name,
-      type: type,
-      style: style,
-    ));
+    if (isTruthy(id)) {
+      await CategoryRepository().updateCategory(CategoryModel(
+        name: name,
+        type: type,
+        style: style,
+        id: id,
+      ));
+    } else {
+      await CategoryRepository().createCategory(CategoryModel(
+        name: name,
+        type: type,
+        style: style,
+      ));
+    }
     ref.invalidateSelf();
     ref.invalidate(categoryListingNotifierProvider);
   }

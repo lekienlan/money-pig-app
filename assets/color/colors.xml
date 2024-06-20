@@ -20,7 +20,7 @@
     <color name="pink_400">#ff79a7</color>
     <color name="pink_300">#ffa0c0</color>
     <color name="pink_200">#ffc6d9</color>
-    <color name="pink_100">#ffecf2</color>
+    <color name="pink_100">#ffd9e6</color>
     <color name="green_900">#000e0b</color>
     <color name="green_800">#002921</color>
     <color name="green_700">#004538</color>
@@ -52,7 +52,7 @@
     <color name="primary_main">#ff4081</color>
     <color name="primary_light">#ff79a7</color>
     <color name="primary_extra_light">#ffc6d9</color>
-    <color name="primary_ultra_light">#ffecf2</color>
+    <color name="primary_ultra_light">#ffd9e6</color>
     <color name="primary_dark">#802041</color>
     <color name="primary_extra_dark">#3a3637</color>
     <!-- <color name="primary_main">#00a7ff</color>

@@ -124,8 +124,8 @@ class ColorName {
   /// Color: #190d06
   static const Color orange900 = Color(0xFF190D06);
 
-  /// Color: #ffecf2
-  static const Color pink100 = Color(0xFFFFECF2);
+  /// Color: #ffd9e6
+  static const Color pink100 = Color(0xFFFFD9E6);
 
   /// Color: #ffc6d9
   static const Color pink200 = Color(0xFFFFC6D9);
@@ -166,8 +166,8 @@ class ColorName {
   /// Color: #ff4081
   static const Color primaryMain = Color(0xFFFF4081);
 
-  /// Color: #ffecf2
-  static const Color primaryUltraLight = Color(0xFFFFECF2);
+  /// Color: #ffd9e6
+  static const Color primaryUltraLight = Color(0xFFFFD9E6);
 
   /// Color: #ffecf2
   static const Color surfaceBrandLight = Color(0xFFFFECF2);

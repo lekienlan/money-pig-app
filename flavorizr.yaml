@@ -15,7 +15,7 @@ flavors:
         - debug
         - release
     ios:
-      icon: 'assets/app_logo_development_2.png'
+      icon: 'assets/app_logo_development.png'
       buildTypes:
         - debug
         - release
