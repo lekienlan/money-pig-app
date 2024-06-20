@@ -8,7 +8,7 @@ import 'package:money_pig/presentation/pig_detail/widget/pig_detail_calendar_wid
 import 'package:money_pig/presentation/pig_detail/widget/transaction_listing_sheet_widget.dart';
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
@@ -78,7 +78,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
       tag: "pig-${widget.id}",
       child: Scaffold(
           appBar: HeaderWidget(
-            background: ColorName.surfaceSecondary,
+            background: AppColor.surfaceSecondary,
           ),
           body: pigDetailNotifier.maybeWhen(
               orElse: () => SizedBox(),
@@ -98,7 +98,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                                 Text(
                                   pig.name ?? '',
                                   style: AppTextStyle.headingM(
-                                    color: ColorName.textPrimary,
+                                    color: AppColor.textPrimary,
                                   ),
                                 ),
                                 SizedBox(height: 4),
@@ -119,7 +119,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                           children: [
                             Container(
                                 decoration: BoxDecoration(
-                                  color: ColorName.surfaceSecondary,
+                                  color: AppColor.surfaceSecondary,
                                 ),
                                 child: CustomScrollView(
                                   controller: _scrollController,
@@ -143,7 +143,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                                                     BudgetExpenseButtonWidget(
                                                   title: 'budget',
                                                   amount: pig.budget,
-                                                  color: ColorName.green500,
+                                                  color: AppColor.green500,
                                                   icon: Remix.arrow_down_line,
                                                 ),
                                               ),
@@ -164,7 +164,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                                                     BudgetExpenseButtonWidget(
                                                   title: 'expense',
                                                   amount: pig.expense,
-                                                  color: ColorName.orange500,
+                                                  color: AppColor.orange500,
                                                   icon: Remix.arrow_up_line,
                                                 ),
                                               ),

@@ -9,7 +9,7 @@ import 'package:money_pig/presentation/transaction/provider/income_provider.dart
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
@@ -27,7 +27,7 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: ColorName.surfaceSecondary,
+          backgroundColor: AppColor.surfaceSecondary,
           scrolledUnderElevation: 0.0,
           toolbarHeight: 0,
         ),
@@ -143,7 +143,7 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
       decoration: BoxDecoration(
         boxShadow: [AppShadow.normal],
         borderRadius: BorderRadius.circular(isScrolled ? 100 : 16),
-        color: ColorName.white,
+        color: AppColor.white,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,7 +167,7 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
                   ),
                 Text(
                   formatCurrency(incomeAmount),
-                  style: AppTextStyle.headingM(color: ColorName.textPrimary),
+                  style: AppTextStyle.headingM(color: AppColor.textPrimary),
                 ),
               ],
             ),
@@ -181,11 +181,11 @@ class _UserIncome extends SliverPersistentHeaderDelegate {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                  color: ColorName.textSecondary,
+                  color: AppColor.textSecondary,
                   borderRadius: BorderRadius.circular(100)),
               child: Text(
                 '${'add'.tr()} ${'income'.tr()}'.capitalize(),
-                style: AppTextStyle.heading2XS(color: ColorName.white),
+                style: AppTextStyle.heading2XS(color: AppColor.white),
               ),
             ),
           )
@@ -200,7 +200,7 @@ Widget _NewPig(WidgetRef ref) {
     onTap: () => ref.read(routerProvider).push('/new-pig'),
     child: Container(
       decoration: BoxDecoration(
-          color: ColorName.white,
+          color: AppColor.white,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [AppShadow.light]),
       child: Center(
@@ -210,13 +210,13 @@ Widget _NewPig(WidgetRef ref) {
             Icon(
               Remix.add_fill,
               size: 32,
-              color: ColorName.primaryMain,
+              color: AppColor.primaryMain,
             ),
             // Assets.images.pigNosePng.image(width: 32),
             SizedBox(height: 2),
             Text(
               'new_pig'.tr().capitalize(),
-              style: AppTextStyle.headingXS(color: ColorName.primaryMain),
+              style: AppTextStyle.headingXS(color: AppColor.primaryMain),
             )
           ],
         ),

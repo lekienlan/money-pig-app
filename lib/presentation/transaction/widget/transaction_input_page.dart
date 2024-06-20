@@ -7,7 +7,7 @@ import 'package:money_pig/presentation/category_listing/provider/category_listin
 import 'package:money_pig/presentation/category_listing/widget/category_item_widget.dart';
 import 'package:money_pig/presentation/transaction/provider/transaction_input_provider.dart';
 import 'package:money_pig/router/app_router.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/currency_input_formatter.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
@@ -67,10 +67,9 @@ class _IncomeInputPageState extends ConsumerState<TransactionInputPage> {
 
     _genColor() {
       if (widget.type == TransactionTypeEnum.budget ||
-          widget.type == TransactionTypeEnum.income) return ColorName.green500;
-      if (widget.type == TransactionTypeEnum.expense)
-        return ColorName.orange500;
-      return ColorName.primaryMain;
+          widget.type == TransactionTypeEnum.income) return AppColor.green500;
+      if (widget.type == TransactionTypeEnum.expense) return AppColor.orange500;
+      return AppColor.primaryMain;
     }
 
     return GestureDetector(
@@ -99,9 +98,9 @@ class _IncomeInputPageState extends ConsumerState<TransactionInputPage> {
                           autofocus: true,
                           inputFormatters: [CurrencyInputFormatter()],
                           onChanged: (value) {},
-                          cursorColor: ColorName.textPrimary,
+                          cursorColor: AppColor.textPrimary,
                           style: TextStyle(
-                              color: ColorName.textPrimary,
+                              color: AppColor.textPrimary,
                               fontWeight: FontWeight.w600,
                               fontSize: dynamicFontSize(
                                   text: amountController.text,
@@ -210,7 +209,7 @@ class _IncomeInputPageState extends ConsumerState<TransactionInputPage> {
                                         width: 40,
                                         height: 40,
                                         decoration: BoxDecoration(
-                                          color: ColorName
+                                          color: AppColor
                                               .white, // background color
                                           shape: BoxShape
                                               .circle, // makes the container circular
@@ -244,7 +243,7 @@ class _IncomeInputPageState extends ConsumerState<TransactionInputPage> {
                       width: constraints.maxWidth,
                       child: SafeArea(
                         child: Container(
-                          color: ColorName.surfaceSecondary,
+                          color: AppColor.surfaceSecondary,
                           child: !isNoteFocused
                               ? NumPadWidget(
                                   title: widget.type.stringValue,

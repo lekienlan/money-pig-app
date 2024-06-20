@@ -4,7 +4,7 @@ import 'package:money_pig/domain/model/category_model.dart';
 import 'package:money_pig/presentation/category_listing/provider/category_listing_provider.dart';
 import 'package:money_pig/presentation/category_listing/widget/category_item_widget.dart';
 import 'package:money_pig/router/app_router.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/widget/navigation_bar_widget.dart';
 import 'package:remixicon/remixicon.dart';
@@ -24,7 +24,7 @@ class _CategoryListingPageState extends ConsumerState<CategoryListingPage> {
         ref.watch(categoryListingNotifierProvider(CategoryParams()));
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorName.surfaceSecondary,
+        backgroundColor: AppColor.surfaceSecondary,
         scrolledUnderElevation: 0.0,
         toolbarHeight: 0,
       ),
@@ -77,7 +77,7 @@ class _CategoryListingPageState extends ConsumerState<CategoryListingPage> {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: ColorName.white, // background color
+                    color: AppColor.white, // background color
                     shape: BoxShape.circle, // makes the container circular
                   ), // padding inside the container
                   child: Icon(

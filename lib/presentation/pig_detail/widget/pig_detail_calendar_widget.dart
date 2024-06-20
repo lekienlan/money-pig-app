@@ -4,7 +4,7 @@ import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/presentation/pig_detail/provider/pig_detail_calendar_provider.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -46,15 +46,15 @@ class PigDetailCalendarWidget extends ConsumerWidget {
             selectionDecoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
-            backgroundColor: ColorName.surfacePrimary,
+            backgroundColor: AppColor.surfacePrimary,
             view: CalendarView.month,
             viewHeaderHeight: 40,
             viewHeaderStyle: ViewHeaderStyle(
-                backgroundColor: ColorName.surfaceSecondary,
+                backgroundColor: AppColor.surfaceSecondary,
                 dayTextStyle:
-                    AppTextStyle.bodyS(color: ColorName.textSecondary)),
+                    AppTextStyle.bodyS(color: AppColor.textSecondary)),
             headerStyle: CalendarHeaderStyle(
-                backgroundColor: ColorName.surfacePrimary,
+                backgroundColor: AppColor.surfacePrimary,
                 textStyle: AppTextStyle.headingXS()),
             firstDayOfWeek: 1,
             monthViewSettings: MonthViewSettings(
@@ -78,7 +78,7 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                   border: Border.all(
                     width: 1,
                     color: _isSelected
-                        ? ColorName.textTertiary
+                        ? AppColor.textTertiary
                         : Colors.transparent,
                   ),
                 ),
@@ -88,12 +88,12 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                     Text(details.date.day.toString(),
                         style: _isToday
                             ? AppTextStyle.heading2XS(
-                                color: ColorName.primaryMain)
+                                color: AppColor.primaryMain)
                             : AppTextStyle.bodyS(
                                 color: _isSelected || _isInCurrentMonth
-                                    ? ColorName
+                                    ? AppColor
                                         .textTertiary // Style for dates from current month
-                                    : ColorName.textDisabled,
+                                    : AppColor.textDisabled,
                               )),
 
                     // Clear the cache when new data is received
@@ -113,14 +113,14 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                           children: [
                             if (isTruthy(_cellBudgetAmount))
                               _TransactionTypeDot(
-                                color: ColorName.green500,
+                                color: AppColor.green500,
                               ),
                             if (isTruthy(_cellExpenseAmount))
                               Row(
                                 children: [
                                   SizedBox(width: 2),
                                   _TransactionTypeDot(
-                                    color: ColorName.orange500,
+                                    color: AppColor.orange500,
                                   ),
                                 ],
                               ),

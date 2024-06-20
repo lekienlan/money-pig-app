@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/presentation/new_pig/provider/new_pig_provider.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/currency_input_formatter.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
@@ -61,7 +61,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
               .onChangeName(nameController.text);
         },
         style: TextStyle(
-            color: ColorName.textPrimary,
+            color: AppColor.textPrimary,
             fontWeight: FontWeight.w600,
             fontSize: dynamicFontSize(
                 text: nameController.text,
@@ -89,7 +89,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
               .onChangeBudget(budgetController.text);
         },
         style: TextStyle(
-            color: ColorName.textPrimary,
+            color: AppColor.textPrimary,
             fontWeight: FontWeight.w600,
             fontSize: dynamicFontSize(
                 text: budgetController.text,
@@ -128,9 +128,9 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
               width: 4, // Thickness of the line
               height: double.infinity,
               decoration: BoxDecoration(
-                color: ColorName.primaryExtraLight,
+                color: AppColor.primaryExtraLight,
                 // gradient: LinearGradient(
-                //   colors: [ColorName.primaryMain, ColorName.primaryUltraLight],
+                //   colors: [AppColor.primaryMain, AppColor.primaryUltraLight],
                 //   begin: Alignment.topCenter,
                 //   end: Alignment.bottomCenter,
                 // ),
@@ -148,14 +148,14 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
               ),
               SizedBox(height: 24),
               Container(
-                color: ColorName.white,
+                color: AppColor.white,
                 child: Column(
                   children: [
                     Text(
                       newPigNotifier.name ?? '',
                       textAlign: TextAlign.center,
                       style:
-                          AppTextStyle.heading2XL(color: ColorName.textPrimary)
+                          AppTextStyle.heading2XL(color: AppColor.textPrimary)
                               .copyWith(
                                   fontSize: dynamicFontSize(
                                       text: nameController.text,
@@ -172,12 +172,12 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                 height: 32,
               ),
               Container(
-                color: ColorName.white,
+                color: AppColor.white,
                 padding: EdgeInsets.all(4),
                 child: Column(
                   children: [
                     Text('${'from'.tr().capitalize()} ${'start_of_day'.tr()}',
-                        style: AppTextStyle.bodyS(color: ColorName.textBorder)),
+                        style: AppTextStyle.bodyS(color: AppColor.textBorder)),
                     Text((newPigNotifier.startDate ?? '').toDate(),
                         style: AppTextStyle.headingS()),
                     SizedBox(height: 16),
@@ -186,7 +186,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                         children: [
                           Text('${'to'.tr().capitalize()} ${'end_of_day'.tr()}',
                               style: AppTextStyle.bodyS(
-                                  color: ColorName.textBorder)),
+                                  color: AppColor.textBorder)),
                           Text((newPigNotifier.endDate ?? '').toDate(),
                               style: AppTextStyle.headingS())
                         ],
@@ -221,7 +221,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                       .renderTitle(selectedPageIndex + 1)
                       .capitalize(),
                 )
-              ], style: AppTextStyle.bodyXS(color: ColorName.textBorder)),
+              ], style: AppTextStyle.bodyXS(color: AppColor.textBorder)),
             ),
           SizedBox(
             height: 8,
@@ -254,7 +254,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                                   CircularProgressIndicator(
                                 value: value,
                                 strokeWidth: 24,
-                                backgroundColor: ColorName.primaryExtraLight,
+                                backgroundColor: AppColor.primaryExtraLight,
                               ),
                             )),
                       ),
@@ -269,21 +269,21 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                                 Icon(
                                   Remix.add_fill,
                                   size: 40,
-                                  color: ColorName.primaryMain,
+                                  color: AppColor.primaryMain,
                                 )
                                 // Assets.images.pigNosePng.image(width: 32),
                                 // Text(
                                 //   '${'create'.tr().capitalize()}',
                                 //   textAlign: TextAlign.center,
                                 //   style: AppTextStyle.headingS(
-                                //       color: ColorName.primaryMain),
+                                //       color: AppColor.primaryMain),
                                 // ),
                               ],
                             ),
                           ),
                           decoration: BoxDecoration(
                             boxShadow: [AppShadow.normal],
-                            color: ColorName.white,
+                            color: AppColor.white,
                             borderRadius: BorderRadius.circular(100),
                           ),
                         ),
@@ -318,7 +318,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                 SafeArea(
                   child: TextButton(
                       style: TextButton.styleFrom(
-                          foregroundColor: ColorName.textTertiary),
+                          foregroundColor: AppColor.textTertiary),
                       onPressed: () {
                         setState(() {
                           _pageViewController.animateToPage(
@@ -384,8 +384,8 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
                     child: CircularProgressIndicator(
                       value: value,
                       strokeWidth: 4,
-                      backgroundColor: ColorName.primaryUltraLight,
-                      color: ColorName.primaryLight,
+                      backgroundColor: AppColor.surfaceBrandLight,
+                      color: AppColor.primaryLight,
                     ),
                   ),
                   Text(
@@ -401,7 +401,7 @@ class NewPigPageState extends ConsumerState<NewPigPage> {
     }
 
     return Scaffold(
-      backgroundColor: ColorName.white,
+      backgroundColor: AppColor.white,
       appBar: HeaderWidget(
         title: 'new_pig'.tr().capitalize(),
       ),

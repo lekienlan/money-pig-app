@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
-import 'package:money_pig/shared/widget/header_widget.dart';
 import 'package:remixicon/remixicon.dart';
 
 class EastlinPage extends ConsumerWidget {
@@ -24,7 +23,7 @@ class EastlinPage extends ConsumerWidget {
     ];
     return Container(
       child: Scaffold(
-        backgroundColor: ColorName.white,
+        backgroundColor: AppColor.white,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           toolbarHeight: 40,
@@ -32,7 +31,7 @@ class EastlinPage extends ConsumerWidget {
             padding: EdgeInsets.only(left: 16),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: ColorName.textBorder),
+                border: Border.all(color: AppColor.textBorder),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -46,7 +45,7 @@ class EastlinPage extends ConsumerWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                border: Border.all(color: ColorName.textBorder),
+                border: Border.all(color: AppColor.textBorder),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -64,12 +63,12 @@ class EastlinPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('Current location',
-                    style: AppTextStyle.bodyS(color: ColorName.textBorder)),
+                    style: AppTextStyle.bodyS(color: AppColor.textBorder)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Remix.map_pin_fill,
-                        color: ColorName.green500, size: 18),
+                        color: AppColor.green500, size: 18),
                     SizedBox(
                       width: 8,
                     ),
@@ -186,7 +185,7 @@ class _CategoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8),
-      color: ColorName.surfaceSecondary,
+      color: AppColor.surfaceSecondary,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -196,7 +195,7 @@ class _CategoryButton extends StatelessWidget {
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: ColorName.white),
+                  color: AppColor.white),
               child: Image.network(image ?? '')),
           SizedBox(height: 4),
           Text(
@@ -259,9 +258,9 @@ class _NavBar extends StatelessWidget {
         child: BottomNavigationBar(
             unselectedFontSize: 0,
             selectedFontSize: 0,
-            selectedItemColor: ColorName.white,
-            unselectedItemColor: ColorName.textTertiary,
-            backgroundColor: ColorName.textSecondary,
+            selectedItemColor: AppColor.white,
+            unselectedItemColor: AppColor.textTertiary,
+            backgroundColor: AppColor.textSecondary,
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(icon: Icon(Remix.home_5_fill), label: ''),

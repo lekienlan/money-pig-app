@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_pig/domain/model/category_model.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
@@ -34,9 +34,9 @@ class CategoryItemWidget extends StatelessWidget {
       if (isTruthy(color)) return color;
       if (category?.type == TransactionTypeEnum.budget ||
           category?.type == TransactionTypeEnum.income)
-        return ColorName.green500;
+        return AppColor.green500;
       if (category?.type == TransactionTypeEnum.expense)
-        return ColorName.orange500;
+        return AppColor.orange500;
 
       return null;
     }
@@ -49,14 +49,14 @@ class CategoryItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: isTruthy(isSelected)
               ? Border.all(
-                  color: _genColor() ?? ColorName.textBorder,
+                  color: _genColor() ?? AppColor.textBorder,
                 )
               : Border.all(
-                  color: ColorName.white,
+                  color: AppColor.white,
                 ),
           color: isTruthy(isSelected)
               ? _genColor()?.withOpacity(0.1)
-              : ColorName.white,
+              : AppColor.white,
           borderRadius: BorderRadius.circular(100),
         ),
         padding: EdgeInsets.symmetric(horizontal: 4),
@@ -68,9 +68,8 @@ class CategoryItemWidget extends StatelessWidget {
               width: 30,
               height: 30,
               decoration: BoxDecoration(
-                color: isTruthy(isSelected)
-                    ? _genColor()
-                    : ColorName.textSecondary,
+                color:
+                    isTruthy(isSelected) ? _genColor() : AppColor.textSecondary,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: IconSelectWidget(

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
 
 class IconSelectWidget extends ConsumerWidget {
   final IconData? icon;
   final double? size;
+  final Color? color;
   final Function(String? key, IconData? icon)? onChange;
 
   const IconSelectWidget({
     super.key,
+    this.color,
     this.icon,
     this.size,
     this.onChange,
@@ -34,7 +36,7 @@ class IconSelectWidget extends ConsumerWidget {
                                 BorderRadius.all(Radius.circular(10.0))),
                         content: Builder(
                           builder: (_) => Container(
-                              color: ColorName.white,
+                              color: AppColor.white,
                               width: MediaQuery.of(context).size.width / 2,
                               height: MediaQuery.of(context).size.height / 2,
                               child: CustomScrollView(
@@ -71,7 +73,7 @@ class IconSelectWidget extends ConsumerWidget {
             },
       child: Icon(
         icon,
-        color: ColorName.white,
+        color: color ?? AppColor.surfacePrimary,
         size: size ?? 18,
       ),
     );

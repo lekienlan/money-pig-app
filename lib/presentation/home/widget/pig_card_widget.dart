@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
@@ -34,7 +34,7 @@ class PigCardWidget extends StatelessWidget {
             builder: (BuildContext context, BoxConstraints constraints) {
           return Container(
             decoration: BoxDecoration(
-              color: ColorName.textDisabled,
+              color: AppColor.textDisabled,
               borderRadius: BorderRadius.circular(24),
               boxShadow: [AppShadow.hard],
             ),
@@ -48,7 +48,7 @@ class PigCardWidget extends StatelessWidget {
                     height: constraints.maxHeight * percent.toDouble() / 100,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: ColorName.white,
+                        color: AppColor.surfacePrimary,
                       ),
                     ),
                   ),
@@ -59,7 +59,7 @@ class PigCardWidget extends StatelessWidget {
                         child: Text('${pig?.name}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: ColorName.textTertiary,
+                                color: AppColor.textTertiary,
                                 fontSize: dynamicFontSize(
                                   text: pig?.name ?? '',
                                   defaultFontSize: 24,
@@ -84,12 +84,12 @@ class PigCardWidget extends StatelessWidget {
                         Text(
                           'balance'.tr().capitalize(),
                           style: AppTextStyle.bodyXS(
-                            color: ColorName.textTertiary,
+                            color: AppColor.textTertiary,
                           ),
                         ),
                         Text(formatCurrency(balance),
                             style: AppTextStyle.headingXS(
-                              color: ColorName.primaryMain,
+                              color: AppColor.primaryMain,
                             ).copyWith(
                               overflow: TextOverflow.ellipsis,
                             )),
@@ -119,11 +119,12 @@ class PigCardIcon extends StatelessWidget {
         height: 32,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: ColorName.primaryMain,
+          color: AppColor.primaryUltraLight,
         ),
         child: Center(
           child: IconSelectWidget(
             onChange: onChange,
+            color: AppColor.primaryMain,
             icon: icon ?? Remix.heart_fill,
           ),
         ),

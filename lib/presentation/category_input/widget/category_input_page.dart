@@ -6,8 +6,8 @@ import 'package:money_pig/domain/model/style_model.dart';
 import 'package:money_pig/presentation/category_input/provider/category_input_provider.dart';
 import 'package:money_pig/presentation/category_listing/widget/category_item_widget.dart';
 import 'package:money_pig/router/app_router.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
@@ -75,8 +75,8 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                   controller: nameController,
                   style: AppTextStyle.bodyM(
                     color: type == TransactionTypeEnum.expense
-                        ? ColorName.orange500
-                        : ColorName.green500,
+                        ? AppColor.orange500
+                        : AppColor.green500,
                   ),
                   decoration: InputDecoration(
                       hintText: '...',

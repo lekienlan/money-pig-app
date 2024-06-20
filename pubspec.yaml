@@ -90,10 +90,6 @@ flutter_gen:
       # package_parameter_enabled: true # <- Add this line.
   fonts:
     enabled: true
-  colors:
-    enabled: true
-    inputs:
-      - assets/color/colors.xml
 import_sorter:
   comments: false # Optional, defaults to true
   ignored_files: # Optional, defaults to []

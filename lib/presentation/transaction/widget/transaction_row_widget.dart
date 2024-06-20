@@ -3,7 +3,7 @@ import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/presentation/transaction/widget/transaction_icon_widget.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
@@ -29,8 +29,8 @@ class TransactionRowWidget extends StatelessWidget {
 
     Color getColor() {
       if (transaction?.type == TransactionTypeEnum.expense)
-        return ColorName.orange500;
-      return ColorName.green500;
+        return AppColor.orange500;
+      return AppColor.green500;
     }
 
     IconData getIcon() {
@@ -46,7 +46,7 @@ class TransactionRowWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         decoration: BoxDecoration(
-            color: ColorName.white,
+            color: AppColor.white,
             boxShadow: [AppShadow.normal],
             borderRadius: BorderRadius.circular(8)),
         child: Row(

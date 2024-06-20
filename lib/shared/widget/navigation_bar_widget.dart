@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/router/app_router.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:remixicon/remixicon.dart';
 
 class NavigationBarWidget extends ConsumerWidget {
@@ -43,8 +43,8 @@ class NavigationBarWidget extends ConsumerWidget {
           borderRadius: BorderRadius.circular(100),
           child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              selectedItemColor: ColorName.textPrimary,
-              unselectedItemColor: ColorName.textBorder,
+              selectedItemColor: AppColor.primaryMain,
+              unselectedItemColor: AppColor.primaryExtraLight,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               elevation: 0,
@@ -52,11 +52,11 @@ class NavigationBarWidget extends ConsumerWidget {
               selectedFontSize: 0,
               unselectedFontSize: 0,
               iconSize: 24,
-              backgroundColor: ColorName.white,
+              backgroundColor: AppColor.surfaceBrandLight,
               onTap: _onTap,
               items: [
                 BottomNavigationBarItem(
-                    icon: Icon(Remix.home_5_fill), label: ''),
+                    icon: Icon(Remix.home_5_line), label: ''),
                 BottomNavigationBarItem(
                     icon: Icon(Remix.search_2_line), label: ''),
                 BottomNavigationBarItem(

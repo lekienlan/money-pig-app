@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 
 class BottomSheetPage<T> extends Page<T> {
   final Offset? anchorPoint;
@@ -28,7 +28,7 @@ class BottomSheetPage<T> extends Page<T> {
       anchorPoint: anchorPoint,
       barrierLabel: barrierLabel,
       useSafeArea: useSafeArea,
-      backgroundColor: ColorName.white,
+      backgroundColor: AppColor.white,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24))));
 }

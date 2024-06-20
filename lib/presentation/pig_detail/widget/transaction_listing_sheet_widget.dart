@@ -6,9 +6,9 @@ import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/presentation/pig_detail/provider/pig_detail_calendar_provider.dart';
 import 'package:money_pig/presentation/transaction/provider/transaction_listing_provider.dart';
 import 'package:money_pig/presentation/transaction/widget/transaction_row_widget.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
@@ -44,7 +44,7 @@ class TransactionListingSheet extends ConsumerWidget {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            color: ColorName.white,
+            color: AppColor.white,
             boxShadow: [AppShadow.withSpreadRadius(4)],
             borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
           ),
@@ -63,7 +63,7 @@ class TransactionListingSheet extends ConsumerWidget {
                         width: 148,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: ColorName.textDisabled,
+                          color: AppColor.textDisabled,
                         ),
                         height: 8,
                       ),
@@ -76,7 +76,7 @@ class TransactionListingSheet extends ConsumerWidget {
                   controller: listController,
                   slivers: [
                     SliverAppBar(
-                      backgroundColor: ColorName.white,
+                      backgroundColor: AppColor.white,
                       leadingWidth: 0,
                       scrolledUnderElevation: 0,
                       floating: true,
@@ -91,7 +91,7 @@ class TransactionListingSheet extends ConsumerWidget {
                             Text(
                               'balance'.tr().capitalize(),
                               style: AppTextStyle.bodyS(
-                                color: ColorName.textTertiary,
+                                color: AppColor.textTertiary,
                               ),
                             ),
                             SizedBox(width: 4),
@@ -99,7 +99,7 @@ class TransactionListingSheet extends ConsumerWidget {
                               formatCurrency(
                                   (pig?.budget ?? 0) - (pig?.expense ?? 0)),
                               style: AppTextStyle.headingS(
-                                color: ColorName.textSecondary,
+                                color: AppColor.textSecondary,
                               ),
                             ),
                           ],
@@ -177,11 +177,11 @@ class TransactionListingSheet extends ConsumerWidget {
         maxHeight: 32,
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 4),
-          color: ColorName.surfacePrimary,
+          color: AppColor.surfacePrimary,
           alignment: Alignment.bottomLeft,
           child: Text(
             date.toIso8601String().toDate(),
-            style: AppTextStyle.heading2XS(color: ColorName.textTertiary),
+            style: AppTextStyle.heading2XS(color: AppColor.textTertiary),
           ),
         ),
       ),

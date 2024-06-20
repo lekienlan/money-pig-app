@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/router/app_router.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
 import 'package:money_pig/shared/theme/fonts.gen.dart';
 
 class App extends ConsumerWidget {
@@ -18,17 +18,17 @@ class App extends ConsumerWidget {
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
       theme: ThemeData(
-          splashColor: ColorName.neutral100,
+          splashColor: AppColor.neutral100,
           colorScheme: ColorScheme(
-            primary: ColorName.primaryMain,
+            primary: AppColor.primaryMain,
             brightness: Brightness.light,
-            onPrimary: ColorName.neutral100,
-            secondary: ColorName.primaryLight,
-            onSecondary: ColorName.textSecondary,
-            error: ColorName.pink700,
-            onError: ColorName.textSecondary,
-            surface: ColorName.surfaceSecondary,
-            onSurface: ColorName.textSecondary,
+            onPrimary: AppColor.neutral100,
+            secondary: AppColor.primaryLight,
+            onSecondary: AppColor.textSecondary,
+            error: AppColor.pink700,
+            onError: AppColor.textSecondary,
+            surface: AppColor.surfaceSecondary,
+            onSurface: AppColor.textSecondary,
           ),
           fontFamily: FontFamily.inter,
           visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -37,19 +37,19 @@ class App extends ConsumerWidget {
             backgroundColor: WidgetStateProperty.resolveWith<Color>(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.pressed)) {
-                  return ColorName.primaryDark;
+                  return AppColor.primaryDark;
                 }
 
                 if (states.contains(WidgetState.disabled)) {
-                  return ColorName.textDisabled;
+                  return AppColor.textDisabled;
                 }
-                return ColorName.primaryMain;
+                return AppColor.primaryMain;
               },
             ),
             textStyle: WidgetStateProperty.all<TextStyle>(
-              AppTextStyle.headingXS(color: ColorName.white),
+              AppTextStyle.headingXS(color: AppColor.white),
             ),
-            foregroundColor: WidgetStatePropertyAll(ColorName.white),
+            foregroundColor: WidgetStatePropertyAll(AppColor.white),
             shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
             elevation: WidgetStatePropertyAll(0),
@@ -71,9 +71,9 @@ class App extends ConsumerWidget {
             ),
           )),
           textSelectionTheme:
-              TextSelectionThemeData(cursorColor: ColorName.textSecondary),
+              TextSelectionThemeData(cursorColor: AppColor.textSecondary),
           inputDecorationTheme: InputDecorationTheme(
-              hintStyle: TextStyle(color: ColorName.textDisabled))),
+              hintStyle: TextStyle(color: AppColor.textDisabled))),
       routerConfig: router,
       builder: (context, router) {
         return Material(

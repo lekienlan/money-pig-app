@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class LoadingWidget extends StatelessWidget {
     return Center(
       child: Container(
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(ColorName.primaryMain),
+          valueColor: AlwaysStoppedAnimation<Color>(AppColor.primaryMain),
           strokeWidth: 4.0,
         ),
       ),

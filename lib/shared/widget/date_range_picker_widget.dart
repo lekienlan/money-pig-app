@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:remixicon/remixicon.dart';
@@ -37,7 +37,7 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                     var width = MediaQuery.of(context).size.width;
 
                     return Container(
-                      color: ColorName.blue100,
+                      color: AppColor.blue100,
                       // height: height - 400,
                       width: width - 48,
                       height: height / 2,
@@ -56,19 +56,19 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                             view: DateRangePickerView.month,
                             // showActionButtons: true,
                             selectionMode: DateRangePickerSelectionMode.range,
-                            backgroundColor: ColorName.white,
+                            backgroundColor: AppColor.white,
                             headerStyle: DateRangePickerHeaderStyle(
-                              backgroundColor: ColorName.surfacePrimary,
+                              backgroundColor: AppColor.surfacePrimary,
                               textStyle: AppTextStyle.headingXS(
-                                  color: ColorName.textSecondary),
+                                  color: AppColor.textSecondary),
                             ),
                             monthCellStyle: DateRangePickerMonthCellStyle(
                               textStyle: AppTextStyle.bodyS(
-                                  color: ColorName.textSecondary),
+                                  color: AppColor.textSecondary),
                               trailingDatesTextStyle: AppTextStyle.bodyS(
-                                  color: ColorName.textBorder),
+                                  color: AppColor.textBorder),
                               leadingDatesTextStyle: AppTextStyle.bodyS(
-                                  color: ColorName.textBorder),
+                                  color: AppColor.textBorder),
                             ),
 
                             monthViewSettings: DateRangePickerMonthViewSettings(
@@ -76,13 +76,13 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                                 showTrailingAndLeadingDates: true,
                                 viewHeaderHeight: 40,
                                 viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                                  backgroundColor: ColorName.surfaceSecondary,
+                                  backgroundColor: AppColor.surfaceSecondary,
                                   textStyle: AppTextStyle.heading2XS(),
                                 )),
-                            todayHighlightColor: ColorName.primaryMain,
+                            todayHighlightColor: AppColor.primaryMain,
                             selectionTextStyle:
-                                AppTextStyle.heading2XS(color: ColorName.white),
-                            rangeSelectionColor: ColorName.primaryUltraLight,
+                                AppTextStyle.heading2XS(color: AppColor.white),
+                            rangeSelectionColor: AppColor.primaryUltraLight,
                             onSelectionChanged:
                                 (DateRangePickerSelectionChangedArgs args) {
                               if (args.value is PickerDateRange) {
@@ -116,8 +116,8 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
         SizedBox(height: 4),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-              side: BorderSide(width: 1, color: ColorName.textBorder),
-              backgroundColor: ColorName.white,
+              side: BorderSide(width: 1, color: AppColor.textBorder),
+              backgroundColor: AppColor.white,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 12),
             ),
@@ -129,11 +129,11 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
               children: [
                 Text(
                   (widget.startDate ?? '').toDate(),
-                  style: AppTextStyle.headingM(color: ColorName.textSecondary),
+                  style: AppTextStyle.headingM(color: AppColor.textSecondary),
                 ),
                 Icon(
                   Remix.arrow_down_s_line,
-                  color: ColorName.textSecondary,
+                  color: AppColor.textSecondary,
                 )
               ],
             )),
@@ -143,8 +143,8 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
         SizedBox(height: 4),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-              side: BorderSide(width: 1, color: ColorName.textBorder),
-              backgroundColor: ColorName.white,
+              side: BorderSide(width: 1, color: AppColor.textBorder),
+              backgroundColor: AppColor.white,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 12),
             ),
@@ -156,11 +156,11 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
               children: [
                 Text(
                   isTruthy(widget.endDate) ? widget.endDate!.toDate() : '...',
-                  style: AppTextStyle.headingM(color: ColorName.textSecondary),
+                  style: AppTextStyle.headingM(color: AppColor.textSecondary),
                 ),
                 Icon(
                   Remix.arrow_down_s_line,
-                  color: ColorName.textSecondary,
+                  color: AppColor.textSecondary,
                 )
               ],
             )),

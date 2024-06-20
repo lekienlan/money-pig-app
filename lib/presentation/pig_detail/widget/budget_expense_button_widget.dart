@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:money_pig/presentation/transaction/widget/transaction_icon_widget.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 
@@ -25,7 +25,7 @@ class BudgetExpenseButtonWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
-        color: ColorName.white,
+        color: AppColor.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [AppShadow.light],
       ),
@@ -39,7 +39,7 @@ class BudgetExpenseButtonWidget extends StatelessWidget {
               Text(
                 title.tr().capitalize(),
                 style: AppTextStyle.bodyS(
-                  color: ColorName.textTertiary,
+                  color: AppColor.textTertiary,
                 ),
               ),
               TransactionIconWidget(

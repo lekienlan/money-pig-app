@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 
@@ -105,7 +105,7 @@ class _NumPadWidgetState extends State<NumPadWidget> {
           child: Text(
             "${'add'.tr().capitalize()} ${widget.title?.tr()}",
             textAlign: TextAlign.center,
-            style: AppTextStyle.headingS(color: ColorName.white),
+            style: AppTextStyle.headingS(color: AppColor.white),
           ),
         ));
   }
@@ -115,17 +115,17 @@ class _NumPadWidgetState extends State<NumPadWidget> {
       // style: ElevatedButton.styleFrom(
       //   padding: EdgeInsets.all(0),
       //   minimumSize: Size(double.infinity, 56),
-      //   backgroundColor: ColorName.white,
+      //   backgroundColor: AppColor.white,
       // ),
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        overlayColor: MaterialStateProperty.all(ColorName.neutral200),
-        backgroundColor: MaterialStateProperty.all(ColorName.white),
+        padding: WidgetStateProperty.all(EdgeInsets.zero),
+        overlayColor: WidgetStateProperty.all(AppColor.neutral200),
+        backgroundColor: WidgetStateProperty.all(AppColor.white),
       ),
       onPressed: onPressed ?? () => _input(text),
       child: Text(
         text,
-        style: AppTextStyle.headingL(color: ColorName.textSecondary),
+        style: AppTextStyle.headingL(color: AppColor.textSecondary),
       ),
     );
   }

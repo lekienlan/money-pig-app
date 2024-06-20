@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/router/app_router.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/colors.gen.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -17,7 +17,7 @@ class HeaderWidget extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      color: background ?? ColorName.white,
+      color: background ?? AppColor.white,
       child: AppBar(
         centerTitle: true,
         scrolledUnderElevation: 0.0,
