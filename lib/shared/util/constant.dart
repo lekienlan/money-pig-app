@@ -1,1 +1,1 @@
-String SPECIAL_CHARACTERS = '!"\#\$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+String SPECIAL_CHARACTERS = '!"\#\$%&\'()*+,/:;<=>?@[\\]^_`{|}~';

@@ -7,8 +7,8 @@ import 'package:money_pig/presentation/pig_detail/widget/budget_expense_button_w
 import 'package:money_pig/presentation/pig_detail/widget/pig_detail_calendar_widget.dart';
 import 'package:money_pig/presentation/pig_detail/widget/transaction_listing_sheet_widget.dart';
 import 'package:money_pig/router/app_router.dart';
-import 'package:money_pig/shared/theme/app_text_style.dart';
 import 'package:money_pig/shared/theme/app_color.dart';
+import 'package:money_pig/shared/theme/app_text_style.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
@@ -27,11 +27,12 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
   final _scrollController = ScrollController();
   final _transactionListingSheetController = DraggableScrollableController();
   final _transactionListingController = ScrollController();
+  final min = 0.40;
 
   void _scrollListener() {
     if (_scrollController.offset > 10) {
       _transactionListingSheetController.animateTo(
-        0.32,
+        min,
         duration: Duration(milliseconds: 100),
         curve: Curves.linear,
       );
@@ -44,7 +45,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
             ScrollDirection.idle &&
         _transactionListingController.offset < 0) {
       _transactionListingSheetController.animateTo(
-        0.32,
+        min,
         duration: Duration(milliseconds: 100),
         curve: Curves.linear,
       );
@@ -196,7 +197,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                                       child: SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.32,
+                                                min,
                                       ),
                                     ),
                                   ],
@@ -204,6 +205,7 @@ class PigDetailPageState extends ConsumerState<PigDetailPage> {
                             TransactionListingSheet(
                                 ref: ref,
                                 pig: pig,
+                                min: min,
                                 sheetController:
                                     _transactionListingSheetController,
                                 listController: _transactionListingController),

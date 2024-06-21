@@ -17,12 +17,14 @@ class TransactionListingSheet extends ConsumerWidget {
   final PigModel? pig;
   final ScrollController? listController;
   final DraggableScrollableController? sheetController;
+  final double? min;
 
   const TransactionListingSheet({
     super.key,
     this.pig,
     this.sheetController,
     this.listController,
+    this.min = 0.42,
     required this.ref,
   });
 
@@ -35,11 +37,11 @@ class TransactionListingSheet extends ConsumerWidget {
 
     return DraggableScrollableSheet(
       controller: sheetController,
-      initialChildSize: 0.32,
+      initialChildSize: min!,
       snap: true,
       // snapSizes: [0.32, 0.86],
-      minChildSize: 0.32,
-      maxChildSize: 0.86,
+      minChildSize: min!,
+      maxChildSize: 0.9,
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -81,15 +83,16 @@ class TransactionListingSheet extends ConsumerWidget {
                       scrolledUnderElevation: 0,
                       floating: true,
                       leading: SizedBox(),
-                      toolbarHeight: 48,
+                      toolbarHeight: 24,
                       centerTitle: true,
                       flexibleSpace: FlexibleSpaceBar(
                         titlePadding: EdgeInsets.zero,
-                        background: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        background: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              'balance'.tr().capitalize(),
+                              "${'balance'.tr().capitalize()}:",
                               style: AppTextStyle.bodyS(
                                 color: AppColor.textTertiary,
                               ),
@@ -98,10 +101,11 @@ class TransactionListingSheet extends ConsumerWidget {
                             Text(
                               formatCurrency(
                                   (pig?.budget ?? 0) - (pig?.expense ?? 0)),
-                              style: AppTextStyle.headingS(
+                              style: AppTextStyle.headingXS(
                                 color: AppColor.textSecondary,
                               ),
                             ),
+                            SizedBox(width: 12),
                           ],
                         ),
                       ),
@@ -237,7 +241,7 @@ void _scrollToSelectedDate(DateTime? selectedDate, List<Widget> slivers,
     ScrollController? controller) {
   double offset = 0;
   const double kListItemHeight = 64;
-  const double kHeaderHeight = 32;
+  const double kHeaderHeight = 24;
   const double kAppBarHeight = 48;
 
   if (!isTruthy(selectedDate)) {

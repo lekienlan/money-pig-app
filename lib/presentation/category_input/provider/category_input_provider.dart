@@ -32,14 +32,14 @@ class CategoryInputNotifier extends _$CategoryInputNotifier {
       {String? name, TransactionTypeEnum? type, StyleModel? style}) async {
     if (isTruthy(id)) {
       await CategoryRepository().updateCategory(CategoryModel(
-        name: name,
+        name: sanitizeText(name),
         type: type,
         style: style,
         id: id,
       ));
     } else {
       await CategoryRepository().createCategory(CategoryModel(
-        name: name,
+        name: sanitizeText(name),
         type: type,
         style: style,
       ));

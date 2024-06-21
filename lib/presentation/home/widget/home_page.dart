@@ -4,17 +4,19 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/presentation/home/provider/pig_listing_provider.dart';
+import 'package:money_pig/presentation/home/widget/pig_card_popover_widget.dart';
 import 'package:money_pig/presentation/home/widget/pig_card_widget.dart';
 import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:money_pig/router/app_router.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/widget/loading_widget.dart';
 import 'package:money_pig/shared/widget/navigation_bar_widget.dart';
+import 'package:popover/popover.dart';
 import 'package:remixicon/remixicon.dart';
 
 class HomePage extends ConsumerWidget {
@@ -83,9 +85,35 @@ class HomePage extends ConsumerWidget {
                             PigModel pigCard = pigListing[index];
                             return PigCardWidget(
                               pig: pigCard,
-                              onClick: () => ref
+                              onTap: () => ref
                                   .read(routerProvider)
                                   .push('/pig-detail/${pigCard.id}'),
+                              onLongPress: (context) {
+                                final size =
+                                    (MediaQuery.of(context).size.width / 2) -
+                                        32;
+                                showPopover(
+                                  context: context,
+                                  bodyBuilder: (
+                                    _,
+                                  ) =>
+                                      PigCardPopoverWidget(
+                                    onDelete: () {
+                                      ref
+                                          .read(pigListingNotifierProvider
+                                              .notifier)
+                                          .deletePig(pigCard.id);
+                                    },
+                                  ),
+                                  onPop: () => print('Popover was popped!'),
+                                  direction: PopoverDirection.left,
+                                  width: size,
+                                  height: size / 1.4,
+                                  arrowHeight: 4,
+                                  backgroundColor: AppColor.surfacePrimary,
+                                  arrowWidth: 12,
+                                );
+                              },
                             );
                           } else {
                             return null; // Return null if index is out of bounds

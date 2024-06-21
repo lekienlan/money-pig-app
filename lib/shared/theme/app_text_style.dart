@@ -132,4 +132,16 @@ abstract class AppTextStyle {
       color: color,
     );
   }
+
+  static TextStyle body2XS({
+    Color? color,
+  }) {
+    return TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.normal,
+      letterSpacing: 0,
+      height: 1.33,
+      color: color,
+    );
+  }
 }

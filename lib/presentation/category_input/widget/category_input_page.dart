@@ -86,12 +86,10 @@ class _IncomeInputPageState extends ConsumerState<CategoryInputPage> {
                       )),
                   onChanged: (value) {
                     setState(() {
-                      String text = sanitizeText(value);
-
                       ref
                           .read(
                               categoryInputNotifierProvider(widget.id).notifier)
-                          .onChangeName(text);
+                          .onChangeName(value);
                     });
                   },
                   autofocus: true,

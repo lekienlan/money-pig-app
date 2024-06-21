@@ -76,3 +76,20 @@ bool isSameDay(DateTime? date1, DateTime? date2) {
       date1?.month == date2?.month &&
       date1?.day == date2?.day;
 }
+
+String formatNumberWithSuffix(num? number) {
+  if (!isTruthy(number)) return 'N/A';
+
+  if (number! >= 1000000000) {
+    return (number / 1000000000)
+            .toStringAsFixed((number % 1000000000 == 0) ? 0 : 1) +
+        'B';
+  } else if (number >= 1000000) {
+    return (number / 1000000).toStringAsFixed((number % 1000000 == 0) ? 0 : 1) +
+        'M';
+  } else if (number >= 1000) {
+    return (number / 1000).toStringAsFixed((number % 1000 == 0) ? 0 : 1) + 'K';
+  } else {
+    return number.toString();
+  }
+}

@@ -40,7 +40,7 @@ class TransactionInputNotifier extends _$TransactionInputNotifier {
     if (state.type == TransactionTypeEnum.income) {
       await TransactionRepository().createTransaction(TransactionModel(
         amount: data.amount,
-        note: data.note,
+        note: sanitizeText(data.note),
         type: TransactionTypeEnum.income,
         category_id: data.category_id,
       ));
@@ -48,14 +48,14 @@ class TransactionInputNotifier extends _$TransactionInputNotifier {
     } else if (state.type == TransactionTypeEnum.expense) {
       await TransactionRepository().createTransaction(TransactionModel(
           amount: data.amount,
-          note: data.note,
+          note: sanitizeText(data.note),
           period_id: data.period_id,
           type: TransactionTypeEnum.expense,
           category_id: data.category_id));
     } else if (state.type == TransactionTypeEnum.budget) {
       await TransactionRepository().createTransaction(TransactionModel(
         amount: data.amount,
-        note: data.note,
+        note: sanitizeText(data.note),
         period_id: data.period_id,
         type: TransactionTypeEnum.budget,
       ));

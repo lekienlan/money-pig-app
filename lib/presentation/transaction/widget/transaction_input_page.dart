@@ -145,10 +145,8 @@ class _IncomeInputPageState extends ConsumerState<TransactionInputPage> {
                                     hintText: 'Nhập ghi chú...'),
                                 focusNode: _focusNode,
                                 onChanged: (value) {
-                                  String text = sanitizeText(value);
-
-                                  notifier.onChangeNote(text);
-                                  noteController.text = text;
+                                  notifier.onChangeNote(value);
+                                  noteController.text = value;
                                 },
                               ),
                             ),

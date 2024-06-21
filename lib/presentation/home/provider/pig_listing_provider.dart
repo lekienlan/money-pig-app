@@ -1,5 +1,6 @@
 import 'package:money_pig/domain/repository/pig_repository.dart';
 import 'package:money_pig/presentation/home/state/pig_listing_state.dart';
+import 'package:money_pig/presentation/transaction/provider/income_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'pig_listing_provider.g.dart';
@@ -27,5 +28,14 @@ class PigListingNotifier extends _$PigListingNotifier {
     } catch (err) {
       state = PigListingState.empty();
     }
+  }
+
+  Future<void> deletePig(String? id) async {
+    try {
+      await pigRepository.deletePig(id ?? '');
+
+      ref.invalidateSelf();
+      ref.invalidate(incomeNotifierProvider);
+    } catch (err) {}
   }
 }

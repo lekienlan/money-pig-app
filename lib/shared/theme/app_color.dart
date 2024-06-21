@@ -7,18 +7,11 @@ class AppColor {
   static const Color pink300 = Color(0xFFFFA0C0);
   static const Color pink200 = Color(0xFFFFC6D9);
   static const Color pink100 = Color(0xFFFFD9E6);
+  static const Color pink50 = Color(0xFFfef7fa);
   static const Color pink900 = Color(0xFF19060D);
   static const Color pink800 = Color(0xFF4C1327);
   static const Color pink700 = Color(0xFF802041);
   static const Color pink600 = Color(0xFFB32D5A);
-
-  // Primary Colors (using pink values)
-  static const Color primaryMain = pink400;
-  static const Color primaryLight = pink300;
-  static const Color primaryExtraLight = pink200;
-  static const Color primaryUltraLight = pink100;
-  static const Color primaryDark = pink700;
-  static const Color primaryExtraDark = Color(0xFF3A3637);
 
   // Neutral Colors
   static const Color black = Color(0xFF000000);
@@ -76,5 +69,13 @@ class AppColor {
   // Surface Colors
   static const Color surfacePrimary = Color(0xFFFFFFFF);
   static const Color surfaceSecondary = Color(0xFFF9F8F8);
-  static const Color surfaceBrandLight = Color(0xFFfef7fa);
+  static const Color surfaceBrandLight = pink50;
+
+  // Primary Colors (using pink values)
+  static const Color primaryMain = pink400;
+  static const Color primaryLight = pink300;
+  static const Color primaryExtraLight = pink200;
+  static const Color primaryUltraLight = pink100;
+  static const Color primaryDark = pink700;
+  static const Color primaryExtraDark = pink900;
 }

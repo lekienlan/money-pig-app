@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:money_pig/domain/model/transaction_model.dart';
 import 'package:money_pig/presentation/transaction/widget/transaction_icon_widget.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/enum.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:money_pig/shared/util/icon_mapper.dart';
@@ -68,7 +68,7 @@ class TransactionRowWidget extends StatelessWidget {
               children: [
                 Text(
                   renderAmount(),
-                  style: AppTextStyle.headingXS(
+                  style: AppTextStyle.heading2XS(
                     color: getColor(),
                   ),
                 ),

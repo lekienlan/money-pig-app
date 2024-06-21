@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/presentation/pig_detail/provider/pig_detail_calendar_provider.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/helper.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -20,7 +20,7 @@ class PigDetailCalendarWidget extends ConsumerWidget {
 
     return Container(
         decoration: BoxDecoration(boxShadow: [AppShadow.hard]),
-        height: 350,
+        height: 320,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: SfCalendar(
@@ -48,7 +48,7 @@ class PigDetailCalendarWidget extends ConsumerWidget {
             ),
             backgroundColor: AppColor.surfacePrimary,
             view: CalendarView.month,
-            viewHeaderHeight: 40,
+            viewHeaderHeight: 32,
             viewHeaderStyle: ViewHeaderStyle(
                 backgroundColor: AppColor.surfaceSecondary,
                 dayTextStyle:
@@ -72,7 +72,7 @@ class PigDetailCalendarWidget extends ConsumerWidget {
 
               return Container(
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(vertical: 2),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
@@ -83,7 +83,6 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                   ),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(details.date.day.toString(),
                         style: _isToday
@@ -95,10 +94,6 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                                         .textTertiary // Style for dates from current month
                                     : AppColor.textDisabled,
                               )),
-
-                    // Clear the cache when new data is received
-                    // calendarNotifier.clearCache();
-
                     FutureBuilder<List<int?>>(
                       future: calendarNotifier.getTransactionAmountsForDate(
                         periodId: pig?.period_id ?? '',
@@ -109,17 +104,22 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                         int? _cellExpenseAmount = snapshot.data?[1];
 
                         return Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             if (isTruthy(_cellBudgetAmount))
-                              _TransactionTypeDot(
+                              _TransactionAmount(
+                                amount: _cellBudgetAmount,
                                 color: AppColor.green500,
                               ),
                             if (isTruthy(_cellExpenseAmount))
                               Row(
                                 children: [
-                                  SizedBox(width: 2),
-                                  _TransactionTypeDot(
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  _TransactionAmount(
+                                    amount: _cellExpenseAmount,
                                     color: AppColor.orange500,
                                   ),
                                 ],
@@ -127,27 +127,38 @@ class PigDetailCalendarWidget extends ConsumerWidget {
                           ],
                         );
                       },
-                    ),
+                    )
                   ],
                 ),
               );
+
+              // Clear the cache when new data is received
+              // calendarNotifier.clearCache();
             },
           ),
         ));
   }
 }
 
-class _TransactionTypeDot extends StatelessWidget {
+class _TransactionAmount extends StatelessWidget {
   final Color? color;
-  const _TransactionTypeDot({super.key, this.color});
+  final num? amount;
+  const _TransactionAmount({super.key, this.color, this.amount});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 4,
-      height: 4,
-      decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(100)),
+      // width: 4,
+      // height: 4,
+      decoration: BoxDecoration(
+        // color: color,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Text(
+        formatNumberWithSuffix(amount),
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(fontSize: 7, color: color),
+      ),
     );
   }
 }

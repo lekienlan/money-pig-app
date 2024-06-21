@@ -4,6 +4,7 @@ import 'package:money_pig/domain/model/pig_model.dart';
 abstract class PigRepositoryProtocol {
   Future<List<PigModel>> getPigListing();
   Future<void> createPig(PigModel data);
+  Future<void> deletePig(String id);
   Future<PigModel> getPigDetail(String id);
 }
 
@@ -32,6 +33,15 @@ class PigRepository implements PigRepositoryProtocol {
   Future<PigModel> getPigDetail(String id) async {
     try {
       return await pigService.getPigDetail(id);
+    } catch (err) {
+      throw Error();
+    }
+  }
+
+  @override
+  Future<void> deletePig(String id) async {
+    try {
+      return await pigService.deletePig(id);
     } catch (err) {
       throw Error();
     }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
@@ -12,10 +13,12 @@ import 'package:remixicon/remixicon.dart';
 
 class PigCardWidget extends StatelessWidget {
   final PigModel? pig;
-  final Function? onClick;
+  final Function? onTap;
+  final Function(BuildContext context)? onLongPress;
   PigCardWidget({
     this.pig,
-    this.onClick,
+    this.onTap,
+    this.onLongPress,
     super.key,
   });
 
@@ -27,8 +30,15 @@ class PigCardWidget extends StatelessWidget {
     return Hero(
       tag: "pig-${pig?.id}",
       child: GestureDetector(
+        onLongPress: () {
+          if (isTruthy(onLongPress)) {
+            HapticFeedback.lightImpact();
+            onLongPress!(context);
+          }
+          ;
+        },
         onTap: () {
-          if (isTruthy(onClick)) onClick!();
+          if (isTruthy(onTap)) onTap!();
         },
         child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {

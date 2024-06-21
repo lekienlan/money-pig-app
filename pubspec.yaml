@@ -55,6 +55,7 @@ dependencies:
   equatable: ^2.0.5
   flutter_flavorizr: ^2.2.3
   syncfusion_flutter_calendar: 25.2.7+1
+  popover: ^0.3.0+1
 
 dev_dependencies:
   #flutter_test:

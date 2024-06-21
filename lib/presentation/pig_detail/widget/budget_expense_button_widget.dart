@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:money_pig/presentation/transaction/widget/transaction_icon_widget.dart';
+import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/theme/app_shadow.dart';
 import 'package:money_pig/shared/theme/app_text_style.dart';
-import 'package:money_pig/shared/theme/app_color.dart';
 import 'package:money_pig/shared/util/extension.dart';
 import 'package:money_pig/shared/util/helper.dart';
 
@@ -48,9 +48,6 @@ class BudgetExpenseButtonWidget extends StatelessWidget {
                 rotation: 0.75,
               ),
             ],
-          ),
-          SizedBox(
-            height: 4,
           ),
           Text(
             formatCurrency(amount),

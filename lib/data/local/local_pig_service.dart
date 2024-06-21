@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:money_pig/domain/model/pig_model.dart';
 import 'package:money_pig/domain/model/style_model.dart';
@@ -87,8 +88,11 @@ LEFT JOIN (
     WHERE transactions.type = 'expense'
     GROUP BY periods.pig_id
 ) AS expenses ON pigs.id = expenses.pig_id
+WHERE pigs.status = 'active'
 ORDER BY pigs.created_at DESC;
   ''');
+
+    log("$list");
 
     return list
         .map((item) => PigModel.fromJson({
@@ -162,5 +166,70 @@ ORDER BY pigs.created_at DESC;
     } else {
       throw Exception('Pig not found');
     }
+  }
+
+  Future<void> deletePig(String id) async {
+    log("$id");
+    final Database db = await _localDb.database;
+
+    await db.transaction((txn) async {
+      // Update pig status to inactive
+      await txn.update(
+        'pigs',
+        {'status': 'inactive'},
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+
+      // Update periods status to inactive
+      await txn.update(
+        'periods',
+        {'status': 'inactive'},
+        where: 'pig_id = ?',
+        whereArgs: [id],
+      );
+
+      // Update transactions status to inactive
+      await txn.update(
+        'transactions',
+        {'status': 'inactive'},
+        where: 'period_id IN (SELECT id FROM periods WHERE pig_id = ?)',
+        whereArgs: [id],
+      );
+
+      // Add refund income transaction
+      final periodResult = await txn.rawQuery('''
+        SELECT id FROM periods WHERE pig_id = ?
+      ''', [id]);
+
+      if (periodResult.isNotEmpty) {
+        final periodId = periodResult.first['id'] as String;
+        final refundTransactionId = Uuid().v4();
+
+        final budgetResult = await txn.rawQuery('''
+          SELECT IFNULL(SUM(amount), 0) AS total_budget 
+          FROM transactions 
+          WHERE period_id = ? AND type = 'budget'
+        ''', [periodId]);
+
+        final totalBudget = budgetResult.isNotEmpty
+            ? budgetResult.first['total_budget'] as double
+            : 0.0;
+
+        if (totalBudget > 0) {
+          await txn.insert('transactions', {
+            'id': refundTransactionId,
+            'updated_at': DateTime.now().toIso8601String(),
+            'created_at': DateTime.now().toIso8601String(),
+            'period_id': periodId,
+            'note': 'refund income',
+            'date': DateTime.now().toIso8601String(),
+            'amount': totalBudget,
+            'type': 'income',
+            'status': 'active'
+          });
+        }
+      }
+    });
   }
 }
